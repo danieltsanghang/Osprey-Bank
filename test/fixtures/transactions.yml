@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  senderId: 1
+  receiverId: 1
+  amount: 9.99
+  timeStamp: 2020-11-20
+
+two:
+  senderId: 1
+  receiverId: 1
+  amount: 9.99
+  timeStamp: 2020-11-20
