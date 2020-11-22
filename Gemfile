@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Add bootstrap form
-gem 'bootstrap_form', '~> 4.0'
+gem "bootstrap_form", "~> 4.0"
 
 # Required for has_secure_password
 gem 'bcrypt'

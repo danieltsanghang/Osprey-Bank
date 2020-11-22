@@ -1,0 +1,6 @@
+<h1>Login</h1>
+<%= bootstrap_form_with(url: login_path, scope: :session, local: true) do |f| %>
+    <%= f.text_field :username %>
+    <%= f.password_field :password %>
+    <%= f.submit 'Login', class: 'btn btn-primary' %>
+<% end %>
