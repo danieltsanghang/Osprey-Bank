@@ -5,7 +5,7 @@ user:
     lname: Doe
     email: testemail@yahoo.com
     username: someUser
-    # password: password1
+    password: password1
     isAdmin: false
     DOB: 11/11/2011
     phoneNumber: 123456789
