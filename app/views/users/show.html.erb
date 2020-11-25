@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Personal Details</title>
+
+</head>
+
+<body>
+    <div style="padding-right: 0;padding-left: 0;padding-top: 10%;">
+        <div class="container">
+            <div class="row d-md-flex justify-content-md-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Personal and address details</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Here you can check and update your personal and address details so that we know how to contact you.</p>
+                            <div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
+  <!-- table displaying personal details -->
+  <a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+    <h5 class="mb-0">Personal Details</h5>
+  </a>
+    <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
+        <div class="table-responsive" style="height: 312px;">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td><%= @user.fname %></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><%= @user.lname %></td>
+                    </tr>
+                    <tr>
+                        <td>User Name</td>
+                        <td><%= @user.username %></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><%= @user.email %></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Number</td>
+                        <td><%= @user.phoneNumber %></td>
+                    </tr>
+                    <tr>
+                        <td>Date of birth</td>
+                        <td><%= @user.DOB %></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td><%= @user.address %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- for accounts to be displayed -->
+
+<div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
+<a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2"><h5 class="mb-0">Accounts</h5></a>
+                                <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><span> placeholder for accounts 00-11-22 12345678</span></li>
+                                        <li class="list-group-item"><span>placeholder for accounts 00-11-22 12345678910</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
