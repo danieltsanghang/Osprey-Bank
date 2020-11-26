@@ -15,6 +15,7 @@ class User < ApplicationRecord
 
     before_save :downcase_username
 
+    # Each user has many accounts, which has many transactions
     has_many :accounts
 
     private

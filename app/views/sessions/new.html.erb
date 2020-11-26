@@ -1,6 +1,10 @@
-<h1>Login</h1>
-<%= bootstrap_form_with(url: login_path, scope: :session, local: true) do |f| %>
-    <%= f.text_field :username %>
-    <%= f.password_field :password %>
-    <%= f.submit 'Login', class: 'btn btn-primary' %>
+<%= flash[:error] %>
+<div class="login-clean" style="width: 100%; height: 100vh;">
+<%=form_with(url: login_path, scope: :session, local: true) do |f| %>
+    <h2 class="sr-only">Login Form</h2>
+    <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+    <%= f.text_field :username, required: true, class: "form-control" %>
+    <%= f.password_field :password, required: true, class: "form-control" %>
+    <%= f.submit 'Login', class: 'btn btn-primary btn-block' %>
 <% end %>
+</div>
