@@ -21,4 +21,11 @@ module SessionsHelper
     def logout
         session.delete(:user_id)
     end
+
+    # Checks if the user is logged in, if not, redirect to login page
+    def redirect_to_login_if_not_logged_in
+      unless logged_in?
+          redirect_to login_path
+      end
+    end
 end

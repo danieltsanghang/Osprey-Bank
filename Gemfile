@@ -19,7 +19,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # include bootstrap
 gem 'bootstrap', '~> 4.0.0'
-gem 'bootstrap-sass'
 # include jquery
 gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
