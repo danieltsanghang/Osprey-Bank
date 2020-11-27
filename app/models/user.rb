@@ -17,6 +17,10 @@ class User < ApplicationRecord
 
     # Each user has many accounts, which has many transactions
     has_many :accounts
+    #has_many :transactions, through: :accounts
+    has_many :sent_transactions, through: :accounts
+    has_many :received_transactions, through: :accounts
+    has_many :transactions, through: :accounts
 
     private
 
