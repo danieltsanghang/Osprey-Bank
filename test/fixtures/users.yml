@@ -8,7 +8,7 @@ user:
     username: someuser
     password_digest: <%= User.digest("password1") %>
     isAdmin: false
-    DOB: 11/11/2011
+    DOB: 1990-10-10
     phoneNumber: 123456789
     address: somewhere over the rainbow
 
@@ -20,7 +20,7 @@ user_2:
     username: bobsacamano
     password_digest: <%= User.digest("password2") %>
     isAdmin: false
-    DOB: 1/1/1990
+    DOB: 1990-10-10
     phoneNumber: 987654321
     address: New York
 

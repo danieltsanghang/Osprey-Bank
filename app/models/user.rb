@@ -15,18 +15,19 @@ class User < ApplicationRecord
     
     validates :DOB, presence: true
 
+    validates :address, presence: true
+
     validates :phoneNumber, presence: true,
                             numericality: true,
-                            length: { minimum: 10, maximum: 15 }
+                            length: { minimum: 9, maximum: 15 }
 
-    before_save :downcase_username
+    before_save :downcase_username # Downcase username
+    before_save :default_values # Set default admin value to false if it does not exist
 
     # Each user has many accounts, which has many transactions
     has_many :accounts
-    #has_many :transactions, through: :accounts
     has_many :sent_transactions, through: :accounts
     has_many :received_transactions, through: :accounts
-    has_many :transactions, through: :accounts
 
     # This function is taken from the LGT and from https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
     def User.digest(passphrase)
@@ -41,8 +42,9 @@ class User < ApplicationRecord
             self.username = username.downcase
         end
 
+        # Method that sets the default admin attribute to false
         def default_values
-            self.isAdmin ||= 0
+            self.isAdmin ||= false
         end
         
 end
