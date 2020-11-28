@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_183153) do
-
+ActiveRecord::Schema.define(version: 2020_11_26_214946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.integer "userId"
+    t.integer "user_id"
     t.integer "sortCode"
     t.integer "accountNumber"
     t.decimal "balance"
@@ -27,8 +26,8 @@ ActiveRecord::Schema.define(version: 2020_11_24_183153) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "senderId"
-    t.integer "receiverId"
+    t.integer "sender_id"
+    t.integer "receiver_id"
     t.decimal "amount"
     t.date "timeStamp"
     t.datetime "created_at", precision: 6, null: false

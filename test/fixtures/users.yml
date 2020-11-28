@@ -1,12 +1,26 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 user:
+    id: 1
     fname: John
     lname: Doe
     email: testemail@yahoo.com
-    username: someUser
-    password: password1
+    username: someuser
+    password_digest: <%= User.digest("password1") %>
     isAdmin: false
-    DOB: 11/11/2011
+    DOB: 1990-10-10
     phoneNumber: 123456789
     address: somewhere over the rainbow
+
+user_2:
+    id: 2
+    fname: Bob
+    lname: Sacamano
+    email: Bob@gmail.com
+    username: bobsacamano
+    password_digest: <%= User.digest("password2") %>
+    isAdmin: false
+    DOB: 1990-10-10
+    phoneNumber: 987654321
+    address: New York
+

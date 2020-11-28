@@ -10,7 +10,10 @@ class UserTest < ActiveSupport::TestCase
       :username => "Alice101", 
       :password => "AlicePassword123", 
       :password_confirmation => "AlicePassword123",
-      :isAdmin => false)
+      :isAdmin => false,
+      :DOB => Date.new(1990-10-10),
+      :phoneNumber => 123456789,
+      :address => "London")
 
     @user_inValid = User.new(:fname => "Bob", 
       :lname => "Sacamano", 
@@ -18,7 +21,10 @@ class UserTest < ActiveSupport::TestCase
       :username => "My friend Bob Sacamano", 
       :password => "Seinfeld101", 
       :password_confirmation => "Sacamano101",
-      :isAdmin => false)
+      :isAdmin => false,
+      :DOB => Date.new(1990-10-10),
+      :phoneNumber => 123456789,
+      :address => "London")
   end
 
 

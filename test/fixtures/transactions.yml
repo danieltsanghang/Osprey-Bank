@@ -1,13 +1,50 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  senderId: 1
-  receiverId: 1
-  amount: 9.99
-  timeStamp: 2020-11-20
+# Transaction from account 1 to account 2
+transaction_one:
+  sender_id: 1
+  receiver_id: 2
+  amount: 2500
+  timeStamp: 2020-11-27
 
-two:
-  senderId: 1
-  receiverId: 1
-  amount: 9.99
-  timeStamp: 2020-11-20
+# Transaction from account 2 to account 1
+transaction_two:
+  sender_id: 2
+  receiver_id: 1
+  amount: 50000
+  timeStamp: 2020-11-27
+
+# Transaction from account 1 to a fake account
+transaction_three:
+  sender_id: 1
+  receiver_id: 323
+  amount: 995
+  timeStamp: 2020-11-27
+
+# Transaction from a fake account to account 1 
+transaction_four:
+  sender_id: 2123
+  receiver_id: 1
+  amount: 1000
+  timeStamp: 2020-11-27
+
+# Transaction from account 2 to a fake account
+transaction_three:
+  sender_id: 2
+  receiver_id: 323
+  amount: 5000000000
+  timeStamp: 2020-11-27
+
+# Transaction from a fake account to account 2
+transaction_four:
+  sender_id: 2123
+  receiver_id: 2
+  amount: 10
+  timeStamp: 2020-11-27
+
+# Transaction from fake account to another fake account
+transaction_five:
+  sender_id: 2123
+  receiver_id: 234234
+  amount: 1000000
+  timeStamp: 2020-11-27
