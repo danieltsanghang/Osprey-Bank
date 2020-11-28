@@ -22,6 +22,12 @@ class User < ApplicationRecord
     has_many :received_transactions, through: :accounts
     has_many :transactions, through: :accounts
 
+    # This function is taken from the LGT and from https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
+    def User.digest(passphrase)
+        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+        BCrypt::Password.create(passphrase, cost: cost)
+    end
+
     private
 
         # Method that makes the username all lower case before saving to the database

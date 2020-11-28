@@ -1,2 +1,45 @@
-<h1>Accounts#show</h1>
-<p>Find me in app/views/accounts/show.html.erb</p>
+<body>
+    <div style="padding-right: 0;padding-left: 0;padding-top: 10%;">
+        <div class="container">
+            <div class="row d-md-flex justify-content-md-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Account Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Here you can check and update your personal and address details so that we know how to contact you.</p>
+                            <div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
+  <!-- table displaying personal details -->
+  <a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+    <h5 class="mb-0">Personal Details</h5>
+  </a>
+    <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
+        <div class="table-responsive" style="height: 312px;">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>ID</td>
+                        <td><%= @account.user_id %></td>
+                    </tr>
+                    <tr>
+                        <td>Sort Code</td>
+                        <td><%= @account.sortCode %></td>
+                    </tr>
+                    <tr>
+                        <td>Account Number</td>
+                        <td><%= @account.accountNumber %></td>
+                    </tr>
+                    <tr>
+                        <td>Balance</td>
+                        <td><%= @account.balance %></td>
+                    </tr>
+                    <tr>
+                        <td>Currency</td>
+                        <td><%= @account.currency %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

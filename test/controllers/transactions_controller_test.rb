@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class TransactionsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'should not open transactions page without login' do
+    get transactions_url
+    assert_response :redirect
+  end
+
 end

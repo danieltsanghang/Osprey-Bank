@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  userId: 1
+  user_id: 1
   sortCode: 1
   accountNumber: 1
   balance: 9.99
   currency: MyString
 
 two:
-  userId: 1
-  sortCode: 1
-  accountNumber: 1
+  user_id: 2
+  sortCode: 2
+  accountNumber: 2
   balance: 9.99
   currency: MyString
