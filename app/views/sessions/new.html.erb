@@ -1,16 +1,17 @@
 <div class="login-clean" style="width: 100%; height: 100vh;">
-    <div class="row">
-    <div class="col-sm-12">
-        <% flash.each do |type, msg| %>
-        <div class="alert alert-danger">
-            <%= msg %>
-        </div>
-        <% end %>
-    </div>
-</div>
     <%=form_with(url: login_path, scope: :session, local: true) do |f| %>
         <h2 class="sr-only">Login Form</h2>
+        <h2 class="" style="text-align: center;">Osprey Bank</h2>
         <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+        <div class="row">
+        <div class="col-sm-12">
+            <% flash.each do |type, msg| %>
+            <div class="alert alert-danger">
+                <%= msg %>
+            </div>
+            <% end %>
+        </div>
+    </div>
         <%= f.text_field :username, required: true, class: "form-control", placeholder: "Username" %>
         <%= f.password_field :password, required: true, class: "form-control", placeholder: "Password" %>
         <%= f.submit 'Login', class: 'btn btn-primary btn-block' %>
