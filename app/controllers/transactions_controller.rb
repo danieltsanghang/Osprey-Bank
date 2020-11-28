@@ -10,16 +10,13 @@ class TransactionsController < ApplicationController
         # Check wehther the user is accessing the transactions for a specific account or for all accounts a user has
         if(params.has_key?(:account_id))
             # Get transactions for a specific account
-            account = Account.find(params[:account_id])
-            transactions_sent = account.sent_transactions
-            transactions_received = account.received_transactions
+            transactions = get_transactions_from_account
         else
             # Get transactions for all accounts the user has
-            transactions_sent = current_user.sent_transactions
-            transactions_received = current_user.received_transactions
+            transactions = get_transactions_from_user
         end
         
-        @transactions_all = (transactions_sent + transactions_received).sort_by &:created_at # Sort the transactions
+        @transactions_all = transactions.sort_by &:created_at # Sort the transactions
         paginate # Paginate the page
         @transactions_all = @transactions_all[@page * TRANSACTIONS_PER_PAGE, TRANSACTIONS_PER_PAGE] # Set the variable to contain all transactions in the current page
         
@@ -40,6 +37,26 @@ class TransactionsController < ApplicationController
                 render file: "#{Rails.root}/public/404.html", layout: false, status: 404 # Render 404 page
             end
         end
+
+
+        # Function that returns all the transaction a user has from all accounts
+        def get_transactions_from_user
+            # Get transactions for all accounts the user has
+            transactions_sent = current_user.sent_transactions
+            transactions_received = current_user.received_transactions
+            return transactions_sent + transactions_received
+        end
+
+
+        # Function that returns all the transactions a user has from a specific account
+        def get_transactions_from_account
+            # Get transactions for a specific account
+            account = Account.find(params[:account_id])
+            transactions_sent = account.sent_transactions
+            transactions_received = account.received_transactions
+            return transactions_sent + transactions_received
+        end
+
 
         # Function that paginates the transactions into different pages
         def paginate

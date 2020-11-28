@@ -12,6 +12,12 @@ class User < ApplicationRecord
     validates :email, presence: true, 
                       format: { with: URI::MailTo::EMAIL_REGEXP }, 
                       uniqueness: { case_sensitive: false }
+    
+    validates :DOB, presence: true
+
+    validates :phoneNumber, presence: true,
+                            numericality: true,
+                            length: { minimum: 10, maximum: 15 }
 
     before_save :downcase_username
 
@@ -33,6 +39,10 @@ class User < ApplicationRecord
         # Method that makes the username all lower case before saving to the database
         def downcase_username() 
             self.username = username.downcase
+        end
+
+        def default_values
+            self.isAdmin ||= 0
         end
         
 end
