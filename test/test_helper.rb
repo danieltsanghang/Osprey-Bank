@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
 
   # Helper function to test if the user is logged in for testing purposes
   def is_logged_in?
-    !session[user_id].nil?
+    !session[:user_id].nil?
   end
 
 end
