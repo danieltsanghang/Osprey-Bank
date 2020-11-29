@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
     TRANSACTIONS_PER_PAGE = 20 # This will be used for pagination, max number of transactionsin each page is 20
 
     def index
+        puts(params)
         @page = params.fetch(:page, 0).to_i
 
         # Check wehther the user is accessing the transactions for a specific account or for all accounts a user has
@@ -20,6 +21,34 @@ class TransactionsController < ApplicationController
         paginate # Paginate the page
         @transactions_all = @transactions_all[@page * TRANSACTIONS_PER_PAGE, TRANSACTIONS_PER_PAGE] # Set the variable to contain all transactions in the current page
         
+    end
+
+    def new
+        @transaction = Transaction.new
+    end
+
+    def create
+        @transaction = Transaction.new(transaction_params)
+        if(@transaction.valid?)
+            account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
+            receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
+
+            if(account.balance - @transaction.amount > 0) # Check if the transaction is even possible based on balance in account
+                account.balance -= @transaction.amount
+
+                if(receiver_account.nil?) # Update the receiver's balance if they exist
+                    receiver_account.balance.to_i += @transaction.amount
+                end
+                @transaction.save
+                redirect_to(transactions_path) # Redirect them to the transactions
+                
+            else
+                flash[:error] = "Not enough money"
+                redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+            end
+        else
+            redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+        end
     end
 
     private
@@ -69,6 +98,11 @@ class TransactionsController < ApplicationController
             if(@page >= @max_pages || @page < 0) 
                 redirect_to transactions_path
             end
+        end
+
+        # Sanitise input params
+        def transaction_params
+            params.require(:transaction).permit(:sender_id, :receiver_id, :amount)
         end
     
 end

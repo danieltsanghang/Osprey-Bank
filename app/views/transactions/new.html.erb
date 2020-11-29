@@ -1,0 +1,18 @@
+<%= bootstrap_form_for @transaction, local: true do |f| %>
+<% flash.each do |type, msg| %>
+            <div class="alert alert-danger">
+                <%= msg %>
+            </div>
+            <% end %>
+    <h2 class="" style="text-align: center;">Make a Transaction</h2>
+    <!--If the user is accessing the url '/accounts/:id/transactions/new' then we know the account they are making the transaction from, so don't ask them for the account-->
+    <% if(params.has_key?(:account_id)) %>
+        <p><%= f.hidden_field :sender_id, value: params[:account_id] %></p>
+    <% else %>
+        <!--If the user is accessing the url '/transactions/new' then we don't know the account they are making the transaction from, so ask them to specify one of their accounts-->
+        <%= f.collection_select :sender_id, current_user.accounts.all, :id, :accountNumber %>
+    <% end %>
+    <p><%= f.text_field :receiver_id, required: true %></p>
+    <p><%= f.text_field :amount, required: true %></p>
+    <p><%= f.submit "Make Transaction" %></p>
+<% end %>
