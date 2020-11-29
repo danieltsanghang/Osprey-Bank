@@ -27,4 +27,9 @@ class ActionDispatch::IntegrationTest
     post login_url, params: { session: { username: user.username, password: password} }
   end
 
+  # Helper function to logout of website for testing purposes
+  def logout
+    session.delete(:user_id)
+  end
+
 end

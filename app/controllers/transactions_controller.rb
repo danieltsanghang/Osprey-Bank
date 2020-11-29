@@ -33,13 +33,15 @@ class TransactionsController < ApplicationController
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
 
-            if(account.balance - @transaction.amount > 0) # Check if the transaction is even possible based on balance in account
+            if(account.balance - @transaction.amount >= 0) # Check if the transaction is even possible based on balance in account
                 account.balance -= @transaction.amount
 
-                if(receiver_account.nil?) # Update the receiver's balance if they exist
-                    receiver_account.balance.to_i += @transaction.amount
+                if(!receiver_account.nil?) # Update the receiver's balance if they exist
+                    receiver_account.balance += @transaction.amount
+                    receiver_account.save
                 end
                 @transaction.save
+                account.save
                 redirect_to(transactions_path) # Redirect them to the transactions
                 
             else
