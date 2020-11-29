@@ -1,18 +1,64 @@
-<%= bootstrap_form_for @transaction, local: true do |f| %>
-<% flash.each do |type, msg| %>
+<div class="row">
+    <div class="col">
+        <h1>Transaction Page</h1>
+    </div>
+</div>
+<div class="col-12 col-md-4 offset-md-4">
+    <div class="card credit-card-box">
+        <div class="card-header">
+            <h3><span class="panel-title-text">Make a Transaction</span><%= image_tag "accepted_cards.png", class: "img-fluid panel-title-image" %></h3>
+        </div>
+        <div class="card-body">
+            <%= form_for @transaction, local: true do |f| %>
+            <% flash.each do |type, msg| %>
             <div class="alert alert-danger">
                 <%= msg %>
             </div>
             <% end %>
-    <h2 class="" style="text-align: center;">Make a Transaction</h2>
-    <!--If the user is accessing the url '/accounts/:id/transactions/new' then we know the account they are making the transaction from, so don't ask them for the account-->
-    <% if(params.has_key?(:account_id)) %>
-        <p><%= f.hidden_field :sender_id, value: params[:account_id] %></p>
-    <% else %>
-        <!--If the user is accessing the url '/transactions/new' then we don't know the account they are making the transaction from, so ask them to specify one of their accounts-->
-        <%= f.collection_select :sender_id, current_user.accounts.all, :id, :accountNumber %>
-    <% end %>
-    <p><%= f.text_field :receiver_id, required: true %></p>
-    <p><%= f.text_field :amount, required: true %></p>
-    <p><%= f.submit "Make Transaction" %></p>
-<% end %>
+            <!--If the user is accessing the url '/accounts/:id/transactions/new' then we know the account they are making the transaction from, so don't ask them for the account-->
+            <% if(params.has_key?(:account_id)) %>
+                <p><%= f.hidden_field :sender_id, value: params[:account_id] %></p>
+            <% else %>
+            <!--If the user is accessing the url '/transactions/new' then we don't know the account they are making the transaction from, so ask them to specify one of their accounts-->
+                <div class="form-row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <%= f.label :sender_id, 'Select an account to transfer from' %>
+                            <div class="input-group"><%= f.collection_select :sender_id, current_user.accounts.all, :id, :accountNumber, {include_blank: false}, {class: 'form-control '} %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+
+            <div class="form-row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <%= f.label :receiver_id, 'Receiver Account Number' %>
+                        <div class="input-group"><%= f.text_field :receiver_id, required: true, class: "form-control", placeholder: "Acount number of the account you are sending money to" %>
+                            <div class="input-group-append"><span class="input-group-text"><i class="fa fa-credit-card"></i></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <%= f.label :amount, 'Amount to Transfer' %>
+                        <div class="input-group">
+                            <%= f.text_field :amount, required: true, class: "form-control", placeholder: "Insert amount of money to transfer"  %></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="input-group">
+                    <div class="col-12"><%= f.submit "Make Transaction", class: "btn btn-success btn-lg btn-block" %></div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

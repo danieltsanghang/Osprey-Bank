@@ -45,7 +45,7 @@
                             <td><%= transaction.sender_id %></td>
                             <td><%= transaction.receiver_id %></td>
                             <td><%= transaction.amount %></td>
-                            <% if(transaction.sender_id == current_user.id) %>
+                            <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
                             <td>Sent</td>
                             <% else %>
                             <td>Received</td>

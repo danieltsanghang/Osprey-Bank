@@ -69,8 +69,13 @@
 <a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2"><h5 class="mb-0">Accounts</h5></a>
                                 <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
                                     <ul class="list-group">
-                                        <li class="list-group-item"><span> placeholder for accounts 00-11-22 12345678</span></li>
-                                        <li class="list-group-item"><span>placeholder for accounts 00-11-22 12345678910</span></li>
+                                    <% current_user.accounts.each do |account| %>
+                                        <li class="list-group-item">
+                                            <span>
+                                                <%= link_to "Account Number: #{account.id} Balance: #{account.balance} Number of Transactions #{account.sent_transactions.size + account.received_transactions.size}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
+                                            </span>
+                                        </li>
+                                    <% end %>
                                     </ul>
                                 </div>
                             </div>
