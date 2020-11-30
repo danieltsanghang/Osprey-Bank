@@ -42,7 +42,8 @@ gem 'bcrypt'
 
 # For adding fake users
 gem 'faker'
-
+# For currency object for transactions
+gem 'money-rails', '~>1.12'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
