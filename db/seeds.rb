@@ -66,12 +66,12 @@ end
         currency: %w[USD GBP EUR].sample
     )
 end
-#
-# (1..100).each do |id|
-#     Account.create!(
-#       t.integer :senderId
-#       t.integer :receiverId
-#       t.decimal :amount
-#       t.date :timeStamp
-#     )
-#   end
+
+(1..100).each do |id|
+    Transaction.create!(
+      sender_id: Account.find(rand(0..9)).id,
+      receiver_id: Account.find(rand(10..20)).id,
+      amount: Faker::Number.number(digits: 4),
+      timeStamp: Faker::Date.backward(days: 100)
+    )
+  end
