@@ -9,8 +9,10 @@
 </head>
 
 <body>
- <%= link_to("Transactions <br>", transactions_path) %>
- <%= link_to("Accounts1", account_path(@user.id)) %>
+  <ul>
+    <li><%= link_to("Transactions", transactions_path) %></li>
+    <li><%= link_to("Accounts", accounts_path) %></li>
+  </ul>
     <div style="padding-right: 0;padding-left: 0;padding-top: 10%;">
         <div class="container">
             <div class="row d-md-flex justify-content-md-center">

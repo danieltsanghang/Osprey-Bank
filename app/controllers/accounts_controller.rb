@@ -1,12 +1,14 @@
 class AccountsController < ApplicationController
 
-  #before_action :redirect_to_login_if_not_logged_in
   before_action :redirect_to_404_if_not_authorized
 
-  def show
-    @accounts = Account.where("user_id = ?", params[:id]) #obtain array of accounts
+  def index
+    @accounts = current_user.accounts #obtain array of accounts
   end
 
+  def show
+    @account = Account.find(params[:id])
+  end
 
 
   private
@@ -14,13 +16,18 @@ class AccountsController < ApplicationController
       def redirect_to_404_if_not_authorized
         redirect_to_login_if_not_logged_in
 
-        unless(params.has_key?(:id))
-          redirect_to_404
-        else
-          unless(User.exists?(params[:id]) && User.find(params[:id]).id == current_user.id)
+        unless(params.has_key?(:id)) #if routing via index action then skip unauthorized account access
+            return
+        end
+
+        if(Account.exists?(params[:id])) #if account doesn't exist
+          unless(Account.find_by_id(params[:id]).user_id == current_user.id) #if user trying to access external account
             redirect_to_404
           end
+        else
+          redirect_to_404
         end
+
       end
 
 end
