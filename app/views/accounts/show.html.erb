@@ -1,2 +1,18 @@
-<h1>Accounts#show</h1>
-<p>Find me in app/views/accounts/show.html.erb</p>
+<h1>Accounts</h1>
+<br>
+<table class="accounts">
+  <tr>
+    <th>Account Number</th>
+    <th>Sort Code</th>
+    <th>Balance</th>
+  </tr>
+
+  <% @accounts.each do |account| %>
+  <tr>
+    <td> <%= account.accountNumber %> </td>
+    <td> <%= account.sortCode %> </td>
+    <td> <%= account.balance %> </td>
+  </tr>
+  <% end %>
+
+</table>
