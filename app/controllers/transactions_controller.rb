@@ -16,11 +16,10 @@ class TransactionsController < ApplicationController
             # Get transactions for all accounts the user has
             transactions = get_transactions_from_user
         end
-        
+
         @transactions_all = transactions.sort_by &:created_at # Sort the transactions
         paginate # Paginate the page
         @transactions_all = @transactions_all[@page * TRANSACTIONS_PER_PAGE, TRANSACTIONS_PER_PAGE] # Set the variable to contain all transactions in the current page
-        
     end
 
     def new
@@ -43,7 +42,7 @@ class TransactionsController < ApplicationController
                 @transaction.save
                 account.save
                 redirect_to(transactions_path) # Redirect them to the transactions
-                
+
             else
                 flash[:error] = "Not enough money"
                 redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
@@ -88,7 +87,6 @@ class TransactionsController < ApplicationController
             return transactions_sent + transactions_received
         end
 
-
         # Function that paginates the transactions into different pages
         def paginate
             @max_pages = (@transactions_all.size/TRANSACTIONS_PER_PAGE)
@@ -97,7 +95,7 @@ class TransactionsController < ApplicationController
             end
 
             # Boundary conditions for pages, a user should not be able to paginate under 0 or over the max limit
-            if(@page >= @max_pages || @page < 0) 
+            if(@page >= @max_pages || @page < 0)
                 redirect_to transactions_path
             end
         end
@@ -106,5 +104,5 @@ class TransactionsController < ApplicationController
         def transaction_params
             params.require(:transaction).permit(:sender_id, :receiver_id, :amount)
         end
-    
+
 end

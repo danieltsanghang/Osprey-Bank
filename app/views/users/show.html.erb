@@ -72,7 +72,7 @@
                                     <% current_user.accounts.each do |account| %>
                                         <li class="list-group-item">
                                             <span>
-                                                <%= link_to "Account Number: #{account.id} Balance: #{account.balance} Number of Transactions #{account.sent_transactions.size + account.received_transactions.size}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
+                                                <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance} Currency: #{account.currency}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
                                             </span>
                                         </li>
                                     <% end %>
