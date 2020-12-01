@@ -17,12 +17,12 @@ class Account < ApplicationRecord
 
         def default_balance_and_currency()
           #sets default values if not specified in creation of record
-          if self.balance.nil?
-            self.balance = 0
+          if self.balance_cents.nil?
+            self.balance_cents = 0
           end
 
-          if self.currency.nil?
-            self.currency = "GBP"
+          if self.balance_currency.nil?
+            self.balance_currency = "GBP"
           end
         end
 end
