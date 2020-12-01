@@ -1,19 +1,30 @@
-<h1> Transaction at <%= @transaction.timeStamp %> </h1>
-<div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
+<h1>
+  Transaction at
+  <%= @transaction.timeStamp %>
+</h1>
+<div class="card"></div>
+<div style="padding-top: 5px;padding-bottom: 5px;">
 
-                            <div style="padding: 10px 400px; ">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                      <span> Amount: <%= @amount %> </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                      <span> Currency: <%= @transaction.amount_currency %> </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                      <span> From: <%= @senderAccount.sortCode %>/<%= @senderAccount.accountNumber %> </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                    <span> To: <%= @revceiverAccount.sortCode %>/<%= @revceiverAccount.accountNumber %> </span>
-                                    </li>
-                                </ul>
-                            </div>
+  <div style="padding: 10px 400px; ">
+    <ul class="list-group">
+
+      <li class="list-group-item">
+        <span>
+          From:
+          <%= @senderAccount.sortCode %>/<%= @senderAccount.accountNumber %>
+        </span>
+      </li>
+      <li class="list-group-item">
+        <span>
+          To:
+          <%= @revceiverAccount.sortCode %>/<%= @revceiverAccount.accountNumber %>
+        </span>
+      </li>
+      <li class="list-group-item">
+        <span>
+          Amount:
+          <%= @amount %>
+        </span>
+      </li>
+    </ul>
+  </div>
