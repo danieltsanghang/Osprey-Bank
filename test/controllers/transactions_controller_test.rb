@@ -19,6 +19,17 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     logout
   end
 
+  test "should show transaction" do
+    # Get user from fixtures and login
+    user = users(:user)
+    login_as_user(user, "password1")
+    assert_response :redirect # User redirected after authenticated
+
+    # Show user profile
+    get transaction_url(transaction_one)
+    assert_response :success
+  end
+
   test 'should open transactions page after login' do
     logout
     # Get user from fixtures and login
@@ -58,7 +69,7 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should make transactions for valid users and valid amount' do
-    # Perform the transaction using a post request with the correct parameters 
+    # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: 10} }
 
     assert_redirected_to transactions_url # if the transaction succeeds, the user should be redirected to the transactions index page
@@ -73,9 +84,9 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should make transactions for valid users and valid amount (amount = balance)' do
-    # Perform the transaction using a post request with the correct parameters 
+    # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: @sender_balance_before.to_i} }
-    
+
     assert_redirected_to transactions_url # if the transaction succeeds, the user should be redirected to the transactions index page
     follow_redirect! # Follow redirect
     assert_template 'transactions/index' # the template displayed is the transactions index page of the user
@@ -89,7 +100,7 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
 
 
   test 'should not make transactions for valid users and invalid amount (amount = 0)' do
-    # Perform the transaction using a post request with the correct parameters 
+    # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: 0} }
 
     assert_redirected_to new_transaction_url # if the transaction fails, the user should be redirected to the transactions new page (the same page)
@@ -104,7 +115,7 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not make transactions for valid users and invalid amount (amount = -10)' do
-    # Perform the transaction using a post request with the correct parameters 
+    # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: -10} }
 
     assert_redirected_to new_transaction_url # if the transaction fails, the user should be redirected to the transactions new page (the same page)
@@ -119,7 +130,7 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not make transactions for valid users and invalid amount (amount > balance)' do
-    # Perform the transaction using a post request with the correct parameters 
+    # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: @sender.balance+1} }
 
     assert_redirected_to new_transaction_url # if the transaction fails, the user should be redirected to the transactions new page (the same page)
