@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  
+
   root 'home#index'
   get 'home/index'
-  
+
   # Login and logout routes
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
