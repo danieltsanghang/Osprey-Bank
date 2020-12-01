@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
     def show
       @transaction = Transaction.find(params[:id])
       @senderAccount = Account.find(@transaction.sender_id)
-      @revceiverAccount = Account.find(@transaction.receiver_id)
+      @receiverAccount = Account.find(@transaction.receiver_id)
       @amount = Money.new(@transaction.amount).format(display_free: false)
     end
 
