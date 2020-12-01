@@ -14,11 +14,14 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      <%= link_to "Log out", logout_path, method: :delete %>
-    <% else %>
-      <%= link_to "Log In", login_path %>
-    <% end %>
+  <% if(controller_name == 'home' || controller_name == 'sessions') %>
+  <% else %>
+    <%= render(:partial => 'layouts/header') %>
+  <% end %>
     <%= yield %>
+  <% if(controller_name == 'home' || controller_name == 'sessions') %>
+  <% else %>
+    <%= render(:partial => 'layouts/footer') %>
+  <% end %>
   </body>
 </html>

@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-
+    before_action :redirect_to_login_if_not_logged_in
     before_action :redirect_to_404_if_not_authorized
 
     TRANSACTIONS_PER_PAGE = 20 # This will be used for pagination, max number of transactionsin each page is 20
@@ -55,7 +55,6 @@ class TransactionsController < ApplicationController
     private
         # Function redirects user to 404 if they are not logged in or authorized to view that account
         def redirect_to_404_if_not_authorized
-            redirect_to_login_if_not_logged_in
 
             # If the user calls the index for their account, it's a GET request identifying the user by the session, hence not no need for further authentication
             unless(params.has_key?(:account_id))
