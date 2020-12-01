@@ -1,10 +1,11 @@
 class TransactionsController < ApplicationController
-
+    before_action :redirect_to_login_if_not_logged_in
     before_action :redirect_to_404_if_not_authorized
 
     TRANSACTIONS_PER_PAGE = 20 # This will be used for pagination, max number of transactionsin each page is 20
 
     def index
+        puts(params)
         @page = params.fetch(:page, 0).to_i
 
         # Check wehther the user is accessing the transactions for a specific account or for all accounts a user has
@@ -15,17 +16,50 @@ class TransactionsController < ApplicationController
             # Get transactions for all accounts the user has
             transactions = get_transactions_from_user
         end
-        
+
         @transactions_all = transactions.sort_by &:created_at # Sort the transactions
         paginate # Paginate the page
         @transactions_all = @transactions_all[@page * TRANSACTIONS_PER_PAGE, TRANSACTIONS_PER_PAGE] # Set the variable to contain all transactions in the current page
-        
+    end
+
+    def new
+        @transaction = Transaction.new
+    end
+
+    def show
+      @transaction = Transaction.find(params[:id])
+      @amount = Money.new(@transaction.amount).format(display_free: false)
+    end
+
+    def create
+        @transaction = Transaction.new(transaction_params)
+        if(@transaction.valid?)
+            account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
+            receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
+
+            if(account.balance - @transaction.amount >= 0) # Check if the transaction is even possible based on balance in account
+                account.balance -= @transaction.amount
+
+                if(!receiver_account.nil?) # Update the receiver's balance if they exist
+                    receiver_account.balance += @transaction.amount
+                    receiver_account.save
+                end
+                @transaction.save
+                account.save
+                redirect_to(transactions_path) # Redirect them to the transactions
+
+            else
+                flash[:error] = "Not enough money"
+                redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+            end
+        else
+            redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+        end
     end
 
     private
         # Function redirects user to 404 if they are not logged in or authorized to view that account
         def redirect_to_404_if_not_authorized
-            redirect_to_login_if_not_logged_in
 
             # If the user calls the index for their account, it's a GET request identifying the user by the session, hence not no need for further authentication
             unless(params.has_key?(:account_id))
@@ -57,7 +91,6 @@ class TransactionsController < ApplicationController
             return transactions_sent + transactions_received
         end
 
-
         # Function that paginates the transactions into different pages
         def paginate
             @max_pages = (@transactions_all.size/TRANSACTIONS_PER_PAGE)
@@ -66,9 +99,14 @@ class TransactionsController < ApplicationController
             end
 
             # Boundary conditions for pages, a user should not be able to paginate under 0 or over the max limit
-            if(@page >= @max_pages || @page < 0) 
+            if(@page >= @max_pages || @page < 0)
                 redirect_to transactions_path
             end
         end
-    
+
+        # Sanitise input params
+        def transaction_params
+            params.require(:transaction).permit(:sender_id, :receiver_id, :amount)
+        end
+
 end

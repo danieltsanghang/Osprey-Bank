@@ -31,7 +31,7 @@
                             <th scope="col">Date</th>
                             <th scope="col">Sender ID</th>
                             <th scope="col">Receiver ID</th>
-                            <th scope="col">Amount</th>
+                            <th scope="col">Amount (GBP)</th>
                             <th scope="col">Sent/Received</th>
                             <th scope="col">See more</th>
                         </tr>
@@ -42,10 +42,10 @@
                         <tr>
                             <th scope="row"><%= counter %></th>
                             <td><%= transaction.created_at %></td>
-                            <td><%= transaction.sender_id %></td>
+                            <td><%= Account.find(transaction.sender_id).accountNumber%></td>
                             <td><%= transaction.receiver_id %></td>
                             <td><%= transaction.amount %></td>
-                            <% if(transaction.sender_id == current_user.id) %>
+                            <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
                             <td>Sent</td>
                             <% else %>
                             <td>Received</td>
@@ -54,7 +54,6 @@
                         </tr>
                         <% counter += 1%>
                         <% end %>
-                    </tbody>
                     </tbody>
                 </table>
 

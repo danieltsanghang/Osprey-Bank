@@ -1,0 +1,30 @@
+<h1>
+  Transaction at
+  <%= @transaction.timeStamp %>
+</h1>
+<div class="card"></div>
+<div style="padding-top: 5px;padding-bottom: 5px;">
+
+  <div style="padding: 10px 400px; ">
+    <ul class="list-group">
+
+      <li class="list-group-item">
+        <span>
+          From:
+          <%= @transaction.sender_id %>
+        </span>
+      </li>
+      <li class="list-group-item">
+        <span>
+          To:
+          <%= @transaction.receiver_id %>
+        </span>
+      </li>
+      <li class="list-group-item">
+        <span>
+          Amount:
+          <%= @amount %>
+        </span>
+      </li>
+    </ul>
+  </div>

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # Create resourceful routes for accounts only to show accounts, as user should not be able to do anything else
   resources :accounts
   resources :accounts, only: [:show] do
-    resources :transactions, only: [:index]
+    resources :transactions, only: [:index, :new, :create]
   end
 
 end
