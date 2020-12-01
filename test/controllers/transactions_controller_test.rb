@@ -18,14 +18,13 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   def teardown
     logout
   end
-
   test "should show transaction" do
     # Get user from fixtures and login
     user = users(:user)
     login_as_user(user, "password1")
     assert_response :redirect # User redirected after authenticated
 
-    # Show user profile
+    # Show transaction from fixture
     get transaction_url(transaction_one)
     assert_response :success
   end
