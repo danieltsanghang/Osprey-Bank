@@ -45,11 +45,13 @@
                         <td>Address</td>
                         <td><%= @user.address %></td>
                     </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<button class="btn btn-outline-primary" type="button"><%=link_to('Edit Profile', edit_user_path(@user), :class => 'action show')%></button>
 
 <!-- for accounts to be displayed -->
 

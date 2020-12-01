@@ -26,6 +26,11 @@ class TransactionsController < ApplicationController
         @transaction = Transaction.new
     end
 
+    def show
+      @transaction = Transaction.find(params[:id])
+      @amount = Money.new(@transaction.amount).format(display_free: false)
+    end
+
     def create
         @transaction = Transaction.new(transaction_params)
         if(@transaction.valid?)
