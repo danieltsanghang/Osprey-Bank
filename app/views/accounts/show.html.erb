@@ -1,5 +1,5 @@
 
-<%= link_to "Account Transactions", transactions_path %>
+<%= link_to "Transactions", transactions_path %>
 
 <div style="padding-right: 0;padding-left: 0;padding-top: 10%; margin: auto">
   <h1 style="text-align: center;">Your Account</h1>
@@ -24,10 +24,10 @@
                                       <span> Sort Code: <%= @account.sortCode %> </span>
                                     </li>
                                     <li class="list-group-item">
-                                      <span> Currency: <%= @account.balance_currency %> </span>
+                                      <span> Currency: <%= @account.currency %> </span>
                                     </li>
                                     <li class="list-group-item">
-                                      <span> Balance: <%= @account.balance_cents %> </span>
+                                      <span> Balance: <%= @account.balance %> </span>
                                     </li>
                                 </ul>
                             </div>

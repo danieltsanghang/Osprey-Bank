@@ -44,7 +44,7 @@
                             <td><%= transaction.created_at %></td>
                             <td><%= Account.find(transaction.sender_id).accountNumber%></td>
                             <td><%= transaction.receiver_id %></td>
-                            <td><%= transaction.amount_cents %></td>
+                            <td><%= transaction.amount %></td>
                             <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
                             <td>Sent</td>
                             <% else %>

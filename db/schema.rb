@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_003506) do
+ActiveRecord::Schema.define(version: 2020_12_01_154904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2020_12_01_003506) do
     t.integer "accountNumber"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "balance_cents", default: 0, null: false
-    t.string "balance_currency", default: "USD", null: false
+    t.integer "balance"
+    t.string "currency"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -31,8 +31,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_003506) do
     t.date "timeStamp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "amount_cents", default: 0, null: false
-    t.string "amount_currency", default: "USD", null: false
+    t.decimal "amount"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,4 +1,7 @@
- <%= link_to("Transactions", transactions_path) %>
+<ul>
+  <li><%= link_to("Transactions", transactions_path) %></li>
+  <li><%= link_to("Accounts", accounts_path) %></li>
+</ul>
     <div style="padding-right: 0;padding-left: 0;padding-top: 10%;">
         <div class="container">
             <div class="row d-md-flex justify-content-md-center">
@@ -61,7 +64,7 @@
                                     <% current_user.accounts.each do |account| %>
                                         <li class="list-group-item">
                                             <span>
-                                                <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance_cents} Currency: #{account.balance_currency}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
+                                                <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance} Currency: #{account.currency}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
                                             </span>
                                         </li>
                                     <% end %>
