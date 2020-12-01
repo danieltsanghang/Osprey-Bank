@@ -28,8 +28,8 @@ User.create!(
         user_id: 0,
         sortCode: Faker::Number.number(digits: 6),
         accountNumber: Faker::Number.number(digits: 8),
-        balance: Faker::Number.number(digits: 7),
-        currency: %w[USD GBP EUR].sample
+        balance_cents: Faker::Number.number(digits: 7),
+        balance_currency: %w[USD GBP EUR].sample
     )
 end
 
@@ -57,8 +57,8 @@ end
         user_id: rand(1..20),
         sortCode: Faker::Number.number(digits: 6),
         accountNumber: Faker::Number.number(digits: 8),
-        balance: Faker::Number.number(digits: 7),
-        currency: %w[USD GBP EUR].sample
+        balance_cents: Faker::Number.number(digits: 7),
+        balance_currency: %w[USD GBP EUR].sample
     )
 end
 
@@ -66,7 +66,8 @@ end
     Transaction.create!(
       sender_id: Account.find(rand(0..9)).id,
       receiver_id: Account.find(rand(10..20)).id,
-      amount: Faker::Number.number(digits: 4),
+      amount_cents: Faker::Number.number(digits: 4),
+      amount_currency: %w[USD GBP EUR].sample,
       timeStamp: Faker::Date.backward(days: 100)
     )
   end
