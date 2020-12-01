@@ -1,18 +1,24 @@
 <!DOCTYPE html>
+
 <html>
   <head>
-    <title>OspreyBank</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!--<link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+   <title>OspreyBank</title>
+   <%= csrf_meta_tags %>
+   <%= csp_meta_tag %>
+   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+   <!--<link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">-->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   </head>
 
   <body>
+    <% flash.each do |type, msg| %>
+       <div class= "alert alert-danger">
+         <%= msg %>
+        </div>
+        <% end %>
     <div class="container-fluid">
     <div class="row">
       <% if logged_in? %>

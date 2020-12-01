@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Edit Personal Details</title>
+
+</head>
+
+<body>
+ <%= link_to("Transactions", transactions_path) %>
+    <div style="padding-right: 0;padding-left: 0;padding-top: 10%;">
+        <div class="container">
+            <div class="row d-md-flex justify-content-md-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Update Your Personal Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Here you can fill out a form to update your personal details if they happen to change.</p>
+                            <div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
+
+<!-- The display for the form -->
+
+<a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+  <h5 class="mb-0">Personal Details</h5>
+  <%= form_for(@user) do |f| %>
+</a>
+  <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
+      <div class="table-responsive" style="height: 312px;">
+          <table class="table">
+              <tbody>
+                  <tr>
+                      <td>First Name</td>
+                      <td><%= f.text_field(:fname) %></td>
+                  </tr>
+                  <tr>
+                      <td>Last Name</td>
+                      <td><%= f.text_field(:lname) %></td>
+                  </tr>
+                  <tr>
+                      <td>User Name</td>
+                      <td><%= f.text_field(:username) %></td>
+                  </tr>
+                  <tr>
+                      <td>Email</td>
+                      <td><%= f.text_field(:email) %></td>
+                  </tr>
+                  <tr>
+                      <td>Mobile Number</td>
+                      <td><%= f.text_field(:phoneNumber) %></td>
+                  </tr>
+                  <tr>
+                      <td>Address</td>
+                      <td><%= f.text_field(:address) %></td>
+                  </tr>
+
+              </tbody>
+          </table>
+
+          <div class="form-buttons">
+            <%= f.submit("Update Details") %>
+          </div>
+
+        <% end %>
+      </div>
