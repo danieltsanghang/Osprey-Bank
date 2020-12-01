@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Personal Details</title>
-
-</head>
-
-<body>
+<ul>
+  <li><%= link_to("Transactions", transactions_path) %></li>
+  <li><%= link_to("Accounts", accounts_path) %></li>
+</ul>
     <div style="padding-right: 0;padding-left: 0;padding-top: 5%;">
         <div class="container">
             <div class="row d-md-flex justify-content-md-center">
@@ -71,7 +64,7 @@
                                     <% current_user.accounts.each do |account| %>
                                         <li class="list-group-item">
                                             <span>
-                                                <%= link_to "Account Number: #{account.id} Balance: #{account.balance} Number of Transactions #{account.sent_transactions.size + account.received_transactions.size}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
+                                                <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance} Currency: #{account.currency}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
                                             </span>
                                         </li>
                                     <% end %>
@@ -84,6 +77,3 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
