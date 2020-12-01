@@ -1,40 +1,39 @@
-<h1>Your Account</h1>
-<br>
-<body>
-  <div style="padding-right: 0;padding-left: 0;padding-top: 10%;">
-      <div class="container">
-          <div class="row d-md-flex justify-content-md-center">
-              <div class="col-md-8">
-                  <div class="card">
-                      <div class="card-header">
-                          <h5 class="mb-0">Your Account</h5>
-                      </div>
-                      <div class="card-body">
-                          <p class="card-text">Here you can view your account details.</p>
+
+
+<div style="padding-right: 0;padding-left: 0;padding-top: 10%; margin: auto">
+  <h1 style="text-align: center;">Your Account</h1>
+    <div class="container">
+        <div class="row d-md-flex justify-content-md-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0" style="text-align: center;">Your Account</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Here you can view your account details.</p>
 
 <div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
 <a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2"><h5 class="mb-0">Account Info</h5></a>
-                              <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
-                                  <ul class="list-group">
-                                      <li class="list-group-item">
-                                        <span> Account Number: <%= @account.accountNumber %> </span>
-                                      </li>
-                                      <li class="list-group-item">
-                                        <span> Sort Code: <%= @account.sortCode %> </span>
-                                      </li>
-                                      <li class="list-group-item">
-                                        <span> Currency: <%= @account.currency %> </span>
-                                      </li>
-                                      <li class="list-group-item">
-                                        <span> Balance: <%= @account.balance %> </span>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</body>
+                            <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                      <span> Account Number: <%= @account.accountNumber %> </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <span> Sort Code: <%= @account.sortCode %> </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <span> Currency: <%= @account.currency %> </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <span> Balance: <%= @account.balance %> </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
