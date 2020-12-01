@@ -11,13 +11,13 @@
       <li class="list-group-item">
         <span>
           From:
-          <%= @senderAccount.sortCode %>/<%= @senderAccount.accountNumber %>
+          <%= @transaction.sender_id %>
         </span>
       </li>
       <li class="list-group-item">
         <span>
           To:
-          <%= @receiverAccount.sortCode %>/<%= @receiverAccount.accountNumber %>
+          <%= @transaction.receiver_id %>
         </span>
       </li>
       <li class="list-group-item">
