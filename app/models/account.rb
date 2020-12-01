@@ -5,10 +5,10 @@ class Account < ApplicationRecord
 
     validates :user_id, presence:true
 
-    validates :sortCode, length: {is: 6}
+    validates :sortCode, length: {is: 6}, numericality: {only_integer: true}
 
     validates :accountNumber, length: {minimum: 8, maximum: 9},
-                              uniqueness: true
+                              uniqueness: true, numericality: {only_integer: true}
 
     before_save :default_balance_and_currency
 
@@ -16,11 +16,12 @@ class Account < ApplicationRecord
     private
 
         def default_balance_and_currency()
-          if self.balance == nil
+          #sets default values if not specified in creation of record
+          if self.balance.nil?
             self.balance = 0
           end
 
-          if self.currency == nil
+          if self.currency.nil?
             self.currency = "GBP"
           end
         end
