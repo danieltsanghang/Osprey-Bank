@@ -1,14 +1,12 @@
-
-<%= link_to "Transactions", transactions_path %>
-
-<div style="padding-right: 0;padding-left: 0;padding-top: 10%; margin: auto">
-  <h1 style="text-align: center;">Your Account</h1>
+<h1>Your Account</h1>
+<br>
+<div style="padding-right: 0;padding-left: 0;padding-top: 1%; margin: auto">
     <div class="container">
         <div class="row d-md-flex justify-content-md-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0" style="text-align: center;">Your Account</h5>
+                        <h3 class="mb-0" style="text-align: center;">Your Account</h3>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Here you can view your account details.</p>
@@ -33,6 +31,7 @@
                             </div>
                         </div>
                     </div>
+                    <%= link_to  "Make a Transaction", new_account_transaction_url(params[:id]),  class: "btn btn-lg btn-primary", style: "margin: 2%;" %>
                 </div>
             </div>
         </div>

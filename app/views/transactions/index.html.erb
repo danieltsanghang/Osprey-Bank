@@ -42,8 +42,22 @@
                         <tr>
                             <th scope="row"><%= counter %></th>
                             <td><%= transaction.created_at %></td>
-                            <td><%= Account.find(transaction.sender_id).accountNumber%></td>
-                            <td><%= transaction.receiver_id %></td>
+                            <td>
+                                <% render_sender = Account.find_by(id: transaction.sender_id) %>
+                                <% if(render_sender.nil?) %>
+                                    <%= transaction.sender_id %>
+                                <% else %>
+                                    <%= transaction.sender_id %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <% render_receiver = Account.find_by(id: transaction.sender_id) %>
+                                <% if(render_receiver.nil?) %>
+                                    <%= transaction.receiver_id %>
+                                <% else %>
+                                    <%= transaction.receiver_id %>
+                                <% end %>
+                            </td>
                             <td><%= transaction.amount %></td>
                             <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
                             <td>Sent</td>

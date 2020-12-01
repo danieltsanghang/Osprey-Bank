@@ -3,15 +3,15 @@
 account_1:
   id: 1
   user_id: 1
-  sortCode: 1235326457
-  accountNumber: 10
+  sortCode: 123456
+  accountNumber: 100000000
   balance: 2500
   currency: GBP
 
 account_2:
   id: 2
   user_id: 2
-  sortCode: 21231313
-  accountNumber: 20
+  sortCode: 654321
+  accountNumber: 200000000
   balance: 10000
   currency: US Dollars
