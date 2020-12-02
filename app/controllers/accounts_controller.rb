@@ -10,6 +10,9 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @currency = @account.currency
     @money = Money.new(@account.balance,@account.currency)
+    def convert(money,currency)
+      return money.exchange_to(currency).format
+    end
   end
 
 
