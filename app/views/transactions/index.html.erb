@@ -61,10 +61,12 @@
                             <td><%= transaction.amount %></td>
                             <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
                             <td>Sent</td>
+                            <% direction = "sent" %>
                             <% else %>
                             <td>Received</td>
+                            <% direction = "recieve" %>
                             <% end %>
-                            <td><%= link_to("Show", transaction_path(transaction)) %></td>
+                            <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
                         </tr>
                         <% counter += 1%>
                         <% end %>

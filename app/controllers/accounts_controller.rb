@@ -8,6 +8,8 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
+    @currency = @account.currency
+    @money = Money.new(@account.balance,@account.currency)
   end
 
 
