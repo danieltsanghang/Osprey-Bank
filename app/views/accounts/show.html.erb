@@ -1,6 +1,4 @@
-<h1>Your Account</h1>
-<br>
-<div style="padding-right: 0;padding-left: 0;padding-top: 1%; margin: auto">
+<div style="padding-right: 0;padding-left: 0;padding-top: 5%; margin: auto">
     <div class="container">
         <div class="row d-md-flex justify-content-md-center">
             <div class="col-md-8">
@@ -31,7 +29,8 @@
                             </div>
                         </div>
                     </div>
-                    <%= link_to  "Make a Transaction", new_account_transaction_url(params[:id]),  class: "btn btn-lg btn-primary", style: "margin: 2%;" %>
+                    <%= link_to  "View Account Transactions", account_transactions_url(params[:id]),  class: "btn btn-lg btn-primary", style: "margin: 2%;" %>
+                    <%= link_to  "Make a Transaction", new_account_transaction_url(params[:id]),  class: "btn btn-lg btn-info", style: "margin: 2%; margin-top: 0%" %>
                 </div>
             </div>
         </div>
