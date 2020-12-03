@@ -2,29 +2,42 @@
   Transaction at
   <%= @transaction.timeStamp %>
 </h1>
-<div class="card"></div>
-<div style="padding-top: 5px;padding-bottom: 5px;">
+<div class="container">
+  <div class="row d-md-flex justify-content-md-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div style="padding-top: 5px;padding-bottom: 5px;">
 
-  <div style="padding: 10px 400px; ">
-    <ul class="list-group">
+          <div class="card-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td style="width:200px; ">From</td>
+                  <td><%= @transaction.sender_id %></td>
+                </tr>
+                <tr>
+                  <td>To</td>
+                  <td><%= @transaction.receiver_id %></td>
+                </tr>
+                <tr>
+                  <td>Amount</td>
+                  <td>
+                    <%= convert(@amount,params[:currency]) %></td>
+                </tr>
+              </tbody>
+            </table>
 
-      <li class="list-group-item">
-        <span>
-          From:
-          <%= @transaction.sender_id %>
-        </span>
-      </li>
-      <li class="list-group-item">
-        <span>
-          To:
-          <%= @transaction.receiver_id %>
-        </span>
-      </li>
-      <li class="list-group-item">
-        <span>
-          Amount:
-          <%= @amount %>
-        </span>
-      </li>
-    </ul>
+            <div style="text-align: center;">
+              <span>
+                <td><%= link_to"EUR", transaction_path(:currency =>"EUR"), class: "btn btn-lg btn-primary", style: "margin: 2%;" %></td>
+                <td><%= link_to"GBP", transaction_path(:currency =>"GBP"), class: "btn btn-lg btn-primary", style: "margin: 2%;" %></td>
+                <td><%= link_to"USD", transaction_path(:currency =>"USD"), class: "btn btn-lg btn-primary", style: "margin: 2%;" %></td>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
+</div>

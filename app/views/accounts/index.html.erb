@@ -23,7 +23,7 @@
                                       <% @accounts.each_with_index do |account, index| %>
                                         <li class="list-group-item">
                                           <span>
-                                            <%= link_to "Account " + (index+1).to_s, account_path(account.id) %>
+                                            <%= link_to "Account " + (index+1).to_s, account_path(account.id, :currency => account.currency) %>
                                             <br>
                                             <%= account.accountNumber %> / <%= account.sortCode %>
                                           </span>
