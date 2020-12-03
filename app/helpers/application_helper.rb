@@ -13,7 +13,17 @@ module ApplicationHelper
   end
 
   def convert(money,currency)
-    return money.exchange_to(currency).format
+      return money.exchange_to(haveCurrency(currency)).format
+    end
+
+def haveCurrency(currency)
+  if(currency.nil? && params.has_key?(:account_id))
+    return Account.find_by(params[:account_id])
   end
+  if(currency.nil? && !params.has_key?(:account_id))
+    return "USD"
+  end
+  return currency
+end
 
 end

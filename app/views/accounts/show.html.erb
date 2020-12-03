@@ -33,13 +33,13 @@
                   <li class="list-group-item">
                     <span>
                       Currency:
-                      <%= params[:currency] %>
+                      <%= haveCurrency(params[:currency]) %>
                     </span>
                   </li>
                   <li class="list-group-item">
                     <span>
                       Balance:
-                      <%= convert(@money,params[:currency])%>
+                      <%=  convert(@money,params[:currency]) %>
                     </span>
                   </li>
                   <div style="text-align: center;">
