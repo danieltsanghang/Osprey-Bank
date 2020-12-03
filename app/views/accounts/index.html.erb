@@ -1,6 +1,4 @@
-<h1>Accounts</h1>
-<br>
-  <div style="padding-right: 0;padding-left: 0;padding-top: 1%;">
+  <div style="padding-right: 0;padding-left: 0;padding-top: 5%;">
       <div class="container">
           <div class="row d-md-flex justify-content-md-center">
               <div class="col-md-8">
@@ -16,18 +14,19 @@
                       <div class="card-body">
                           <p class="card-text">Here you can view all your accounts.</p>
 
-<div class="card"></div><div style="padding-top: 5px;padding-bottom: 5px;">
-<a class="btn card" style="background-color: rgba(0,0,0,.03);"data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2"><h5 class="mb-0">Accounts</h5></a>
-                              <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
+                          <div class="card"></div>
+                          <div style="padding-top: 5px;padding-bottom: 5px;">
+                              <div class="collapse show"  style="padding-top: 10px;">
                                   <ul class="list-group">
                                       <% @accounts.each_with_index do |account, index| %>
-                                        <li class="list-group-item">
+                                      <li class="list-group-item">
                                           <span>
+
                                             <%= link_to "Account " + (index+1).to_s, account_path(account.id, :currency => account.currency) %>
                                             <br>
                                             <%= account.accountNumber %> / <%= account.sortCode %>
                                           </span>
-                                        </li>
+                                      </li>
                                       <% end %>
                                   </ul>
                               </div>

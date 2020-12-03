@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
     before_action :redirect_to_login_if_not_logged_in
     before_action :redirect_to_404_if_not_authorized
+    helper_method :sort_column, :sort_direction
 
     TRANSACTIONS_PER_PAGE = 20 # This will be used for pagination, max number of transactionsin each page is 20
 
@@ -17,7 +18,16 @@ class TransactionsController < ApplicationController
             transactions = get_transactions_from_user
         end
 
-        @transactions_all = transactions.sort_by &:created_at # Sort the transactions
+        if(params.has_key?(:search_transaction)) 
+            transactions = search(transactions)
+        end
+        if(sort_direction == 'asc')
+            @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the ascending order
+        else
+            @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the descending order
+            @transactions_all = @transactions_all.reverse
+        end
+        
         paginate # Paginate the page
         @transactions_all = @transactions_all[@page * TRANSACTIONS_PER_PAGE, TRANSACTIONS_PER_PAGE] # Set the variable to contain all transactions in the current page
     end
@@ -68,8 +78,13 @@ class TransactionsController < ApplicationController
 
             # Authentication for transactions for a specific account, authentication needs to be done
             unless(params.has_key?(:account_id) && Account.exists?(params[:account_id]) && Account.find(params[:account_id]).user_id == current_user.id)
-                render file: "#{Rails.root}/public/404.html", layout: false, status: 404 # Render 404 page
+                redirect_to_404 # Render 404 page
             end
+        end
+
+        # Sanitise input params
+        def transaction_params
+            params.require(:transaction).permit(:sender_id, :receiver_id, :amount, :pages, :sort, :direction, :search_transaction)
         end
 
 
@@ -104,9 +119,19 @@ class TransactionsController < ApplicationController
             end
         end
 
-        # Sanitise input params
-        def transaction_params
-            params.require(:transaction).permit(:sender_id, :receiver_id, :amount, :pages)
+        # Function used to sort a certain column, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
+        def sort_column
+            Transaction.column_names.include?(params[:sort]) ? params[:sort] : "name"
+        end
+
+        # Function used to sort either in ascending or descending order, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
+        def sort_direction
+            %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+        end
+
+        # Function used to search for a sender, receiver, amount or date
+        def search(transactions)
+            return transactions.select{|el| el.sender_id.to_s.starts_with?(params[:search_transaction]) || el.receiver_id.to_s.starts_with?(params[:search_transaction]) || el.amount.to_s.starts_with?(params[:search_transaction]) || el.created_at.to_s.starts_with?(params[:search_transaction])}
         end
 
 end
