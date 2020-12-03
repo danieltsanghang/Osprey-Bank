@@ -1,7 +1,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
 
 <div class="container">
-    <div class ="col col-xs-6">
+    <div class="col col-xs-6">
         <div class="row">
             <h1 class="display-3" style="text-align: center;">Welcome to your transaction history <%=current_user.fname%>!</h1>
             <p class="lead">Below you can find all the transactions from your bank account!</p>
@@ -17,6 +17,15 @@
 
         <div class="panel panel-default panel-table">
             <div class="panel-heading">
+                <div class="col col-xs-6">
+                    <div class="row">
+                        <%= form_for(transactions_path, method: :get) do |f|%>
+                        <%= text_field_tag :search_transaction, params[:search_item], placeholder: "Search for something..." %>
+                        <%= f.submit "Search", class:"btn btn-success"%>
+                        <% end %>
+                        <%= link_to "Reset", transactions_path, class:"btn btn-warning", style:"margin-left: 2%"%>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col col-xs-6">
                         <h3 class="panel-title">Transactions</h3>
@@ -28,10 +37,10 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Sender ID</th>
-                            <th scope="col">Receiver ID</th>
-                            <th scope="col">Amount (GBP)</th>
+                            <th scope="col"><%= sortable "created_at", "Date"%></th>
+                            <th scope="col"><%= sortable "sender_id", "Sender"%></th>
+                            <th scope="col"><%= sortable "receiver_id", "Receiver"%></th>
+                            <th scope="col"><%= sortable "amount", "Amount"%></th>
                             <th scope="col">Sent/Received</th>
                             <th scope="col">See more</th>
                         </tr>
@@ -45,17 +54,17 @@
                             <td>
                                 <% render_sender = Account.find_by(id: transaction.sender_id) %>
                                 <% if(render_sender.nil?) %>
-                                    <%= transaction.sender_id %>
+                                <%= transaction.sender_id %>
                                 <% else %>
-                                    <%= transaction.sender_id %>
+                                <%= transaction.sender_id %>
                                 <% end %>
                             </td>
                             <td>
                                 <% render_receiver = Account.find_by(id: transaction.sender_id) %>
                                 <% if(render_receiver.nil?) %>
-                                    <%= transaction.receiver_id %>
+                                <%= transaction.receiver_id %>
                                 <% else %>
-                                    <%= transaction.receiver_id %>
+                                <%= transaction.receiver_id %>
                                 <% end %>
                             </td>
                             <td><%= transaction.amount %></td>
@@ -80,13 +89,13 @@
                     <div class="col col-xs-8">
                         <ul class="pagination visible-xs pull-right">
                             <%if(@page - 1 >= 0)%>
-                                <li><a href="#"><%= link_to "Previous Page", transactions_path(page: @page - 1) %></a></li>
+                            <li><%= link_to "Previous Page", transactions_path(page: @page - 1) %></li>
                             <% end %>
                             <%if(@page - 1 >= 0 && @page + 1 < @max_pages)%>
-                                <li>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+                            <li>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                             <% end %>
                             <%if(@page + 1 < @max_pages)%>
-                                <li><a href="#"><%= link_to "Next Page", transactions_path(page: @page + 1) %></a></li>
+                            <li><%= link_to "Next Page", transactions_path(page: @page + 1) %></li>
                             <% end %>
                         </ul>
                     </div>
