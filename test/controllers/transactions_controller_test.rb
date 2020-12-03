@@ -25,7 +25,7 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect # User redirected after authenticated
 
     # Show transaction from fixture
-    get transaction_url(transaction_one)
+    get transaction_url(transactions(:transaction_one))
     assert_response :success
   end
 
