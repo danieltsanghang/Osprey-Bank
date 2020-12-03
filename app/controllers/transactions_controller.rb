@@ -21,6 +21,7 @@ class TransactionsController < ApplicationController
         if(params.has_key?(:search_transaction)) 
             transactions = search(transactions)
         end
+
         if(sort_direction == 'asc')
             @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the ascending order
         else
@@ -108,7 +109,7 @@ class TransactionsController < ApplicationController
 
         # Function that paginates the transactions into different pages
         def paginate
-            @max_pages = (@transactions_all.size/TRANSACTIONS_PER_PAGE)
+            @max_pages = (@transactions_all.size/TRANSACTIONS_PER_PAGE) + 1
             if(@max_pages == 0)
                 @max_pages = 1 # Because @max_pages indexes from 0, if its 0 change it to 1
             end

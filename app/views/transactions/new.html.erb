@@ -24,7 +24,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <%= f.label :sender_id, 'Select an account to transfer from' %>
-                            <div class="input-group"><%= f.collection_select :sender_id, current_user.accounts.all, :id, :accountNumber, {include_blank: false}, {class: 'form-control '} %>
+                            <div class="input-group"><%= f.collection_select :sender_id, current_user.accounts.all, :id, :id, {include_blank: false}, {class: 'form-control '} %>
                             </div>
                         </div>
                     </div>

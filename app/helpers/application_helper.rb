@@ -12,6 +12,7 @@ module ApplicationHelper
     css = col == sort_column ? "current #{sort_direction}" : nil
     direction = col == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
     link_to title, { :sort => col, :direction => direction }, { :class => css }
+  end
     
   def findCurrency(sender,reciever,direction)
 
@@ -24,6 +25,14 @@ module ApplicationHelper
   end
 
   def convert(money,currency)
+    if(currency.nil? && params.has_key?(:account_id))
+      currency = Account.find_by(params[:account_id])
+    end
+
+    if(currency.nil? && !params.has_key?(:account_id))
+      currency = 'USD'
+    end
+
     return money.exchange_to(currency).format
   end
 
