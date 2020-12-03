@@ -1,81 +1,88 @@
 <div style="padding-right: 0;padding-left: 0;padding-top: 5%;">
-    <div class="container">
-        <div class="row d-md-flex justify-content-md-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="mb-0">Personal and address details</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Here you can check and update your personal and address details so that we know how to contact you.</p>
-                        <div class="card"></div>
-                        <div style="padding-top: 5px;padding-bottom: 5px;">
-                            <!-- table displaying personal details -->
-                            <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
-                                <h5 class="mb-0">Personal Details</h5>
-                            </a>
-                            <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
-                                <div class="table-responsive" style="height: 312px;">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>First Name</td>
-                                                <td><%= @user.fname %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Last Name</td>
-                                                <td><%= @user.lname %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>User Name</td>
-                                                <td><%= @user.username %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email</td>
-                                                <td><%= @user.email %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mobile Number</td>
-                                                <td><%= @user.phoneNumber %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Date of birth</td>
-                                                <td><%= @user.DOB %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Address</td>
-                                                <td><%= @user.address %></td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+  <div class="container">
+    <div class="row d-md-flex justify-content-md-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="mb-0">Personal and address details</h3>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Here you can check and update your personal and address details so that we know how to contact you.</p>
+            <div class="card"></div>
+            <div style="padding-top: 5px;padding-bottom: 5px;">
+              <!-- table displaying personal details -->
+              <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+                <h5 class="mb-0">Personal Details</h5>
+              </a>
+              <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
+                <div class="table-responsive" style="height: 430px;">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>First Name</td>
+                        <td><%= @user.fname %></td>
+                      </tr>
+                      <tr>
+                        <td>Last Name</td>
+                        <td><%= @user.lname %></td>
+                      </tr>
+                      <tr>
+                        <td>User Name</td>
+                        <td><%= @user.username %></td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><%= @user.email %></td>
+                      </tr>
+                      <tr>
+                        <td>Mobile Number</td>
+                        <td><%= @user.phoneNumber %></td>
+                      </tr>
+                      <tr>
+                        <td>Date of birth</td>
+                        <td><%= @user.DOB %></td>
+                      </tr>
+                      <tr>
+                        <td>Address</td>
+                        <td><%= @user.address %></td>
+                      </tr>
+                      <tr>
+                        <div style="text-align: right;">
+                          <%=link_to('Edit Profile', edit_user_path(@user), :class => 'btn btn-lg btn-primary', style: "width: 100%; margin-top: 5%")%>
+                          <%=link_to("View Accounts", accounts_path(params[:id]),  :class => "btn btn-lg btn-info", style: "width: 100%;  margin-top: 2%") %>
                         </div>
-                        <%=link_to('Edit Profile', edit_user_path(@user), :class => 'btn btn-lg btn-primary', style: "width: 100%; margin-top: 5%")%>
-                        <%=link_to("View Accounts", accounts_path(params[:id]),  :class => "btn btn-lg btn-info", style: "width: 100%;  margin-top: 2%") %>
-                        <!-- for accounts to be displayed -->
+                      </tr>
 
-                        <!--<div class="card"></div>
-                        <div style="padding-top: 5%;padding-bottom: 5%;">
-                            <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2">
-                                <h5 class="mb-0">Accounts</h5>
-                            </a>
-                            <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
-                                <ul class="list-group">
-                                    <% current_user.accounts.each do |account| %>
-                                    <li class="list-group-item">
-                                        <span>
-                                            <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance} Currency: #{account.currency}", account, {:style => "text-decoration: none !important;color: #000000;"} %>
-                                        </span>
-                                    </li>
-                                    <% end %>
-                                </ul>
-                            </div>
-                        </div>-->
-                    </div>
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
+
+            <!-- for accounts to be displayed -->
+
+            <!--<div class="card"></div>
+            <div style="padding-top: 5px;padding-bottom: 5px;">
+              <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2">
+                <h5 class="mb-0">Accounts</h5>
+              </a>
+              <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
+                <ul class="list-group">
+                  <% current_user.accounts.each do |account| %>
+                    <li class="list-group-item">
+                      <span>
+                        <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance} Currency: #{account.currency}",account_path(account.id, :currency => account.currency), {:style => "text-decoration: none
+                        !important;color: #000000;"} %>
+                      </span>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>-->
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+
+  </div>
 </div>

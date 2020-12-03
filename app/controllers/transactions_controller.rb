@@ -38,7 +38,7 @@ class TransactionsController < ApplicationController
 
     def show
       @transaction = Transaction.find(params[:id])
-      @amount = Money.new(@transaction.amount).format(display_free: false)
+      @amount = Money.new(@transaction.amount)
     end
 
     def create
