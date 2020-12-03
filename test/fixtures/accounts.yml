@@ -14,4 +14,4 @@ account_2:
   sortCode: 654321
   accountNumber: 200000000
   balance: 10000
-  currency: US Dollars
+  currency: USD
