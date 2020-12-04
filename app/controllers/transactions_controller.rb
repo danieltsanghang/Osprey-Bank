@@ -91,7 +91,7 @@ class TransactionsController < ApplicationController
 
         # Sanitise input params
         def transaction_params
-            params.require(:transaction).permit(:sender_id, :receiver_id, :amount, :pages, :sort, :direction, :search_transaction)
+            params.require(:transaction).permit(:sender_id, :receiver_id, :amount, :pages, :sort, :direction, :search_transaction, :format)
         end
 
 
