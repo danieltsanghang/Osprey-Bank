@@ -18,7 +18,7 @@ class Transaction < ApplicationRecord
 
     # Function used to generate CSV file of transactions
     def self.export_csv(transactions_to_export, current_user)
-        attributes = ['created_at', 'sender_id', 'receiver_id', 'amount'] # Attributes from the Transaction model
+        attributes = ['created_at', 'sender_id', 'receiver_id'] # Attributes from the Transaction model
         headers = ['Date', 'Sender', 'Receiver', 'Amount', 'Sent/Received'] # Headers for the CSV file
         CSV.generate(headers: true) do |csv|
             csv << headers # Append the headers to the CSV files to serve as 'titles'
@@ -26,10 +26,12 @@ class Transaction < ApplicationRecord
                 # For each transaction, add the necessary attributes to an array of strings then add it to the CSV as a row
                 append = transaction.attributes.values_at(*attributes)
                if(current_user.accounts.exists?(:id => transaction.sender_id)) # Check if the user made or received the transaction
-                append << 'Sent'
+                direction = 'Sent'
                else
-                append << 'Received'
+                direction = 'Received'
                end
+               append << transaction.amount
+               append << direction
                csv << append # Add to the array to the CSV file
           end
         end

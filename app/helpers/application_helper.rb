@@ -11,7 +11,7 @@ module ApplicationHelper
     title ||= col.titleize
     css = col == sort_column ? "current #{sort_direction}" : nil
     direction = col == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
-    link_to title, { :sort => col, :direction => direction }, { :class => css }
+    link_to title, request.params.merge( :sort => col, :direction => direction ), { :class => css }
   end
     
   def findCurrency(sender,reciever,direction)
