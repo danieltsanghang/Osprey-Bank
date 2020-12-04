@@ -27,6 +27,7 @@
                         <%= f.submit "Search", class:"btn btn-success"%>
                         <% end %>
                         <%= link_to "Reset", transactions_path, class:"btn btn-warning", style:"margin-left: 2%"%>
+                        <%= link_to "Export transactions to CSV", transactions_path(format: :csv, all: true), class:"btn btn-warning", style:"margin-left: 2%"%>
                     </div>
                 </div>
                 <div class="row">
