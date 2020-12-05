@@ -35,6 +35,19 @@ class User < ApplicationRecord
         BCrypt::Password.create(passphrase, cost: cost)
     end
 
+    # Function used to generate CSV file of users
+    def self.export_csv(users_to_export)
+        attributes = ['created_at', 'id', 'username', 'fname', 'lname', 'email', 'DOB', 'phoneNumber', 'address'] # Attributes from the User model
+        headers = ['Date', 'ID', 'Username', 'First Name', 'Last Name', 'Email', 'DOB', 'Phone Number', 'Address'] # Headers for the CSV file
+        CSV.generate(headers: true) do |csv|
+            csv << headers # Append the headers to the CSV files to serve as 'titles'
+            users_to_export.each do |user|
+                # For each user, add the necessary attributes to the CSV file as a row
+                csv << user.attributes.values_at(*attributes)
+          end
+        end
+    end
+
     private
 
         # Method that makes the username all lower case before saving to the database

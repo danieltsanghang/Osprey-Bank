@@ -20,15 +20,9 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default panel-table">
             <div class="panel-heading">
-                <div class="col col-xs-6">
-                    <div class="row">
-                        <%= form_for(transactions_path, method: :get) do |f|%>
-                        <%= text_field_tag :search_transaction, params[:search_item], placeholder: "Search for something..." %>
-                        <%= f.submit "Search", class:"btn btn-success"%>
-                        <% end %>
-                        <%= link_to "Reset", transactions_path, class:"btn btn-warning", style:"margin-left: 2%"%>
-                        <%= link_to "Export transactions to CSV", url_for(format: 'csv', search_transaction: params[:search_transaction], sort: [:sort], direction: [:direction]), class:"btn btn-warning", style:"margin-left: 2%"%>
-                    </div>
+                <div class="col">
+                    <div class="row"><%= render(:partial => 'layouts/search', :locals => {:input_path => transactions_url, :search => :search_transaction})%></div>
+                    <div class="row"><%= link_to "Export transactions to CSV", url_for(format: 'csv', search_transaction: params[:search_transaction], sort: params[:sort], direction: params[:direction]), class:"btn btn-warning", style:"margin: 2% 0%;"%></div>
                 </div>
                 <div class="row">
                     <div class="col col-xs-6">
@@ -50,10 +44,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% counter = 1 %>
-                        <% @transactions_all.each do |transaction| %>
+                        <% @transactions_all.each_with_index do |transaction, index| %>
                         <tr>
-                            <th scope="row"><%= counter %></th>
+                            <th scope="row"><%= (index + 1) + (TransactionsController::TRANSACTIONS_PER_PAGE  * (@page))%></th>
                             <td><%= transaction.created_at %></td>
                             <td>
                                 <% render_sender = Account.find_by(id: transaction.sender_id) %>
@@ -77,38 +70,18 @@
                             <% direction = "sent" %>
                             <% else %>
                             <td>Received</td>
-                            <% direction = "recieve" %><% end %>
+                            <% direction = "recieve" %>
+                            <% end %>
                             <td><%= Money.new(transaction.amount,findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
 
-
-                            <%# error!!!! %>
                             <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
                         </tr>
-                        <% counter += 1%><% end %>
+                        <% end %>
                     </tbody>
                 </table>
 
             </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col col-xs-4">
-                        <%= "Page #{@page+1} of #{@max_pages}"%>
-                    </div>
-                    <div class="col col-xs-8">
-                        <ul class="pagination visible-xs pull-right">
-                            <%if(@page - 1 >= 0)%>
-                            <li><%= link_to "Previous Page", transactions_path(page: @page - 1) %></li>
-                            <% end %>
-                            <%if(@page - 1 >= 0 && @page + 1 < @max_pages)%>
-                            <li>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                            <% end %>
-                            <%if(@page + 1 < @max_pages)%>
-                            <li><%= link_to "Next Page", transactions_path(page: @page + 1) %></li>
-                            <% end %>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+           <%= render(:partial => 'layouts/paginate', :locals => {:input_path => transactions_url(:page => params[:page])})%>
         </div>
         
     </div>

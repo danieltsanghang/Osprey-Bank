@@ -13,6 +13,26 @@ module ApplicationHelper
     direction = col == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
     link_to title, request.params.merge( :sort => col, :direction => direction ), { :class => css }
   end
+
+  # Function used to sort either in ascending or descending order, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+
+  def filter(things)
+
+    if(sort_direction == 'asc')
+      things = things.sort_by {|el| el[sort_column]} # Sort the ascending order
+    else
+      things = things.sort_by {|el| el[sort_column]} # Sort the descending order
+      things = things.reverse
+    end
+
+    return things
+    
+  end
+
+
     
   def findCurrency(sender,reciever,direction)
 

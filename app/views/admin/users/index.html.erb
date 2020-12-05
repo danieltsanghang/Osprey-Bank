@@ -1,0 +1,49 @@
+<div class="container">
+    <h1 class="display-3 lead" style="text-align: center;">View all Users Below!</h1>
+    <div class="panel-heading">
+                <div class="col">
+                    <div class="row"><%= render(:partial => 'layouts/search', :locals => {:input_path => admin_users_url, :search => :search_user})%></div>
+                    <div class="row"><%= link_to "Export transactions to CSV", url_for(format: 'csv', search_user: params[:search_user], sort: params[:sort], direction: params[:direction]), class:"btn btn-warning", style:"margin: 2% 0%;"%></div>
+                </div>
+                <div class="row">
+                    <div class="col col-xs-6">
+                        <h3 class="panel-title">Users</h3>
+                    </div>
+                </div>
+            </div>
+    <div class="col col-xs-6">
+        <table class="table table-striped table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"><%= sortable "created_at", "Date Created" %></th>
+                <th scope="col"><%= sortable "id", "User ID" %></th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <!--<th>Password</th>-->
+                <th>Admin?</th>
+                <th>Actions</th>
+            </tr>
+
+            <% @users.each_with_index do |user, index| %>
+            <tr>
+                <th scope="row"><%= (index + 1) + (Admin::UsersController::USERS_PER_PAGE * (@page)) %></th>
+                <td><%= user.created_at %></td>
+                <td><%= user.id %></td>
+                <td><%= user.fname %></td>
+                <td><%= user.lname %></td>
+                <td><%= user.email %></td>
+               <!--<td><%# user.password_digest %></td>-->
+                <td><%= user.isAdmin %></td>
+                <td>
+                    <%= link_to "Show", admin_user_url(user) %>
+                    <%= link_to "Edit", edit_admin_user_url(user) %>
+                    <%= link_to "Delete", delete_admin_user_url(user) %>
+                </td>
+            </tr>
+            <% end %>
+
+        </table>
+        <%= render(:partial => 'layouts/paginate', :locals => {:input_path => admin_users_url(:page => params[:page])})%>
+    </div>
+</div>
