@@ -15,6 +15,29 @@ class Transaction < ApplicationRecord
     belongs_to :sender, :foreign_key => :user_id,:class_name => 'Account', optional: :true
     belongs_to :receiver, :foreign_key => :user_id, :class_name => 'Account', optional: :true
 
+
+    # Function used to generate CSV file of transactions
+    def self.export_csv(transactions_to_export, current_user)
+        attributes = ['created_at', 'sender_id', 'receiver_id'] # Attributes from the Transaction model
+        headers = ['Date', 'Sender', 'Receiver', 'Amount', 'Sent/Received'] # Headers for the CSV file
+        CSV.generate(headers: true) do |csv|
+            csv << headers # Append the headers to the CSV files to serve as 'titles'
+            transactions_to_export.each do |transaction|
+                # For each transaction, add the necessary attributes to an array of strings then add it to the CSV as a row
+                append = transaction.attributes.values_at(*attributes)
+               if(current_user.accounts.exists?(:id => transaction.sender_id)) # Check if the user made or received the transaction
+                direction = 'Sent'
+               else
+                direction = 'Received'
+               end
+               append << transaction.amount
+               append << direction
+               csv << append # Add to the array to the CSV file
+          end
+        end
+    end
+
+
     private
         def sender_and_receiver_unique
             if(sender_id == receiver_id)

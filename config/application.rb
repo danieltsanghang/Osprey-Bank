@@ -1,5 +1,6 @@
 require_relative 'boot'
 
+require 'csv' # Require for exporting to CSV
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
