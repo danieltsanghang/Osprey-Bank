@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       if(user.isAdmin)
         # Redirect to admin panel
         # redirect_to ...
+        redirect_to admin_users_url
         puts("User authenticated and is a admin")
       else
         # Redirect to user area

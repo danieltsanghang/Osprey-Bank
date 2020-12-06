@@ -22,13 +22,8 @@ class TransactionsController < ApplicationController
             transactions = search(transactions)
         end
 
-        if(sort_direction == 'asc')
-            @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the ascending order
-        else
-            @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the descending order
-            @transactions_all = @transactions_all.reverse
-        end
-        
+        @transactions_all = filter(transactions)
+
         # Route for CSV file, no need to create a controller for it
         respond_to do |format|
             format.html
@@ -129,11 +124,6 @@ class TransactionsController < ApplicationController
         # Function used to sort a certain column, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
         def sort_column
             Transaction.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-        end
-
-        # Function used to sort either in ascending or descending order, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
-        def sort_direction
-            %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
         end
 
         # Function used to search for a sender, receiver, amount or date
