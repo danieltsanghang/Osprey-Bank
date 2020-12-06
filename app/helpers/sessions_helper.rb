@@ -12,6 +12,15 @@ module SessionsHelper
         end
     end
 
+    # Checks if the current user is an admin
+    def is_admin?
+        if(logged_in? && current_user.isAdmin == true)
+            return true
+        else
+            return false
+        end
+    end
+
     # Checks if user is logged in
     def logged_in?
         !current_user.nil?
@@ -28,4 +37,11 @@ module SessionsHelper
           redirect_to login_path
       end
     end
+
+    # Checks if the user is logged in, if not, redirect to login page
+    def redirect_to_login_if_not_admin
+        unless(is_admin?)
+            redirect_to login_path
+        end
+      end
 end

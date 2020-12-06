@@ -22,4 +22,36 @@ Rails.application.routes.draw do
     resources :transactions, only: [:index, :new, :create]
   end
 
+  # Create namespaces for admin, this will look like: 'admin/users' or 'admin/accounts', etc.
+  namespace :admin do
+    resources :users do
+      member do
+        get :delete
+      end
+    end
+    resources :accounts do
+      member do
+        get :delete
+      end
+    end
+    resources :transactions do
+      member do
+        get :delete
+      end
+    end
+
+    # Indented resourceful routes for better UX
+    resources :users, only: [:show] do
+      resources :transactions, only:  [:index, :new, :create]
+    end
+
+    resources :accounts, only: [:show] do
+      resources :transactions, only:  [:index, :new, :create]
+    end
+
+    resources :users, only: [:show] do
+      resources :accounts, only:  [:index, :new, :create]
+    end
+  end
+
 end
