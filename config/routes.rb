@@ -42,9 +42,11 @@ Rails.application.routes.draw do
 
     # Indented resourceful routes for better UX
     resources :users, only: [:show] do
-      resources :accounts, only: [:show] do
-        resources :transactions, only:  [:index, :new, :create]
-      end
+      resources :transactions, only:  [:index, :new, :create]
+    end
+
+    resources :accounts, only: [:show] do
+      resources :transactions, only:  [:index, :new, :create]
     end
 
     resources :users, only: [:show] do
