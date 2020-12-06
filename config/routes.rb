@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'home/index'
+  get 'home/maintenance'
 
   # Login and logout routes
   get '/login', to: 'sessions#new'
