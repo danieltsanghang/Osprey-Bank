@@ -48,3 +48,10 @@ transaction_five:
   receiver_id: 234234
   amount: 1000000
   timeStamp: 2020-11-27
+
+# Transaction from account 2 to account 3
+transaction_six:
+  sender_id: 2
+  receiver_id: 3
+  amount: 2500
+  timeStamp: 2020-11-27

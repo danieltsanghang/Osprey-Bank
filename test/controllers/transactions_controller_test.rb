@@ -83,9 +83,7 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     sender = users(:user_2).accounts[1]
     sender_balance_before = sender.balance
     post transactions_url, params: { transaction: { sender_id: sender.id, receiver_id: @receiver.id, amount: (sender_balance_before/100) } }
-  
-    puts User.find(2).accounts[1].balance
-    puts User.find(2).accounts[0].balance
+
 
     assert User.find(2).accounts[1].balance == 0
     assert User.find(2).accounts[0].balance == (@receiver_balance_before + sender_balance_before)

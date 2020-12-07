@@ -45,12 +45,20 @@ class Admin::TransactionsController < ApplicationController
         @transaction = Transaction.new(transaction_params)
         @transaction.amount *= 100
         #params[:transaction][:amount] = params[:transaction][:amount].to_i * 100
-        if(@transaction.save)
+        if(@transaction.valid?)
+            # If transaction invalid, meaning trying to sen more money than a user has, then render ned with an error
+            if(!(@transaction.sender.nil?) && (@transaction.sender.balance - @transaction.amount < 0))
+                flash[:error] = "Not enough money"
+                render 'new'
+                return
+            end
+            @transaction.save
             # Update the balance of the users with the new transaction, if they exist
             update_balance
 
             redirect_to(admin_transaction_path(@transaction))
         else
+            flash[:error] = "Transaction Invalid"
             render 'new'
         end
     end

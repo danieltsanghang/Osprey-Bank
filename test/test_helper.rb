@@ -17,6 +17,11 @@ class ActiveSupport::TestCase
     !session[:user_id].nil?
   end
 
+  # Helper function to convert an amount from one currency to another
+  def convert(amount, currency_from, currency_to)
+    return Money.new(amount, currency_from).exchange_to(currency_to).fractional
+  end
+
 end
 
 # This class was developed with the help of the LGT
