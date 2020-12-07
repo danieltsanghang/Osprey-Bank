@@ -12,17 +12,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/22790cbe10.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
   <% if(controller_name == 'home' || controller_name == 'sessions') %>
   <% else %>
-    <%= render(:partial => 'layouts/header') %>
+    <%= render(:partial => 'application/header') %>
   <% end %>
     <%= yield %>
   <% if(controller_name == 'home' || controller_name == 'sessions') %>
   <% else %>
-    <%= render(:partial => 'layouts/footer') %>
+    <%= render(:partial => 'application/footer') %>
   <% end %>
   </body>
 </html>

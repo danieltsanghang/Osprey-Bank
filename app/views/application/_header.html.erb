@@ -1,0 +1,20 @@
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color: #292c2f;color: #fff;">
+    <div class="container"><%= link_to "Osprey Bank", home_index_path, class: "navbar-brand" %><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Header</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <% if(is_admin?) %>
+                <%= render partial: "application/headers/header_admin" %>
+            <% elsif(logged_in?) %>
+                <%= render partial: "application/headers/header_user" %>
+            <% else %>
+                <%= render partial: "application/headers/header_home" %>
+            <% end %>
+            <span class="navbar-text actions ">
+                <% if(logged_in?) %>
+                <%= link_to "Log out", logout_path, method: :delete, class: "btn btn-light action-button" %>
+                <% else %>
+                <%= link_to "Log In", login_path, class: "btn btn-light action-button" %>
+                <% end %>
+            </span>
+        </div>
+    </div>
+</nav>
