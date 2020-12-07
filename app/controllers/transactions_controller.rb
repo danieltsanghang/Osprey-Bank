@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
     TRANSACTIONS_PER_PAGE = 20 # This will be used for pagination, max number of transactionsin each page is 20
 
     def index
-        puts(params)
+
         @page = params.fetch(:page, 0).to_i
 
         # Check wehther the user is accessing the transactions for a specific account or for all accounts a user has
@@ -21,11 +21,13 @@ class TransactionsController < ApplicationController
         if(params.has_key?(:search_transaction)) 
             transactions = search(transactions)
         end
-        if(sort_direction == 'asc')
-            @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the ascending order
-        else
-            @transactions_all = transactions.sort_by {|el| el[sort_column]} # Sort the descending order
-            @transactions_all = @transactions_all.reverse
+
+        @transactions_all = filter(transactions)
+
+        # Route for CSV file, no need to create a controller for it
+        respond_to do |format|
+            format.html
+            format.csv { send_data Transaction.export_csv(@transactions_all, current_user) } # Send the data to the Transaction model along with the current_user
         end
         
         paginate # Paginate the page
@@ -38,20 +40,22 @@ class TransactionsController < ApplicationController
 
     def show
       @transaction = Transaction.find(params[:id])
-      @amount = Money.new(@transaction.amount)
+      @amount = convert(Money.new(@transaction.amount, (@transaction.sender.currency || @transaction.receiver.currency || 'USD')), params[:currency])
     end
 
     def create
         @transaction = Transaction.new(transaction_params)
+        @transaction.amount *= 100
+
         if(@transaction.valid?)
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
 
             if(account.balance - @transaction.amount >= 0) # Check if the transaction is even possible based on balance in account
-                account.balance -= @transaction.amount
+                account.balance = account.balance - @transaction.amount
 
                 if(!receiver_account.nil?) # Update the receiver's balance if they exist
-                    receiver_account.balance += @transaction.amount
+                    receiver_account.balance = receiver_account.balance + Monetize.parse(convert(Money.new(@transaction.amount, account.currency), receiver_account.currency)).fractional.round(-1)
                     receiver_account.save
                 end
                 @transaction.save
@@ -84,7 +88,7 @@ class TransactionsController < ApplicationController
 
         # Sanitise input params
         def transaction_params
-            params.require(:transaction).permit(:sender_id, :receiver_id, :amount, :pages, :sort, :direction, :search_transaction)
+            params.require(:transaction).permit(:sender_id, :receiver_id, :amount, :pages, :sort, :direction, :search_transaction, :format)
         end
 
 
@@ -108,7 +112,7 @@ class TransactionsController < ApplicationController
 
         # Function that paginates the transactions into different pages
         def paginate
-            @max_pages = (@transactions_all.size/TRANSACTIONS_PER_PAGE)
+            @max_pages = (@transactions_all.size/TRANSACTIONS_PER_PAGE) + 1
             if(@max_pages == 0)
                 @max_pages = 1 # Because @max_pages indexes from 0, if its 0 change it to 1
             end
@@ -121,12 +125,7 @@ class TransactionsController < ApplicationController
 
         # Function used to sort a certain column, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
         def sort_column
-            Transaction.column_names.include?(params[:sort]) ? params[:sort] : "name"
-        end
-
-        # Function used to sort either in ascending or descending order, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
-        def sort_direction
-            %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+            Transaction.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
         end
 
         # Function used to search for a sender, receiver, amount or date

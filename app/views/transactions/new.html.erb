@@ -1,3 +1,4 @@
+<%= render partial: "application/error_messages", locals: {:object => @transaction} %>
 <div class="row">
     <div class="col">
         <h1>Transaction Page</h1>
@@ -24,7 +25,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <%= f.label :sender_id, 'Select an account to transfer from' %>
-                            <div class="input-group"><%= f.collection_select :sender_id, current_user.accounts.all, :id, :accountNumber, {include_blank: false}, {class: 'form-control '} %>
+                            <div class="input-group"><%= f.collection_select :sender_id, current_user.accounts.all, :id, :id, {include_blank: false}, {class: 'form-control '} %>
                             </div>
                         </div>
                     </div>
@@ -47,7 +48,7 @@
                     <div class="form-group">
                         <%= f.label :amount, 'Amount to Transfer' %>
                         <div class="input-group">
-                            <%= f.text_field :amount, required: true, class: "form-control", placeholder: "Insert amount of money to transfer"  %></div>
+                            <%= f.number_field :amount, step: 0.5, required: true, class: "form-control", placeholder: "Insert amount of money to transfer"  %></div>
                     </div>
                 </div>
             </div>

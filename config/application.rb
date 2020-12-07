@@ -1,6 +1,8 @@
 require_relative 'boot'
 
+require 'csv' # Require for exporting to CSV
 require 'rails/all'
+require 'bigdecimal'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

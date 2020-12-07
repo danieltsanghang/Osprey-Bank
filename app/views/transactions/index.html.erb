@@ -1,38 +1,27 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
 
 <div class="container">
-  <div class="col col-xs-6">
-    <div class="row">
-      <h1 class="display-3" style="text-align: center;">Welcome to your transaction history
-        <%=current_user.fname%>!</h1>
-      <p class="lead">Below you can find all the transactions from your bank account!</p>
-    </div>
-    <% if(@transactions_all.nil? || @transactions_all.empty?) %>
-      <div class="row">
-        <p>You have no transactions!</p>
-      </div>
-    <% else %>
+    <div class="col col-xs-6">
+        <div class="row">
+            <h1 class="display-3" style="text-align: center;">Welcome to your transaction history
+                <%=current_user.fname%>!</h1>
+            <p class="lead">Below you can find all the transactions from your bank account!</p>
+        </div>
+        <% if(@transactions_all.nil? || @transactions_all.empty?) %>
+        <div class="row" style="margin-bottom: 20%;">
+        <% if(params.has_key?(:search_transaction)) %>
+            <p class="alert alert-info" style="width: 100%;" role="alert"><strong>You have no transactions that match: <u><%= params[:search_transaction] %></u>!</strong></p>
+        <% else %>
+          <p class="alert alert-info" style="width: 100%;" role="alert"><strong>You have no transactions!</strong></p>
+        <% end %>
+        </div>
+        <% else %>
     </div>
     <div class="col-md-10 col-md-offset-1">
-
-      <div class="panel panel-default panel-table">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col col-xs-6">
-              <h3 class="panel-title">Transactions</h3>
-            </div>
-          </div>
-        </div>
         <div class="panel panel-default panel-table">
             <div class="panel-heading">
-                <div class="col col-xs-6">
-                    <div class="row">
-                        <%= form_for(transactions_path, method: :get) do |f|%>
-                        <%= text_field_tag :search_transaction, params[:search_item], placeholder: "Search for something..." %>
-                        <%= f.submit "Search", class:"btn btn-success"%>
-                        <% end %>
-                        <%= link_to "Reset", transactions_path, class:"btn btn-warning", style:"margin-left: 2%"%>
-                    </div>
+                <div class="col"><hr>
+                    <div class="row"><%= render(:partial => 'application/search', :locals => {:input_path => transactions_url, :search => :search_transaction, :csv_path => url_for(format: 'csv', search_transaction: params[:search_transaction], sort: params[:sort], direction: params[:direction])})%></div>
                 </div>
                 <div class="row">
                     <div class="col col-xs-6">
@@ -40,81 +29,62 @@
                     </div>
                 </div>
             </div>
-        <div class="panel-body">
-          <table class="table table-striped table-bordered table-list" style="text-align: center;">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col"><%= sortable "created_at", "Date"%></th>
-                <th scope="col"><%= sortable "sender_id", "Sender"%></th>
-                <th scope="col"><%= sortable "receiver_id", "Receiver"%></th>
-                <th scope="col"><%= sortable "amount", "Amount"%></th>
-                <th scope="col">Sent/Received</th>
-                <th scope="col">See more</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% counter = 1 %>
-                <% @transactions_all.each do |transaction| %>
-                  <tr>
-                    <th scope="row"><%= counter %></th>
-                    <td><%= transaction.created_at %></td>
-                    <td>
-                      <% render_sender = Account.find_by(id: transaction.sender_id) %>
-                        <% if(render_sender.nil?) %>
-                          <%= transaction.sender_id %>
-                        <% else %>
-                          <%= transaction.sender_id %>
-                        <% end %>
-                      </td>
-                      <td>
-                        <% render_receiver = Account.find_by(id: transaction.sender_id) %>
-                          <% if(render_receiver.nil?) %>
-                            <%= transaction.receiver_id %>
-                          <% else %>
-                            <%= transaction.receiver_id %>
-                          <% end %>
-                        </td>
-                        <td>Sent</td>
-                        <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
-                          <% direction = "sent" %>
-                          <% else %>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-list" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><%= sortable "created_at", "Date"%></th>
+                            <th scope="col"><%= sortable "sender_id", "Sender"%></th>
+                            <th scope="col"><%= sortable "receiver_id", "Receiver"%></th>
+                            <th scope="col">Sent/Received</th>
+                            <th scope="col"><%= sortable "amount", "Amount"%></th>
+                            <th scope="col">See more</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @transactions_all.each_with_index do |transaction, index| %>
+                        <tr>
+                            <th scope="row"><%= (index + 1) + (TransactionsController::TRANSACTIONS_PER_PAGE  * (@page))%></th>
+                            <td><%= transaction.created_at %></td>
+                            <td>
+                                <% render_sender = Account.find_by(id: transaction.sender_id) %>
+                                <% if(render_sender.nil?) %>
+                                <%= transaction.sender_id %>
+                                <% else %>
+                                <%= transaction.sender_id %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <% render_receiver = Account.find_by(id: transaction.sender_id) %>
+                                <% if(render_receiver.nil?) %>
+                                <%= transaction.receiver_id %>
+                                <% else %>
+                                <%= transaction.receiver_id %>
+                                <% end %>
+                            </td>
+                            
+                            <% if(current_user.accounts.exists?(:id => transaction.sender_id)) %>
+                            <td>Sent</td>
+                            <% direction = "sent" %>
+                            <% else %>
                             <td>Received</td>
-                            <% direction = "recieve" %><% end %>
-                            <td><%= Money.new(transaction.amount,findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
+                            <% direction = "recieve" %>
+                            <% end %>
+                            <!--<td><%# convert(Money.new(transaction.amount, 'USD'), findCurrency(transaction.sender_id,transaction.receiver_id,direction)) %></td>-->
+                            <!--<td><%# Money.new(transaction.amount, transaction.sender.currency).format %></td>-->
+                            <td><%= Money.new(transaction.amount, findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
+                            <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
 
-
-                            <%# error!!!! %>
-                              <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
-                            </tr>
-                            <% counter += 1%><% end %>
-                          </tbody>
-                        </table>
-
-                      </div>
-                      <div class="panel-footer">
-                        <div class="row">
-                          <div class="col col-xs-4">
-                            <%= "Page #{@page+1} of #{@max_pages}"%>
-                          </div>
-                          <div class="col col-xs-8">
-                            <ul class="pagination visible-xs pull-right">
-                              <%if(@page - 1 >= 0)%>
-                                <li><%= link_to "Previous Page", transactions_path(page: @page - 1) %></li>
-                              <% end %>
-                              <%if(@page - 1 >= 0 && @page + 1 < @max_pages)%>
-                                <li>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                              <% end %>
-                              <%if(@page + 1 < @max_pages)%>
-                                  <li><%= link_to "Next Page", transactions_path(page: @page + 1) %></li>
-                              <% end %>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
+            </div>
+           <%= render(:partial => 'application/paginate', :locals => {:input_path => transactions_url(:page => params[:page])})%>
+        </div>
+        
     </div>
     <% end %>
+    </div>
 </div>
-

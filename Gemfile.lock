@@ -252,6 +252,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.2)
   minitest-reporters
+  monetize
   money-rails (~> 1.12)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)

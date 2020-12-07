@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
-      if @user.update(user_params)
+    if @user.update(user_params)
       redirect_to user_path(@user)
     else
       render :edit
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   # Sanitise inputs
     def user_params
-      params.require(:user).permit(:fname, :lname, :username, :email, :phoneNumber, :address)
+      params.require(:user).permit(:fname, :lname, :username, :email, :phoneNumber, :address, :password, :password_confirmation)
     end
 
     # Security check to make sure the user is accessing only their users page

@@ -5,7 +5,7 @@ class Account < ApplicationRecord
 
     validates :user_id, presence:true
 
-    validates :sortCode, length: {is: 6}, numericality: {only_integer: true}
+    validates :sortCode, length: {is: 6}, numericality: {only_number: true}
 
     validates :accountNumber, length: {minimum: 8, maximum: 9},
                               uniqueness: true, numericality: {only_integer: true}
