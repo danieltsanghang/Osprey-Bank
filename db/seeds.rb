@@ -22,6 +22,19 @@ User.create!(
   DOB: Faker::Date.in_date_period,
   address: Faker::Address.full_address
 )
+User.create!(
+  id: 1,
+  fname: "admin",
+  lname: "user",
+  email: Faker::Internet.email,
+  username:"admin0",
+  password: "0000000000", # issue each user the same password
+  password_confirmation: "0000000000",
+  isAdmin: true,
+  phoneNumber: Faker::Number.number(digits: 9),
+  DOB: Faker::Date.in_date_period,
+  address: Faker::Address.full_address
+)
 (0..4).each do |id|
     Account.create!(
         id: id,
@@ -35,7 +48,7 @@ end
 
 
 # generate 20 users
-(1..20).each do |id|
+(2..20).each do |id|
     User.create!(
         id: id, # each user is assigned an id from 1-20
         fname: Faker::Name.unique.first_name,

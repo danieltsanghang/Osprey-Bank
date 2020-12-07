@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap";
- @import "rails_bootstrap_forms";
- @import './application_components/header.scss';
- @import './application_components/footer.scss';
- @import './sortable_tables/table.scss';
+@import "bootstrap";
+@import "rails_bootstrap_forms";
+@import './application_components/header.scss';
+@import './application_components/footer.scss';
+@import './sortable_tables/table.scss';
