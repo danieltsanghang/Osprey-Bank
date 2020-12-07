@@ -71,7 +71,9 @@
                             <td>Received</td>
                             <% direction = "recieve" %>
                             <% end %>
-                            <td><%= convert(Money.new(transaction.amount, 'USD'), findCurrency(transaction.sender_id,transaction.receiver_id,direction)) %></td>
+                            <!--<td><%# convert(Money.new(transaction.amount, 'USD'), findCurrency(transaction.sender_id,transaction.receiver_id,direction)) %></td>-->
+                            <!--<td><%# Money.new(transaction.amount, transaction.sender.currency).format %></td>-->
+                            <td><%= Money.new(transaction.amount, findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
                             <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
                         </tr>
                         <% end %>

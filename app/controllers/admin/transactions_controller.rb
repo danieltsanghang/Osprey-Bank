@@ -149,7 +149,7 @@ class Admin::TransactionsController < ApplicationController
             end
 
             if(@transaction.receiver)
-                @transaction.receiver.balance -= @transaction.amount
+                @transaction.receiver.balance -= Monetize.parse(convert(Money.new(@transaction.amount,findCurrency(@transaction.sender_id,@transaction.receiver_id,'sent')), @transaction.receiver.currency)).fractional
                 @transaction.receiver.save
             end
         end
@@ -162,7 +162,8 @@ class Admin::TransactionsController < ApplicationController
             end
 
             if(@transaction.receiver)
-                @transaction.receiver.balance += @transaction.amount
+                #@transaction.receiver.balance += convert(@transaction.amount, findCurrency(@transaction.sender_id,@transaction.receiver_id,'sent'), @transaction.receiver.currency))
+                @transaction.receiver.balance += Monetize.parse(convert(Money.new(@transaction.amount,findCurrency(@transaction.sender_id,@transaction.receiver_id,'sent')), @transaction.receiver.currency)).fractional
                 @transaction.receiver.save
             end
         end

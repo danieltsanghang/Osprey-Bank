@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <%= f.label :amount, 'Amount to Transfer' %>
                         <div class="input-group">
-                            <%= f.text_field :amount, required: true, class: "form-control", placeholder: "Insert amount of money to transfer"  %></div>
+                            <%= f.number_field :amount, step: 0.5, required: true, class: "form-control", placeholder: "Insert amount of money to transfer"  %></div>
                     </div>
                 </div>
             </div>
