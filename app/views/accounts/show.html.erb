@@ -31,13 +31,13 @@
                   <li class="list-group-item">
                     <span>
                       Currency:
-                      <%= params[:currency] %>
+                      <%= params[:currency] || @currency %>
                     </span>
                   </li>
                   <li class="list-group-item">
                     <span>
                       Balance:
-                      <%= convert(@money,params[:currency])%>
+                      <%= convert(@money,(params[:currency] || @currency))%>
                     </span>
                   </li>
                   <div style="text-align: center;">

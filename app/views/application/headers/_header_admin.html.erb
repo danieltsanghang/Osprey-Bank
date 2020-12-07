@@ -1,0 +1,20 @@
+<ul class="nav navbar-nav mr-auto">
+    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#">Users</a>
+        <div class="dropdown-menu">
+            <%= link_to "View All Users", admin_users_url, class: "nav-link" %>
+            <%= link_to "Create a User", new_admin_user_url, class: "nav-link" %>
+        </div>
+    </li>
+    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#">Accounts</a>
+        <div class="dropdown-menu">
+            <%= link_to "View All Accounts", admin_accounts_url, class: "nav-link" %>
+            <%= link_to "Create an Account", new_admin_account_url, class: "nav-link" %>
+        </div>
+    </li>
+    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#">Transactions</a>
+        <div class="dropdown-menu">
+            <%= link_to "View All Transactions", admin_transactions_url, class: "nav-link" %>
+            <%= link_to "Create a Transaction", new_admin_transaction_url, class: "nav-link" %>
+        </div>
+    </li>
+</ul>

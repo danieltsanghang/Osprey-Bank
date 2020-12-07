@@ -1,0 +1,8 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%;">
+    <%= form_for(input_path, {method: :get, html: {class: "form-inline my-2 my-lg-0"}}) do |f|%>
+    <%= text_field_tag search, params[search], placeholder: "Search for something..." , class: "form-control mr-sm-2"%>
+    <%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0"%>
+    <% end %>
+    <%= link_to "Reset", request.env['PATH_INFO'], class:"btn btn-outline-warning my-2 my-sm-0", style:"margin-left: 5px;"%>
+    <ul class="navbar-nav ml-auto"><%= link_to "Export results to CSV", csv_path, class:"btn btn-outline-info my-2 my-sm-0" %></ul>
+</nav>

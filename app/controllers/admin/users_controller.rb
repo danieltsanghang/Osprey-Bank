@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
 
     helper_method :sort_column
 
-    USERS_PER_PAGE = 20 # This will be used for pagination, max number of transactionsin each page is 20
+    USERS_PER_PAGE = 20 # This will be used for pagination, max number of users in each page is 20
 
     def index
         @page = params.fetch(:page, 0).to_i
@@ -81,7 +81,7 @@ class Admin::UsersController < ApplicationController
 
             # Boundary conditions for pages, a user should not be able to paginate under 0 or over the max limit
             if(@page >= @max_pages || @page < 0)
-                redirect_to transactions_path
+                redirect_to admin_users_path
             end
         end
 end

@@ -15,3 +15,11 @@ account_2:
   accountNumber: 200000000
   balance: 10000
   currency: USD
+
+account_3:
+  id: 3
+  user_id: 2
+  sortCode: 123455
+  accountNumber: 300000000
+  balance: 2500
+  currency: USD

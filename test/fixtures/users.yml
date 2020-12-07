@@ -24,3 +24,15 @@ user_2:
     phoneNumber: 987654321
     address: New York
 
+admin:
+    id: 0
+    fname: Admin
+    lname: Osprey
+    email: admin@outlook.com
+    username: adminuser
+    password_digest: <%= User.digest("password1") %>
+    isAdmin: true
+    DOB: 1990-10-10
+    phoneNumber: 123456789
+    address: upstairs
+

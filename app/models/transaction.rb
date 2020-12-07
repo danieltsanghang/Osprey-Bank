@@ -8,7 +8,7 @@ class Transaction < ApplicationRecord
                           numericality: { only_integer: true, greater_than_or_equal_to: 0, message: "must be valid (number and greater than 0)"  }
 
     validates :amount, presence: true,
-                            numericality: { only_number: true, greater_than: 0, message: "must be greater than 0" }
+                            numericality: { only_number: true, greater_than: 0.0, message: "must be greater than 0" }
 
     validate :sender_and_receiver_unique
 

@@ -1,0 +1,57 @@
+<div class="container">
+    <h1 class="display-3 lead" style="text-align: center;">View all Transactions Below!</h1>
+    <hr>
+    <% if(@transactions.nil? || @transactions.empty?) %>
+    <div class="row" style="margin-bottom: 20%;">
+        <% if(params.has_key?(:search_transaction)) %>
+        <p class="alert alert-info" style="width: 100%; margin-bottom: 9%;" role="alert"><strong>You have no transactions that match: <u><%= params[:search_transaction] %></u>!</strong></p>
+        <% else %>
+        <p class="alert alert-info" style="width: 100%;  margin-bottom: 9%;" role="alert"><strong>You have no transactions!</strong></p>
+        <% end %>
+        <% else %>
+    </div>
+    <div style="width: 80%; margin-left: 10%;">
+
+        <div class="panel-heading col">
+            <div class="row" style="margin-bottom: 1%;"><%= render(:partial => 'application/search', :locals => {:input_path => admin_transactions_url, :search => :search_transaction, :csv_path => url_for(format: 'csv', search_transaction: params[:search_transaction], sort: params[:sort], direction: params[:direction])}) %></div>
+        </div>
+        <div class="">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-dark table-striped table-bordered table-fixed" cellspacing="0" width="100%">
+                    <thead class="">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"><%= sortable "created_at", "Date Created" %></th>
+                            <th scope="col"><%= sortable "id", "ID" %></th>
+                            <th scope="col"><%= sortable "sender_id", "Sender ID" %></th>
+                            <th scope="col"><%= sortable "receiver_id", "Receiver ID" %></th>
+                            <th scope="col"><%= sortable "amount", "Amount (USD)" %></th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <% @transactions.each_with_index do |transaction, index| %>
+                    <tr>
+                        <th scope="row"><%= (index + 1) + (Admin::UsersController::USERS_PER_PAGE * (@page)) %></th>
+                        <td><%= transaction.created_at %></td>
+                        <td><%= transaction.id %></td>
+                        <td><%= transaction.sender_id %></td>
+                        <td><%= transaction.receiver_id %></td>
+                        <td><%= Money.new(transaction.amount, findCurrency(transaction.sender_id,transaction.receiver_id, 'sent')).format %></td>
+                        <td>
+                            <div class="btn-toolbar" role="group">
+                                <%= link_to "Show", admin_transaction_url(transaction), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 30%;" %>
+                                <%= link_to "Edit", edit_admin_transaction_url(transaction), class:"btn btn-outline-warning btn-sm", style: "margin-left: 5px;width: 30%;" %>
+                                <%= link_to "Delete", delete_admin_transaction_url(transaction), class:"btn btn-outline-danger btn-sm", style: "margin-left: 5px; width: 30%;" %>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+
+                </table>
+            </div>
+            <%= render(:partial => 'application/paginate', :locals => {:input_path => admin_transactions_url(:page => params[:page])})%>
+            <% end %>
+        </div>
+    </div>
+</div>

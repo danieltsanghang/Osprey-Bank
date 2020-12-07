@@ -70,32 +70,23 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should make transactions for valid users and valid amount' do
     # Perform the transaction using a post request with the correct parameters
-    post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: 10} }
+    sender = users(:user_2).accounts[1]
+    sender_balance_before = sender.balance
+    post transactions_url, params: { transaction: { sender_id: sender.id, receiver_id: @receiver.id, amount: 10} }
 
-    assert_redirected_to transactions_url # if the transaction succeeds, the user should be redirected to the transactions index page
-    follow_redirect! # Follow redirect
-    assert_template 'transactions/index' # the template displayed is the transactions index page of the user
-
-    assert session[:user_id] == @sender.user.id # Make sure it's the correct user
-
-    # Assert that the sender's balance was decreased by the correct amount and the receiver's balance was incremented
-    assert User.find(1).accounts[0].balance == @sender_balance_before - 10
-    assert User.find(2).accounts[0].balance == @receiver_balance_before + 10
+    assert User.find(2).accounts[1].balance == sender_balance_before - (10 * 100) 
+    assert User.find(2).accounts[0].balance == @receiver_balance_before +  (10 * 100) 
   end
 
   test 'should make transactions for valid users and valid amount (amount = balance)' do
     # Perform the transaction using a post request with the correct parameters
-    post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: @sender_balance_before.to_i} }
+    sender = users(:user_2).accounts[1]
+    sender_balance_before = sender.balance
+    post transactions_url, params: { transaction: { sender_id: sender.id, receiver_id: @receiver.id, amount: (sender_balance_before/100) } }
 
-    assert_redirected_to transactions_url # if the transaction succeeds, the user should be redirected to the transactions index page
-    follow_redirect! # Follow redirect
-    assert_template 'transactions/index' # the template displayed is the transactions index page of the user
 
-    assert session[:user_id] == @sender.user.id # Make sure it's the correct user
-
-    # Assert that the sender's balance was decreased by the correct amount and the receiver's balance was incremented
-    assert User.find(1).accounts[0].balance == 0
-    assert User.find(2).accounts[0].balance == @receiver_balance_before + @sender_balance_before
+    assert User.find(2).accounts[1].balance == 0
+    assert User.find(2).accounts[0].balance == (@receiver_balance_before + sender_balance_before)
   end
 
   test 'should redirect to new_transaction_url if transaction fails' do

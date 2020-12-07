@@ -39,4 +39,12 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in? # user is NOT logged in
   end
 
+  test 'login as admin should redirect to admin namespace' do
+    user = users(:admin)# Get the admin needed to login
+    login_as_user(user, "password1") # login with valid credentials 
+    
+    assert_redirected_to admin_users_url # Should be redirected to admin/users
+  end
+
+
 end

@@ -6,8 +6,9 @@ class User < ApplicationRecord
                          length: { minimum: 6, maximum: 20 },
                          uniqueness: { case_sensitive: false }
 
-    validates :password, presence: true, on: :create,
-                         length: { minimum: 8, maximum: 30 }
+    validates :password, presence: true, #allow_nil: true,
+                         length: { minimum: 8, maximum: 30 },
+                         on: [:create, :partialsave]
 
     validates :email, presence: true,
                       format: { with: URI::MailTo::EMAIL_REGEXP },

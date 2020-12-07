@@ -20,9 +20,8 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default panel-table">
             <div class="panel-heading">
-                <div class="col">
-                    <div class="row"><%= render(:partial => 'layouts/search', :locals => {:input_path => transactions_url, :search => :search_transaction})%></div>
-                    <div class="row"><%= link_to "Export transactions to CSV", url_for(format: 'csv', search_transaction: params[:search_transaction], sort: params[:sort], direction: params[:direction]), class:"btn btn-warning", style:"margin: 2% 0%;"%></div>
+                <div class="col"><hr>
+                    <div class="row"><%= render(:partial => 'application/search', :locals => {:input_path => transactions_url, :search => :search_transaction, :csv_path => url_for(format: 'csv', search_transaction: params[:search_transaction], sort: params[:sort], direction: params[:direction])})%></div>
                 </div>
                 <div class="row">
                     <div class="col col-xs-6">
@@ -72,8 +71,9 @@
                             <td>Received</td>
                             <% direction = "recieve" %>
                             <% end %>
-                            <td><%= Money.new(transaction.amount,findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
-
+                            <!--<td><%# convert(Money.new(transaction.amount, 'USD'), findCurrency(transaction.sender_id,transaction.receiver_id,direction)) %></td>-->
+                            <!--<td><%# Money.new(transaction.amount, transaction.sender.currency).format %></td>-->
+                            <td><%= Money.new(transaction.amount, findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
                             <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
                         </tr>
                         <% end %>
@@ -81,7 +81,7 @@
                 </table>
 
             </div>
-           <%= render(:partial => 'layouts/paginate', :locals => {:input_path => transactions_url(:page => params[:page])})%>
+           <%= render(:partial => 'application/paginate', :locals => {:input_path => transactions_url(:page => params[:page])})%>
         </div>
         
     </div>

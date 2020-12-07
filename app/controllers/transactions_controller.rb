@@ -40,20 +40,22 @@ class TransactionsController < ApplicationController
 
     def show
       @transaction = Transaction.find(params[:id])
-      @amount = Money.new(@transaction.amount)
+      @amount = convert(Money.new(@transaction.amount, (@transaction.sender.currency || @transaction.receiver.currency || 'USD')), params[:currency])
     end
 
     def create
         @transaction = Transaction.new(transaction_params)
+        @transaction.amount *= 100
+
         if(@transaction.valid?)
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
 
             if(account.balance - @transaction.amount >= 0) # Check if the transaction is even possible based on balance in account
-                account.balance -= @transaction.amount
+                account.balance = account.balance - @transaction.amount
 
                 if(!receiver_account.nil?) # Update the receiver's balance if they exist
-                    receiver_account.balance += @transaction.amount
+                    receiver_account.balance = receiver_account.balance + Monetize.parse(convert(Money.new(@transaction.amount, account.currency), receiver_account.currency)).fractional.round(-1)
                     receiver_account.save
                 end
                 @transaction.save
