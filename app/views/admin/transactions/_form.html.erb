@@ -1,0 +1,19 @@
+<%= error_messages_for(f.object) %>
+<div>
+    <hr>
+    <th>Sender ID</th>
+    <% if(params.has_key?(:account_id)) %>
+    <%= f.hidden_field :sender_id, value: params[:account_id]%>
+    <%= f.label(params[:account_id], { class: "rounded-0 form-control", style: "margin-bottom: -10px; border: none;", required: true }) %><br>
+    <% elsif(params.has_key?(:user_id)) %>
+    <div class="input-group">
+        <%= f.collection_select :sender_id, User.find_by(:id => params[:user_id]).accounts.all, :id, :id, {include_blank: false}, {class: 'form-control', style: "margin-bottom: 15px;"} %>
+    </div>
+    <% else %>
+    <%= f.number_field(:sender_id, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Sender ID", required: true }) %>
+    <% end %>
+    <th>Receiver ID</th>
+    <td><%= f.number_field(:receiver_id, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Receiver ID", required: true })%></td>
+    <th>Amount</th>
+    <td><%= f.number_field(:amount, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Amount", required: true }) %></td>
+</div>
