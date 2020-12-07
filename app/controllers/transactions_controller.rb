@@ -46,17 +46,17 @@ class TransactionsController < ApplicationController
     def create
         @transaction = Transaction.new(transaction_params)
         transaction_amount = convert_return_amount(Money.new(params[:transaction][:amount], Account.find(params[:transaction][:sender_id]).currency), 'USD')
-        @transaction.amount = (BigDecimal(transaction_amount * 100))
+        @transaction.amount = (BigDecimal(transaction_amount)) * BigDecimal(100)
 
         if(@transaction.valid?)
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
 
-            if(account.balance - @transaction.amount >= 0) # Check if the transaction is even possible based on balance in account
-                account.balance -= @transaction.amount
+            if(BigDecimal(account.balance) - BigDecimal(@transaction.amount) >= 0) # Check if the transaction is even possible based on balance in account
+                account.balance = BigDecimal(account.balance) - BigDecimal(@transaction.amount)
 
                 if(!receiver_account.nil?) # Update the receiver's balance if they exist
-                    receiver_account.balance += @transaction.amount
+                    receiver_account.balance = BigDecimal(receiver_account.balance) + BigDecimal(@transaction.amount)
                     receiver_account.save
                 end
                 @transaction.save
