@@ -4,6 +4,11 @@ module ApplicationHelper
   def redirect_to_404
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404 # Render 404 page
   end
+  
+  # Render errors for the input object
+  def error_messages_for(object)
+    render(:partial => 'application/error_messages', :locals => {:object => object})
+  end
 
   # Function used to pass the params to the URL for sorting, i.e. ?sort="date"&direction="asc"
   # Source used: Rails casts episode 228, link: http://railscasts.com/episodes/228-sortable-table-columns
@@ -54,6 +59,18 @@ module ApplicationHelper
     end
 
     return money.exchange_to(currency).format
+  end
+
+  def convert_return_amount(money,currency)
+    if(currency.nil? && params.has_key?(:account_id))
+      currency = Account.find_by(params[:account_id])
+    end
+
+    if(currency.nil? && !params.has_key?(:account_id))
+      currency = 'USD'
+    end
+
+    return BigDecimal(money.exchange_to(currency).fractional)
   end
 
 end

@@ -45,6 +45,9 @@ class TransactionsController < ApplicationController
 
     def create
         @transaction = Transaction.new(transaction_params)
+        transaction_amount = convert_return_amount(Money.new(params[:transaction][:amount], Account.find(params[:transaction][:sender_id]).currency), 'USD')
+        @transaction.amount = (BigDecimal(transaction_amount * 100))
+
         if(@transaction.valid?)
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
