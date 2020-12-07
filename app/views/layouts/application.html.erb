@@ -21,7 +21,7 @@
     <%= render(:partial => 'application/header') %>
   <% end %>
     <%= yield %>
-  <% if(controller_name == 'home' || controller_name == 'sessions') %>
+  <% if(controller_name == 'sessions') %>
   <% else %>
     <%= render(:partial => 'application/footer') %>
   <% end %>

@@ -1,13 +1,20 @@
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color: #292c2f;color: #fff;">
     <div class="container"><%= link_to "Osprey Bank", home_index_path, class: "navbar-brand" %><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Header</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
-            <% if(is_admin?) %>
-                <%= render partial: "application/headers/header_admin" %>
-            <% elsif(logged_in?) %>
-                <%= render partial: "application/headers/header_user" %>
-            <% else %>
-                <%= render partial: "application/headers/header_home" %>
-            <% end %>
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item">
+                    <%= link_to "User Page", user_path(current_user), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Accounts", accounts_url, class: "nav-link" %>
+                </li>
+                <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#">Transactions</a>
+                    <div class="dropdown-menu">
+                        <%= link_to "View Transactions", transactions_url, class: "nav-link" %>
+                        <%= link_to "Make a Transaction", new_transaction_url, class: "nav-link" %>
+                    </div>
+                </li>
+            </ul>
             <span class="navbar-text actions ">
                 <% if(logged_in?) %>
                 <%= link_to "Log out", logout_path, method: :delete, class: "btn btn-light action-button" %>
