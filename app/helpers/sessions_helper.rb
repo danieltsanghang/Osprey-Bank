@@ -8,17 +8,13 @@ module SessionsHelper
     # Find the current user
     def current_user
         if session[:user_id]
-            User.find_by(id: session[:user_id])
+            @current_user ||= User.find_by(id: session[:user_id])
         end
     end
 
     # Checks if the current user is an admin
     def is_admin?
-        if(logged_in? && current_user.isAdmin == true)
-            return true
-        else
-            return false
-        end
+        (logged_in? && current_user.isAdmin == true)
     end
 
     # Checks if user is logged in
@@ -29,6 +25,7 @@ module SessionsHelper
     # Logs the user out by terminating the session
     def logout
         session.delete(:user_id)
+        @current_user = nil # Clear the cached result of the current user
     end
 
     # Checks if the user is logged in, if not, redirect to login page
