@@ -23,9 +23,9 @@
       </div>
       <div>
         <div class="table-responsive text-nowrap">
-          <table class="table table-dark table-striped table-bordered table-fixed" cellspacing="0" width="100%">
+          <table class="table table-dark table-striped table-bordered table-fixed" cellspacing="0" width="100%" style="text-align: center">
             <thead class="">
-              <tr>
+              <tr >
                 <th scope="col">#</th>
                 <th scope="col"><%= sortable "created_at", "Date Created" %></th>
                 <th scope="col"><%= sortable "id", "User ID" %></th>
@@ -39,12 +39,14 @@
             </thead>
 
             <% @users.each_with_index do |user, index| %>
-              <tr>
-                <th scope="row"><%= (index + 1) + (Admin::UsersController::USERS_PER_PAGE * (@page)) %></th>
+              <tr >
+                <th scope="row" >
+                  <%= (index + 1) + (Admin::UsersController::USERS_PER_PAGE * (@page)) %>
+                </th>
                 <td><%= user.created_at %></td>
                 <td><%= user.id %></td>
-                <td><%= user.fname %></td>
-                <td><%= user.lname %></td>
+                <td style="text-align: right"><%= user.fname %></td>
+                <td style="text-align: left"><%= user.lname %></td>
                 <td><%= user.email %></td>
                 <!--<td><%# user.password_digest %></td>-->
                 <td><%= user.isAdmin %></td>
