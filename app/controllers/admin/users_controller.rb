@@ -32,7 +32,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def new
-
+        @user = User.new
     end
 
     def create
@@ -40,11 +40,25 @@ class Admin::UsersController < ApplicationController
     end
 
     def edit
-
+        @user = User.find_by(id: params[:id])
     end
 
     def update
 
+    end
+
+    def edit_password
+        @user = User.find_by(id: params[:id])
+    end
+
+    def update_password
+        @user = User.find_by(id: params[:id])
+        @user.update_attributes(users_params)
+        if(@user.save(context: :password_change)) # Add the context password_change to perform password change user model validations
+            redirect_to admin_user_url(@user.id)
+        else
+            render :edit_password
+        end
     end
 
     def delete
@@ -59,7 +73,7 @@ class Admin::UsersController < ApplicationController
 
         # Sanitise input
         def users_params
-            params.require(:user).permit(:id, :fname, :lname, :email, :username, :password_digest, :isAdmin, :created_at, :DOB, :phoneNumber, :address, :pages, :sort, :direction, :search_user, :format)
+            params.require(:user).permit(:id, :fname, :lname, :email, :username, :password_digest, :isAdmin, :created_at, :DOB, :phoneNumber, :address, :pages, :sort, :direction, :search_user, :format, :password, :password_confirmation)
         end
 
         # Function used to sort a certain column, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
