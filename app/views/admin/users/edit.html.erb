@@ -1,0 +1,10 @@
+<div style="margin: 5% 0%;">
+    <div class="col-md-4 col-xl-6 offset-xl-3">
+    <h1 style="font-size: xx-large;"><i class="fas fa-user" style="padding-right: 5px;"></i>Edit User</h1>
+        <%= form_for [:admin, @user] do |f| %>
+        <%= render :partial =>'form', :locals => {:f => f}  %>
+        <%= f.submit "Update", class:"btn btn-lg btn-info", style: "width: 100%; margin: 1% 0%;" %>
+        <%= link_to("Cancel", :back, { class: "btn btn-secondary btn-lg mr-2 rounded-lg", style: "width: 100%; margin: 1% 0%;" }) %>
+        <% end %>
+    </div>
+</div>

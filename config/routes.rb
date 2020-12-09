@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # allow user data to be pulled for user/show
   resources :users, only: [:show, :edit, :update]
@@ -28,6 +27,9 @@ Rails.application.routes.draw do
     resources :users do
       member do
         get :delete
+        get '/edit_password', action: :edit_password, controller: 'users'
+        patch '/edit_password', action: :update_password, controller: 'users'
+        #patch '/update_password', action: :update_password, controller: 'users'
       end
     end
     resources :accounts do
