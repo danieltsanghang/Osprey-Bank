@@ -80,11 +80,13 @@ class Admin::AccountsController < ApplicationController
   end
 
   def delete
-
+      @account = Account.find(params[:id])
   end
 
   def destroy
-
+      @account = Account.find(params[:id])
+      @account.destroy
+      redirect_to(admin_accounts_path)
   end
 
   private
