@@ -8,8 +8,15 @@ class Admin::AccountsController < ApplicationController
 
   def index
     @page = params.fetch(:page, 0).to_i
-    @accounts = Account.all
 
+
+    if (params.has_key?(:user_id))
+        @accounts = get_accounts_by_user
+    else
+        @accounts = Account.all
+    end
+
+    #If search box has been used to query
     if(params.has_key?(:search_account))
         @accounts = search()
     end
@@ -67,6 +74,11 @@ class Admin::AccountsController < ApplicationController
             el.user_id.to_s.starts_with?(params[:search_account]) || el.accountNumber.to_s.starts_with?(params[:search_account]) ||
             el.sortCode.to_s.starts_with?(params[:search_account]) || el.balance.to_s.starts_with?(params[:search_account]) ||
             el.currency.to_s.starts_with?(params[:search_account])}
+      end
+
+      #Returns all accounts of a user
+      def get_accounts_by_user
+          return User.find(params[:user_id]).accounts
       end
 
       # Function that paginates the transactions into different pages
