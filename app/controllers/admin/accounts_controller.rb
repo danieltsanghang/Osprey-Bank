@@ -47,7 +47,7 @@ class Admin::AccountsController < ApplicationController
   end
 
   def edit
-
+      @account = Account.find(params[:id])
   end
 
   def update
