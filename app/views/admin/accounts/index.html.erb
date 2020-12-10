@@ -1,0 +1,58 @@
+<div class="container">
+    <h1 class="display-3 lead" style="text-align: center;">View all Accounts Below!</h1>
+    <hr>
+    <% if(@accounts.nil? || @accounts.empty?) %>
+    <div class="row" style="margin-bottom: 20%;">
+        <% if(params.has_key?(:search_account)) %>
+        <p class="alert alert-info" style="width: 100%; margin-bottom: 9%;" role="alert"><strong>You have no accounts that match: <u><%= params[:search_transaction] %></u>!</strong></p>
+        <% else %>
+        <p class="alert alert-info" style="width: 100%;  margin-bottom: 9%;" role="alert"><strong>You have no accounts!</strong></p>
+        <% end %>
+        <% else %>
+    </div>
+    <div style="width: 80%; margin-left: 10%;">
+        <div class="panel-heading col">
+            <div class="row" style="margin-bottom: 1%;"><%= render(:partial => 'application/search', :locals => {:input_path => admin_accounts_url, :search => :search_account, :csv_path => url_for(format: 'csv', search_account: params[:search_account], sort: params[:sort], direction: params[:direction])}) %></div>
+        </div>
+        <div>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-dark table-striped table-bordered table-fixed" cellspacing="0" width="100%">
+                    <thead class="">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col"><%= sortable "created_at", "Date Created" %></th>
+                          <th scope="col"><%= sortable "id", "Account ID" %></th>
+                          <th scope="col"><%= sortable "user_id", "User ID" %></th>
+                          <th scope="col"><%= sortable "accountNumber", "Account Number" %></th>
+                          <th scope="col"><%= sortable "sortCode", "Sort Code" %></th>
+                          <th scope="col"><%= sortable "balance", "Balance" %></th>
+                          <th>Currency</th>
+                          <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <% @accounts.each_with_index do |account, index| %>
+                    <tr>
+                        <th scope="row"><%= (index + 1) + (Admin::AccountsController::ACCOUNTS_PER_PAGE * (@page)) %></th>
+                        <td><%= account.created_at %></td>
+                        <td><%= account.id %></td>
+                        <td><%= account.user_id %></td>
+                        <td><%= account.accountNumber %></td>
+                        <td><%= account.sortCode %></td>
+                        <td><%= account.balance %></td>
+                        <td><%= account.currency %></td>
+                        <td>
+                            <%= link_to "Show", admin_account_url(account), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 30%;" %>
+                            <%= link_to "Edit", edit_admin_account_url(account), class:"btn btn-outline-warning btn-sm", style: "margin-left: 5px;width: 30%;" %>
+                            <%= link_to "Delete", delete_admin_account_url(account), class:"btn btn-outline-danger btn-sm", style: "margin-left: 5px;width: 30%;" %>
+                        </td>
+                    </tr>
+                    <% end %>
+
+                </table>
+                <%= render(:partial => 'application/paginate', :locals => {:input_path => admin_accounts_url(:page => params[:page])})%>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
