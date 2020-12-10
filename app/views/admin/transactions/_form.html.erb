@@ -16,8 +16,8 @@
     <td><%= f.number_field(:receiver_id, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Receiver ID", required: true })%></td>
     <th>Amount</th>
     <% if(@transaction.amount.nil?)%>
-            <td><%= f.number_field :amount, step: 0.5, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Amount", required: true, scale: 2  %></td>
+            <td><%= f.number_field :amount, step: 0.01, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Amount", required: true, scale: 2  %></td>
     <% else %>
-        <td><%= f.number_field :amount, step: 0.5, value: @transaction.amount/100, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Amount", required: true, scale: 2  %></td>
+        <td><%= f.number_field :amount, step: 0.01, value: @transaction.amount/100, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Amount", required: true, scale: 2  %></td>
     <% end %>
 </div>
