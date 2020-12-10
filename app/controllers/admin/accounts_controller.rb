@@ -7,35 +7,35 @@ class Admin::AccountsController < ApplicationController
   ACCOUNTS_PER_PAGE = 20 #Number of accounts to be displayed per page
 
   def index
-    @page = params.fetch(:page, 0).to_i
+      @page = params.fetch(:page, 0).to_i
 
 
-    if (params.has_key?(:user_id))
-        @accounts = get_accounts_by_user
-    else
-        @accounts = Account.all
-    end
+      if (params.has_key?(:user_id))
+          @accounts = get_accounts_by_user
+      else
+          @accounts = Account.all
+      end
 
-    #If search box has been used to query
-    if(params.has_key?(:search_account))
-        @accounts = search()
-    end
+      #If search box has been used to query
+      if(params.has_key?(:search_account))
+          @accounts = search()
+      end
 
-    @accounts = filter(@accounts)
+      @accounts = filter(@accounts)
 
-    # Route for CSV file
-    respond_to do |format|
-        format.html
-        format.csv { send_data Account.export_csv(@accounts) } # Send the data to the Account model along with the current_user
-    end
+      # Route for CSV file
+      respond_to do |format|
+          format.html
+          format.csv { send_data Account.export_csv(@accounts) } # Send the data to the Account model along with the current_user
+      end
 
-    paginate # Paginate the page
-    @accounts = @accounts[@page * ACCOUNTS_PER_PAGE, ACCOUNTS_PER_PAGE] # Set the variable to contain all accounts in the current page
+      paginate # Paginate the page
+      @accounts = @accounts[@page * ACCOUNTS_PER_PAGE, ACCOUNTS_PER_PAGE] # Set the variable to contain all accounts in the current page
 
   end
 
   def show
-
+      @account = Account.find(params[:id])
   end
 
   def new
