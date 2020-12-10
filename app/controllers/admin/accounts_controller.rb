@@ -51,7 +51,22 @@ class Admin::AccountsController < ApplicationController
   end
 
   def update
+      @account = Account.find(params[:id])
 
+      #update account
+      if (@account.update(account_params))
+          @account.balance *= 100
+          #this doesn't work
+          @account.balance = convert_return_amount(Money.new(@account.balance, @account.currency), @account.currency)
+
+          @account.save
+
+          redirect_to(admin_account_path(@account))
+
+      #render errors
+      else
+          render 'edit'
+      end
   end
 
   def delete
@@ -63,6 +78,10 @@ class Admin::AccountsController < ApplicationController
   end
 
   private
+
+      def account_params
+          params.require(:account).permit(:id, :user_id, :accountNumber, :sortCode, :balance, :currency)
+      end
 
       def sort_column
           Account.column_names.include?(params[:sort]) ? params[:sort] : "created_at"

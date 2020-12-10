@@ -39,7 +39,7 @@
                         <td><%= account.user_id %></td>
                         <td><%= account.accountNumber %></td>
                         <td><%= account.sortCode %></td>
-                        <td><%= account.balance %></td>
+                        <td><%= Money.new(account.balance, account.currency).format %></td>
                         <td><%= account.currency %></td>
                         <td>
                             <%= link_to "Show", admin_account_url(account), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 30%;" %>

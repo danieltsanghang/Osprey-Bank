@@ -5,10 +5,13 @@ class Account < ApplicationRecord
 
     validates :user_id, presence:true
 
-    validates :sortCode, length: {is: 6}, numericality: {only_number: true}
+    validates :sortCode, length: {is: 6, message: "should only be 6 digits"}, numericality: {only_number: true},
+              presence:true
 
-    validates :accountNumber, length: {minimum: 8, maximum: 9},
-                              uniqueness: true, numericality: {only_integer: true}
+    validates :accountNumber, length: {minimum: 8, maximum: 9, message: "should be between 8-9 digits"},
+                              uniqueness: true, numericality: {only_integer: true}, presence:true
+
+    validates :currency, inclusion: { in: %w(GBP EUR USD), message: "%{value} is not a supported currency"}
 
     before_save :default_balance_and_currency
 

@@ -1,0 +1,24 @@
+<%= error_messages_for(f.object) %>
+<div>
+    <hr>
+    <th>User ID</th>
+    <% if(params.has_key?(:user_id)) %>
+    <%= f.hidden_field :user_id, value: params[:user_id]%>
+    <%= f.label(params[:user_id], { class: "rounded-0 form-control", style: "margin-bottom: -10px; border: none;", required: true }) %><br>
+    <% else %>
+    <%= f.number_field(:user_id, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "User ID", required: true }) %>
+    <% end %>
+
+    <th>Account Number</th>
+    <td><%= f.number_field(:accountNumber, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Account Number", required: true })%></td>
+
+    <th>Sort Code</th>
+    <td><%= f.number_field(:sortCode, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Sort Code", required: true })%></td>
+
+    <th>Balance</th>
+    <td><%= f.number_field :balance, step: 0.01, value: @account.balance/100, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Balance", required: true, scale: 2  %></td>
+
+    <th>Currency</th>
+    <td><%= f.text_field(:currency, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Currency", required: true })%></td>
+
+</div>
