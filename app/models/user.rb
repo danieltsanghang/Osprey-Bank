@@ -16,6 +16,10 @@ class User < ApplicationRecord
 
     validates :DOB, presence: true
 
+    validates :fname, presence: true
+
+    validates :lname, presence: true
+
     validates :address, presence: true
 
     validates :phoneNumber, presence: true,

@@ -37,7 +37,6 @@
                 <th>Actions</th>
               </tr>
             </thead>
-
             <% @users.each_with_index do |user, index| %>
               <tr >
                 <th scope="row" >
@@ -48,8 +47,7 @@
                 <td style="text-align: right"><%= user.fname %></td>
                 <td style="text-align: left"><%= user.lname %></td>
                 <td><%= user.email %></td>
-                <!--<td><%# user.password_digest %></td>-->
-                <td><%= user.isAdmin %></td>
+                <td><%= user.isAdmin == true ? "Yes" : "No" %></td>
                 <td>
                   <%= link_to "Show", admin_user_url(user), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 30%;" %>
                   <%= link_to "Edit", edit_admin_user_url(user), class:"btn btn-outline-warning btn-sm", style: "margin-left: 5px;width: 30%;" %>
@@ -57,7 +55,6 @@
                 </td>
               </tr>
             <% end %>
-
           </table>
           <%= render(:partial => 'application/paginate', :locals => {:input_path => admin_users_url(:page => params[:page])})%>
         <% end %>
