@@ -3,15 +3,15 @@
  * Source used: Rails casts episode 228, link: http://railscasts.com/episodes/228-sortable-table-columns
 */
 .table th .current {
-    padding-right: 15px;
+    padding-right: 20px;
     background-repeat: no-repeat;
     background-position: right center;
 }
 
 .table th .asc {
-    background-image: url(sortable_table/up_arrow.gif);
+    background-image: url(sortable_table/sort-up.svg);
 }
 
 .table th .desc {
-    background-image: url(sortable_table/down_arrow.gif);
+    background-image: url(sortable_table/sort-down.svg);
 }
