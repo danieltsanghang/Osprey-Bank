@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-
+    
     before_action :redirect_to_login_if_not_admin
 
     helper_method :sort_column
@@ -10,7 +10,7 @@ class Admin::UsersController < ApplicationController
         @page = params.fetch(:page, 0).to_i
         @users = User.all
 
-        if(params.has_key?(:search_user))
+        if(params.has_key?(:search_user)) 
             @users = search()
         end
 
@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
 
         paginate # Paginate the page
         @users = @users[@page * USERS_PER_PAGE, USERS_PER_PAGE] # Set the variable to contain all transactions in the current page
-
+        
     end
 
     def show
@@ -36,7 +36,17 @@ class Admin::UsersController < ApplicationController
     end
 
     def create
-
+        @user = User.new(users_params)
+        if(@user.save)
+            puts "SUCCESS"
+            redirect_to admin_user_url(@user)
+        else
+            puts "FAILED"
+            @user.errors.full_messages.each do |msg|
+                puts msg
+            end
+            render 'new'
+        end
     end
 
     def edit
@@ -44,11 +54,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find_by(id: params[:id])
-          if @user.update(users_params)
-          redirect_to admin_user_url(@user)
-        else render :edit
-        end
+
     end
 
     def edit_password
@@ -66,7 +72,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def delete
-
+        @user = User.find(params[:id])
     end
 
     def destroy
