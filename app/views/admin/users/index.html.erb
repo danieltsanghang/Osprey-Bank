@@ -40,7 +40,7 @@
                         <td><%= user.lname %></td>
                         <td><%= user.email %></td>
                         <!--<td><%# user.password_digest %></td>-->
-                        <td><%= user.isAdmin %></td>
+                        <td><%= user.isAdmin == true ? "Yes" : "No" %></td>
                         <td>
                             <%= link_to "Show", admin_user_url(user), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 30%;" %>
                             <%= link_to "Edit", edit_admin_user_url(user), class:"btn btn-outline-warning btn-sm", style: "margin-left: 5px;width: 30%;" %>

@@ -1,2 +1,20 @@
 <%= error_messages_for(f.object) %>
-fill this form with create/edit user stuff and your done. This is located in 'views/admin/users/_form.html.erb'
+<div>
+    <hr>
+    <th>Is Admin?</th>
+    <td><%= f.check_box(:isAdmin, { class: "border rounded-0", style: "margin-bottom: 15px;" },  "Admin", "Regular User",)%></td><br>
+    <th>First Name</th>
+    <td><%= f.text_field(:fname, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "First Name", required: true })%></td>
+    <th>Last Name</th>
+    <td><%= f.text_field(:lname, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "First Name", required: true })%></td>
+    <th>E-mail</th>
+    <td><%= f.email_field(:email, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "E-mail", required: true })%></td>
+    <th>Username</th>
+    <td><%= f.text_field(:username, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Username", required: true })%></td>
+    <th>DOB</th>
+    <td><%= f.date_field(:DOB, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Date of Birth", required: true, min: Date.new(1900, 01, 01), max: Date.new(2003, 01, 01) })%></td>
+    <th>Phone number</th>
+    <td><%= f.number_field(:phoneNumber, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Phone number", required: true })%></td>
+    <th>Address</th>
+    <td><%= f.text_field(:address, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Address", required: true })%></td>
+</div>
