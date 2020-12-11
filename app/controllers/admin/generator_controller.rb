@@ -2,8 +2,11 @@ class Admin::GeneratorController < ApplicationController
       def new
 
       end
-    def create
-        redirect_to(admin_users_url)
-    end
+      def create
+          generateUsers(params[:generator][:users].to_i)
+          generateAccounts(params[:generator][:accounts].to_i, params[:generator][:users].to_i)
+          generateTransactions(params[:generator][:transactions], params[:generator][:accounts].to_i)
+          redirect_to(admin_users_url)
+      end
 
 end
