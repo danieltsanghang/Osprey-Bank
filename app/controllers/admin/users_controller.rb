@@ -37,17 +37,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(users_params)
-        if(@user.save)
-            puts "SUCCESS"
-            redirect_to admin_user_url(@user)
-        else
-            puts "FAILED"
-            @user.errors.full_messages.each do |msg|
-                puts msg
-            end
-            render 'new'
-        end
+
     end
 
     def edit
@@ -55,7 +45,11 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-
+        @user = User.find_by(id: params[:id])
+          if @user.update(users_params)
+          redirect_to admin_user_url(@user)
+        else render :edit
+        end
     end
 
     def edit_password
@@ -73,7 +67,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def delete
-        @user = User.find(params[:id])
+
     end
 
     def destroy
