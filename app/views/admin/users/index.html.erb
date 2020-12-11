@@ -17,9 +17,7 @@
     </div>
     <div class="card" style="margin-left: 10%; margin-right: 10%">
       <div class="card-header">
-        <!-- <div class="row" style="margin-bottom: 1%;"> -->
           <%= render(:partial => 'application/search', :locals => {:input_path => admin_users_url, :search => :search_user, :csv_path => url_for(format: 'csv', search_user: params[:search_user], sort: params[:sort], direction: params[:direction])}) %>
-        <!-- </div> -->
       </div>
       <div>
         <div class="table-responsive text-nowrap">
