@@ -1,19 +1,17 @@
-<div style="margin: 5% 0%;">
-    <div class="col-md-4 col-xl-6 offset-xl-3">
- <%= form_for :generator, url: "generator_controller/create" do |f| %>
+ <div class="card">
+ <%= form_for :generator, :url => {:action => "create"} do |f| %>
        <%= error_messages_for(f.object) %>
         <div>
     <hr>
-    <th>Number of fake users</th>
-    <td><%= f.number_field(:users, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "0 if nil", required: true })%></td>
-    <th>Number of fake accounts per user</th>
-    <td><%= f.number_field(:accounts, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "0 if nil", required: true })%></td>
+    <th>users?</th>
+    <td><%= f.number_field(:users, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake users", required: true })%></td>
+    <th>accounts?</th>
+    <td><%= f.number_field(:accounts, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake accounts per user", required: true })%></td>
 
-    <th>Number of transactions per fake account</th>
-    <td><%= f.number_field(:transactions, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "0 if nil", required: true })%></td>
+    <th>transactions?</th>
+    <td><%= f.number_field(:transactions, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of transactions per fake account", required: true })%></td>
 
         </div>
         <%= f.submit "create", class:"btn btn-lg btn-info", style: "width: 100%;" %>
         <% end %>
-</div>
-</div>
+        </div>
