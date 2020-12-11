@@ -1,0 +1,17 @@
+ <div class="card">
+ <%= form_for :generator, :url{:action=> :create} |f| %>
+       <%= error_messages_for(f.object) %>
+        <div>
+    <hr>
+    <th>users?</th>
+    <td><%= f.number_field(:users, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake users", required: true })%></td>
+    <th>accounts?</th>
+    <td><%= f.number_field(:accounts, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake accounts per user", required: true })%></td>
+   
+    <th>transactions?</th>
+    <td><%= f.number_field(:transactions, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of transactions per fake account", required: true })%></td>
+  
+        </div>
+        <%= f.submit "New", class:"btn btn-lg btn-info", style: "width: 100%;" %>
+        <% end %>
+        </div>
