@@ -34,7 +34,6 @@ class Admin::UsersController < ApplicationController
 
     def new
         @user = User.new
-        @transaction
     end
 
     def create
