@@ -16,7 +16,7 @@
     <td><%= f.number_field(:sortCode, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Sort Code", required: true })%></td>
 
     <th>Balance</th>
-    <% if(@account.balance.nil?) %>
+    <% if(@account.balance.nil? || !@account.valid?) %>
     <td><%= f.number_field :balance, step: 0.01, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Balance", required: true, scale: 2  %></td>
     <% else %>
     <td><%= f.number_field :balance, step: 0.01, value: @account.balance/100, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Balance", required: true, scale: 2  %></td>

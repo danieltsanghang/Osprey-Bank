@@ -62,13 +62,12 @@ class Admin::AccountsController < ApplicationController
 
   def update
       @account = Account.find(params[:id])
-
+      old_currency = @account.currency
       #update account
       if (@account.update(account_params))
           @account.balance *= 100
           #this doesn't work
-          @account.balance = convert_return_amount(Money.new(@account.balance, @account.currency), @account.currency)
-
+          @account.balance = Monetize.parse(convert(Money.new(@account.balance, old_currency), @account.currency)).fractional
           @account.save
 
           redirect_to(admin_account_path(@account))
