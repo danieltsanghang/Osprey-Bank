@@ -1,4 +1,5 @@
- <div class="card">
+<div style="margin: 5% 0%;">
+    <div class="col-md-4 col-xl-6 offset-xl-3">
  <%= form_for :generator, :url => {:action => "create"} do |f| %>
        <%= error_messages_for(f.object) %>
         <div>
@@ -14,4 +15,5 @@
         </div>
         <%= f.submit "create", class:"btn btn-lg btn-info", style: "width: 100%;" %>
         <% end %>
-        </div>
+      </div>
+  </div>
