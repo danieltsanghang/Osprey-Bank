@@ -4,12 +4,4 @@ class AdminsController < ApplicationController
 
     end
 
-
-
-    private
-
-        def admin_params
-
-        end
-
 end
