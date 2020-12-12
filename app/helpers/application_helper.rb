@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   # Function used to render the 404 page
   def redirect_to_404
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404 # Render 404 page
@@ -74,9 +73,10 @@ module ApplicationHelper
   end
 
   def generateUsers(amount)
-    (User.all.size .. User.all.size + amount - 1).each do |id|
+    @limit = User.all.size
+    (@limit .. (@limit + amount -1)).each do |id|
         User.create!(
-            id: id, # each user is assigned an id from 1-20
+            id: id,
             fname: Faker::Name.unique.first_name,
             lname: Faker::Name.unique.last_name ,
             email: Faker::Internet.email,
@@ -91,11 +91,13 @@ module ApplicationHelper
     end
   end
 
-  def generateAccounts(amount, range)
-    (Account.all.size .. Account.all.size + amount).each do |id|
+  def generateAccounts(amount, newUsers)
+    @limit = Account.all.size.to_i
+    @userLimit = User.all.size.to_i
+    (@limit .. (@limit + amount-1)).each do |id|
         Account.create!(
             id: id,
-            user_id: rand(User.all.size - range .. User.all.size),
+            user_id: User.find(rand((@userLimit - newUsers) .. (@userLimit -1))).id,
             sortCode: Faker::Number.number(digits: 6),
             accountNumber: Faker::Number.number(digits: 8),
             balance: Faker::Number.number(digits: 7),
@@ -104,21 +106,57 @@ module ApplicationHelper
     end
   end
 
-  def generateTransactions(amount, range)
-    (Transaction.all.size .. Transaction.all.size + amount).each do |id|
+  def generateTransactions(amount, id_range)
+    @limit = Transaction.all.size.to_i
+    @accountLimit = Account.all.size.to_i
+    (@limit .. @limit + amount-1).each do |id|
         Transaction.create!(
-          sender_id: Account.find(rand(Account.all.size - range .. Account.all.size)).id,
-          receiver_id: Account.find(rand(0 .. Account.all.size - range)).id,
-          amount: Faker::Number.number(digits: 4),
-          timeStamp: Faker::Date.backward(days: 100)
-        )
-        Transaction.create!(
-          sender_id: Account.find(rand(0 .. Account.all.size - range)).id,
-          receiver_id: Account.find(rand(Account.all.size - range .. Account.all.size)).id,
-          amount: Faker::Number.number(digits: 4),
-          timeStamp: Faker::Date.backward(days: 100)
+          id: id,
+          sender_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
+          # money to random account that doesnt exist
+          receiver_id: Faker::Number.number(digits: 4),
+          amount: Faker::Number.between(from: 10, to: 99999),
+          timeStamp: Faker::Date.backward(days: Faker::Number.number(digits: 4))
         )
       end
+      @limit = Transaction.all.size.to_i
+        (@limit .. @limit + amount -1).each do |id|
+        Transaction.create!(
+          id: id,
+          # money from random account that doesnt exist
+          sender_id: Faker::Number.number(digits: 4),
+          receiver_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
+          amount: Faker::Number.between(from: 10, to: 99999),
+          timeStamp: Faker::Date.backward(days: Faker::Number.number(digits: 4))
+        )
+      end
+  end
+
+# for generating transaction data for a single user, # of transaction specificed
+# is doubled, once for sent, once for recieve.
+  def userGenerateTransaction(userID, amount)
+    @limit = Transaction.all.size.to_i
+    Account.where("user_id = #{userID}").each do |account_id|
+        (@limit .. @limit + amount-1).each do |id|
+          Transaction.create!(
+            id: id,
+            sender_id: account_id,
+            receiver_id: Faker::Number.number(digits: 4),
+            amount: Faker::Number.between(from: 10, to: 99999),
+            timeStamp: Faker::Date.backward(days: Faker::Number.number(digits: 3))
+          )
+        end
+        @limit = Transaction.all.size.to_i
+        (@limit .. @limit + amount-1).each do |id|
+          Transaction.create!(
+            id: id,
+            sender_id: Faker::Number.number(digits: 4),
+            receiver_id: account_id,
+            amount: Faker::Number.between(from: 10, to: 99999),
+            timeStamp: Faker::Date.backward(days: Faker::Number.number(digits: 3))
+          )
+        end
+    end
   end
 
 end

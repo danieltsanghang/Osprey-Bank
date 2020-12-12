@@ -75,8 +75,9 @@ end
     )
 end
 
-(1..100).each do |id|
+(0..100).each do |id|
     Transaction.create!(
+      id: id,
       sender_id: Account.find(rand(0..9)).id,
       receiver_id: Account.find(rand(10..20)).id,
       amount: Faker::Number.number(digits: 4),
