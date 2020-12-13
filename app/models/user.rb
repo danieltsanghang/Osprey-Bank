@@ -1,17 +1,17 @@
 class User < ApplicationRecord
     has_secure_password # Adds password functionality for each User
 
-    # User validation
+    # User validations
     validates :username, presence: true,
                          length: { minimum: 6, maximum: 20 },
                          uniqueness: { case_sensitive: false }
 
     validates :password, presence: true,
                          length: { minimum: 8, maximum: 30 },
-                         on: [:create, :password_change]
+                         on: [:create, :password_change] # Context for password change so no errors occur when editing user account without changing password
 
     validates :email, presence: true,
-                      format: { with: URI::MailTo::EMAIL_REGEXP },
+                      format: { with: URI::MailTo::EMAIL_REGEXP }, # Email regular expression validation
                       uniqueness: { case_sensitive: false }
 
     validates :DOB, presence: true
@@ -29,6 +29,7 @@ class User < ApplicationRecord
     before_save :downcase_username # Downcase username
     before_save :default_values # Set default admin value to false if it does not exist
 
+    # Model relationships:
     # Each user has many accounts, which has many transactions
     has_many :accounts
     has_many :sent_transactions, through: :accounts

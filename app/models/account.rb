@@ -1,8 +1,6 @@
 class Account < ApplicationRecord
-    belongs_to :user, :foreign_key => :user_id
-    has_many :sent_transactions, :foreign_key => :sender_id, :class_name => 'Transaction'
-    has_many :received_transactions, :foreign_key => :receiver_id, :class_name => 'Transaction'
 
+    # Account validations
     validates :user_id, presence:true
 
     validates :sortCode, length: {is: 6, message: "should only be 6 digits"}, numericality: {only_number: true},
@@ -11,16 +9,30 @@ class Account < ApplicationRecord
     validates :currency, inclusion: { in: %w(GBP EUR USD), message: "%{value} is not a supported currency"}
 
     before_save :default_balance_and_currency
-
+    
+    # Model relationships:
+    # Each account belongs to one user only, and each account has many sent transactions and many received transactions
+    belongs_to :user, :foreign_key => :user_id
+    has_many :sent_transactions, :foreign_key => :sender_id, :class_name => 'Transaction'
+    has_many :received_transactions, :foreign_key => :receiver_id, :class_name => 'Transaction'
 
     private
 
-        def default_balance_and_currency()
+        def default_balance_and_currency
           #sets default values if not specified in creation of record
+          default_balance
+          default_currency
+        end
+
+        def default_balance
+          # If no balance was provided, the default balance should be 0
           if self.balance.nil?
             self.balance = 0
           end
+        end
 
+        def default_currency
+          # If no currency was provided, the default currency should be "GBP"
           if self.currency.nil?
             self.currency = "GBP"
           end
