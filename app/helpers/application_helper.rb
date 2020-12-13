@@ -73,8 +73,8 @@ module ApplicationHelper
   end
 
   def generateUsers(amount)
-    @limit = User.all.size.to_i
-    if @limit != 0
+    @limit = 0
+    if !User.first.nil?
         @limit = User.last.id.to_i + 1
     end
 
@@ -96,12 +96,12 @@ module ApplicationHelper
   end
 
   def generateAccounts(amount, newUsers)
-    @limit = Account.all.size.to_i
-    if @limit != 0
+    @limit = 0
+    if !Account.first.nil?
         @limit = Account.last.id.to_i + 1
     end
-    @userLimit = User.all.size.to_i
-    if @userLimit != 0
+    @userLimit = 0
+    if !User.first.nil?
         @userLimit = User.last.id.to_i + 1
     end
 
@@ -118,12 +118,12 @@ module ApplicationHelper
   end
 
   def generateTransactions(amount, id_range)
-    @limit = Transaction.all.size.to_i
-    if @limit != 0
+    @limit = 0
+    if !Transaction.first.nil?
         @limit = Transaction.last.id.to_i + 1
     end
-    @accountLimit = Account.all.size.to_i
-    if @accountLimit != 0
+    @accountLimit = 0
+    if !Account.first.nil?
         @accountLimit = Account.last.id.to_i + 1
     end
     (@limit .. @limit + amount-1).each do |id|
@@ -133,13 +133,12 @@ module ApplicationHelper
           # money to random account that doesnt exist
           receiver_id: Faker::Number.number(digits: 8),
           amount: Faker::Number.between(from: 10, to: 99999),
-          created_at: Faker::Date.backward(days: Faker::Number.number(digits: 4))
+          created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
         )
       end
-      @limit = Transaction.all.size.to_i
-      if @limit != 0
-          @limit = Transaction.last.id.to_i + 1
-      end
+
+      @limit = Transaction.last.id.to_i + 1
+
         (@limit .. @limit + amount -1).each do |id|
         Transaction.create!(
           id: id,
@@ -147,7 +146,8 @@ module ApplicationHelper
           sender_id: Faker::Number.number(digits: 8),
           receiver_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
           amount: Faker::Number.between(from: 10, to: 99999),
-          created_at: Faker::Date.backward(days: Faker::Number.number(digits: 4))
+          created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
+
         )
       end
   end
@@ -157,25 +157,25 @@ module ApplicationHelper
   def userGenerateTransaction(userID, amount)
 
     User.find(userID).accounts.each do |account|
-      @limit = Transaction.all.size.to_i
+      @limit = Transaction.last.id.to_i
         (@limit .. @limit + amount-1).each do |id|
           Transaction.create!(
             id: id,
             sender_id: account.id.to_i,
             receiver_id: Faker::Number.number(digits: 8),
             amount: Faker::Number.between(from: 10, to: 99999),
-            created_at: Faker::Date.backward(days: Faker::Number.number(digits: 3))
+            created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
           )
         end
 
-        @limit = Transaction.all.size.to_i
+        @limit = Transaction.all.last.id.to_i
         (@limit .. @limit + amount-1).each do |id|
           Transaction.create!(
             id: id,
             sender_id: Faker::Number.number(digits: 8),
             receiver_id: account.id.to_i,
             amount: Faker::Number.between(from: 10, to: 99999),
-            created_at: Faker::Date.backward(days: Faker::Number.number(digits: 3))
+            created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
           )
         end
 
