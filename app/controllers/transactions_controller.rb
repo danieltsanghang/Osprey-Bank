@@ -76,6 +76,9 @@ class TransactionsController < ApplicationController
         # Function redirects user to 404 if they are not logged in or authorized to view that account
         def redirect_to_404_if_not_authorized
 
+            # Admin should not be allowed to act like a regular user, i.e. view personal accounts, transactions, etc.
+            redirect_to_login_if_admin
+
             # If the user calls the index for their account, it's a GET request identifying the user by the session, hence not no need for further authentication
             unless(params.has_key?(:account_id))
                 return

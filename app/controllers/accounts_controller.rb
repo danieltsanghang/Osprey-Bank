@@ -16,6 +16,10 @@ class AccountsController < ApplicationController
   private
 
       def redirect_to_404_if_not_authorized
+        
+        # Admin should not be allowed to act like a regular user, i.e. view personal accounts, transactions, etc.
+        redirect_to_login_if_admin
+
         if (current_user.nil?) #check needed so function can return if user not logged in
           redirect_to_login_if_not_logged_in
           return

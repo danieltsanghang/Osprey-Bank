@@ -29,6 +29,10 @@ class UsersController < ApplicationController
 
     # Security check to make sure the user is accessing only their users page
     def redirect_to_404_if_not_authorized
+
+      # Admin should not be allowed to act like a regular user, i.e. view personal accounts, transactions, etc.
+      redirect_to_login_if_admin
+      
       if(current_user.id !=  params[:id].to_i)
         redirect_to_404
         return
