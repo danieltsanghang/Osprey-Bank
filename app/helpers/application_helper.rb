@@ -114,7 +114,7 @@ module ApplicationHelper
           id: id,
           sender_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
           # money to random account that doesnt exist
-          receiver_id: Faker::Number.number(digits: 4),
+          receiver_id: Faker::Number.number(digits: 8),
           amount: Faker::Number.between(from: 10, to: 99999),
           created_at: Faker::Date.backward(days: Faker::Number.number(digits: 4))
         )
@@ -124,7 +124,7 @@ module ApplicationHelper
         Transaction.create!(
           id: id,
           # money from random account that doesnt exist
-          sender_id: Faker::Number.number(digits: 4),
+          sender_id: Faker::Number.number(digits: 8),
           receiver_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
           amount: Faker::Number.between(from: 10, to: 99999),
           created_at: Faker::Date.backward(days: Faker::Number.number(digits: 4))
@@ -142,7 +142,7 @@ module ApplicationHelper
           Transaction.create!(
             id: id,
             sender_id: account.id.to_i,
-            receiver_id: Faker::Number.number(digits: 4),
+            receiver_id: Faker::Number.number(digits: 8),
             amount: Faker::Number.between(from: 10, to: 99999),
             created_at: Faker::Date.backward(days: Faker::Number.number(digits: 3))
           )
@@ -152,7 +152,7 @@ module ApplicationHelper
         (@limit .. @limit + amount-1).each do |id|
           Transaction.create!(
             id: id,
-            sender_id: Faker::Number.number(digits: 4),
+            sender_id: Faker::Number.number(digits: 8),
             receiver_id: account.id.to_i,
             amount: Faker::Number.between(from: 10, to: 99999),
             created_at: Faker::Date.backward(days: Faker::Number.number(digits: 3))
