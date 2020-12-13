@@ -73,7 +73,11 @@ module ApplicationHelper
   end
 
   def generateUsers(amount)
-    @limit = User.all.size
+    @limit = User.all.size.to_i
+    if @limit != 0
+        @limit = User.last.id.to_i + 1
+    end
+
     (@limit .. (@limit + amount -1)).each do |id|
         User.create!(
             id: id,
@@ -93,7 +97,14 @@ module ApplicationHelper
 
   def generateAccounts(amount, newUsers)
     @limit = Account.all.size.to_i
+    if @limit != 0
+        @limit = Account.last.id.to_i + 1
+    end
     @userLimit = User.all.size.to_i
+    if @userLimit != 0
+        @userLimit = User.last.id.to_i + 1
+    end
+
     (@limit .. (@limit + amount-1)).each do |id|
         Account.create!(
             id: id,
@@ -108,7 +119,13 @@ module ApplicationHelper
 
   def generateTransactions(amount, id_range)
     @limit = Transaction.all.size.to_i
+    if @limit != 0
+        @limit = Transaction.last.id.to_i + 1
+    end
     @accountLimit = Account.all.size.to_i
+    if @accountLimit != 0
+        @accountLimit = Account.last.id.to_i + 1
+    end
     (@limit .. @limit + amount-1).each do |id|
         Transaction.create!(
           id: id,
@@ -120,6 +137,9 @@ module ApplicationHelper
         )
       end
       @limit = Transaction.all.size.to_i
+      if @limit != 0
+          @limit = Transaction.last.id.to_i + 1
+      end
         (@limit .. @limit + amount -1).each do |id|
         Transaction.create!(
           id: id,
