@@ -55,27 +55,6 @@
                         <%=link_to('Edit Profile', edit_user_path(@user), :class => 'btn btn-lg btn-primary', style: "width: 100%; margin-top: 2%")%>
                         <%=link_to("View Accounts", accounts_url,  :class => "btn btn-lg btn-info", style: "width: 100%;  margin-top: 2%") %>
                         <%=link_to("View all Transactions", transactions_url,  :class => "btn btn-lg btn-outline-info", style: "width: 100%;  margin-top: 2%") %>
-                        <!-- for accounts to be displayed -->
-
-                        <!--<div class="card"></div>
-                        <div style="padding-top: 5px;padding-bottom: 5px;">
-                            <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2">
-                                <h5 class="mb-0">Accounts</h5>
-                            </a>
-                            <div class="collapse show" id="collapse-2" style="padding-top: 10px;">
-                                <ul class="list-group">
-                                    <% current_user.accounts.each do |account| %>
-                                    <li class="list-group-item">
-                                        <span>
-                                            <%= link_to " Sort Code: #{account.sortCode} Account Number: #{account.accountNumber} Balance: #{account.balance} Currency: #{account.currency}",account_path(account.id, :currency => account.currency), {:style => "text-decoration: none
-                        !important;color: #000000;"} %>
-                                        </span>
-                                    </li>
-                                    <% end %>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>-->
                     </div>
                 </div>
             </div>

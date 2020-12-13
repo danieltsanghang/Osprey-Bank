@@ -24,7 +24,7 @@
 
                                             <%= link_to "Account " + (index+1).to_s, account_path(account.id, :currency => account.currency) %>
                                             <br>
-                                            <%= account.accountNumber %> / <%= account.sortCode %>
+                                            <%= account.id %> / <%= account.sortCode %>
                                           </span>
                                       </li>
                                       <% end %>

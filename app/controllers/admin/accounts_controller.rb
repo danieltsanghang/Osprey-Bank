@@ -91,7 +91,7 @@ class Admin::AccountsController < ApplicationController
   private
 
       def account_params
-          params.require(:account).permit(:id, :user_id, :accountNumber, :sortCode, :balance, :currency)
+          params.require(:account).permit(:id, :user_id, :sortCode, :balance, :currency)
       end
 
       def sort_column
@@ -101,7 +101,7 @@ class Admin::AccountsController < ApplicationController
       # Function to search for certain accounts
       def search
           return @accounts.select{|el| el.created_at.to_s.starts_with?(params[:search_account]) || el.id.to_s.starts_with?(params[:search_account]) ||
-            el.user_id.to_s.starts_with?(params[:search_account]) || el.accountNumber.to_s.starts_with?(params[:search_account]) ||
+            el.user_id.to_s.starts_with?(params[:search_account])  ||
             el.sortCode.to_s.starts_with?(params[:search_account]) || el.balance.to_s.starts_with?(params[:search_account]) ||
             el.currency.to_s.starts_with?(params[:search_account])}
       end
