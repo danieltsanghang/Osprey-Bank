@@ -10,6 +10,8 @@
                 <%= msg %>
             </div>
             <% end %>
+            <%# Clear flash error messages after displaying invalid login message %>
+            <%flash.clear%>
         </div>
     </div>
         <%= f.text_field :username, required: true, class: "form-control", placeholder: "Username" %>

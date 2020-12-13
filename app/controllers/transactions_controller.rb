@@ -65,10 +65,10 @@ class TransactionsController < ApplicationController
 
             else
                 flash[:error] = "Not enough money"
-                redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+                render 'new'
             end
         else
-            redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+            render 'new'
         end
     end
 
