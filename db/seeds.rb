@@ -81,6 +81,6 @@ end
       sender_id: Account.find(rand(0..9)).id,
       receiver_id: Account.find(rand(10..20)).id,
       amount: Faker::Number.number(digits: 4),
-      timeStamp: Faker::Date.backward(days: 100)
+      created_at: Faker::Date.backward(days: 100)
     )
   end

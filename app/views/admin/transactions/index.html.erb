@@ -33,7 +33,7 @@
                     <% @transactions.each_with_index do |transaction, index| %>
                     <tr>
                         <th scope="row"><%= (index + 1) + (Admin::UsersController::USERS_PER_PAGE * (@page)) %></th>
-                        <td><%= transaction.timeStamp %></td>
+                        <td><%= transaction.created_at %></td>
                         <td><%= transaction.id %></td>
                         <td><%= transaction.sender_id %></td>
                         <td><%= transaction.receiver_id %></td>
