@@ -44,9 +44,10 @@ class Admin::TransactionsController < ApplicationController
     def create
         @transaction = Transaction.new(transaction_params)
         @transaction.amount *= 100
-        #params[:transaction][:amount] = params[:transaction][:amount].to_i * 100
+
         if(@transaction.valid?)
-            # If transaction invalid, meaning trying to sen more money than a user has, then render ned with an error
+            @transaction.id = Transaction.last.id + 1 # assign correct primary key in case of ID collisions with fake data
+            # If transaction invalid, meaning trying to send more money than a user has, then render ned with an error
             if(!(@transaction.sender.nil?) && (@transaction.sender.balance - @transaction.amount < 0))
                 flash[:error] = "Not enough money"
                 render 'new'
@@ -58,7 +59,6 @@ class Admin::TransactionsController < ApplicationController
 
             redirect_to(admin_transaction_path(@transaction))
         else
-            flash[:error] = "Transaction Invalid"
             render 'new'
         end
     end

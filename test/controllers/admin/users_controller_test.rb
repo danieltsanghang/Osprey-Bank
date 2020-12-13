@@ -17,7 +17,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     post admin_users_url, params:
     { user:
       {
-        id: 1000,
+        id: 3,
         fname: "Raymond",
         lname: "Reddington",
         email: "red@gmail.com",
@@ -31,14 +31,14 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_redirected_to admin_user_url(1000)
+    assert_redirected_to admin_user_url(3)
   end
 
   test 'admin should be able to create an admin' do
     post admin_users_url, params:
     { user:
       {
-        id: 1005,
+        id: 3,
         fname: "Raymond",
         lname: "Reddington",
         email: "red@gmail.com",
@@ -52,7 +52,7 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_redirected_to admin_user_url(1005)
+    assert_redirected_to admin_user_url(3)
   end
 
   test 'admin should not be able to create an invalid user' do

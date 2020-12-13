@@ -38,14 +38,11 @@ class Admin::UsersController < ApplicationController
 
     def create
         @user = User.new(users_params)
-        if(@user.save)
-            puts "SUCCESS"
+        if(@user.valid?)
+            @user.id = User.last.id + 1 # assign correct primary key in case of ID collisions with fake data
+            @user.save
             redirect_to admin_user_url(@user)
         else
-            puts "FAILED"
-            @user.errors.full_messages.each do |msg|
-                puts msg
-            end
             render 'new'
         end
     end
@@ -64,7 +61,7 @@ class Admin::UsersController < ApplicationController
 
     def update_password
         @user = User.find_by(id: params[:id])
-        @user.update_attributes(users_params)
+        @user.update(users_params)
         if(@user.save(context: :password_change)) # Add the context password_change to perform password change user model validations
             redirect_to admin_user_url(@user.id)
         else
