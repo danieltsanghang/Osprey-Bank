@@ -3,6 +3,10 @@
     <h1 style="font-size: xx-large;"><i class="fas fa-money-check" style="padding-right: 5px;"></i>Edit Transaction</h1>
         <%= form_for [:admin, @transaction] do |f| %>
         <%= render :partial =>'form', :locals => {:f => f}  %>
+        <tr>
+            <td>Date Created</td>
+            <%= f.datetime_field :created_at, class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Created At", required: true %>
+        </tr>
         <%= f.submit "Update", class:"btn btn-lg btn-info", style: "width: 100%; margin: 1% 0%;" %>
         <%= link_to("Cancel", :back, { class: "btn btn-secondary btn-lg mr-2 rounded-lg", style: "width: 100%; margin: 1% 0%;" }) %>
         <% end %>

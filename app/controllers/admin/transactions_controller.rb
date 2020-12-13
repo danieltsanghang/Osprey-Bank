@@ -106,7 +106,7 @@ class Admin::TransactionsController < ApplicationController
 
         # Sanitise input params
         def transaction_params
-            params.require(:transaction).permit(:id, :sender_id, :receiver_id, :amount)
+            params.require(:transaction).permit(:id, :sender_id, :receiver_id, :amount, :created_at)
         end
 
         # Function used to sort a certain column, source: Rails cast episode 228: http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true

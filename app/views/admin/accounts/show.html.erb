@@ -26,6 +26,7 @@
                 </tr>
             </tbody>
         </table>
+        <%= link_to  "View Account Transactions", admin_account_transactions_url(params[:id]),  class: "btn btn-lg btn-outline-dark", style: "width: 100%; margin: 1% 0%" %>
         <%= link_to "Edit", edit_admin_account_url(@account), class: "btn btn-lg btn-info", style: "width: 100%; margin: 1% 0%" %>
         <%= link_to "Delete", delete_admin_account_url(@account), class: "btn btn-lg btn-dark", style: "width: 100%; margin: 1% 0%" %>
     </div>

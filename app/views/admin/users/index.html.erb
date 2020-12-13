@@ -15,8 +15,8 @@
       <% end %>
     <% else %>
     </div>
-    <div class="card" style="margin-left: 10%; margin-right: 10%">
-      <div class="card-header">
+    <div style="margin-left: 10%; margin-right: 10%">
+      <div class="panel-heading" style="margin-bottom: 1%;">
           <%= render(:partial => 'application/search', :locals => {:input_path => admin_users_url, :search => :search_user, :csv_path => url_for(format: 'csv', search_user: params[:search_user], sort: params[:sort], direction: params[:direction])}) %>
       </div>
       <div>
@@ -30,7 +30,6 @@
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>
-                <!--<th>Password</th>-->
                 <th>Admin?</th>
                 <th>Actions</th>
               </tr>
@@ -47,9 +46,10 @@
                 <td><%= user.email %></td>
                 <td><%= user.isAdmin == true ? "Yes" : "No" %></td>
                 <td>
-                  <%= link_to "Show", admin_user_url(user), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 30%;" %>
-                  <%= link_to "Edit", edit_admin_user_url(user), class:"btn btn-outline-warning btn-sm", style: "margin-left: 5px;width: 30%;" %>
-                  <%= link_to "Delete", delete_admin_user_url(user), class:"btn btn-outline-danger btn-sm", style: "margin-left: 5px;width: 30%;" %>
+                  <%= link_to "Show", admin_user_url(user), class:"btn btn-outline-success btn-sm", style: "margin-left: 5px;width: 45%; margin-top: 2px;" %>
+                  <%= link_to "Edit", edit_admin_user_url(user), class:"btn btn-outline-warning btn-sm", style: "margin-left: 5px;width: 45%; margin-top: 2px;" %><br>
+                  <%= link_to "Edit Password", edit_password_admin_user_url(user), class:"btn btn-outline-primary btn-sm", style: "margin-left: 5px;width: 45%; margin-top: 2px;" %>
+                  <%= link_to "Delete", delete_admin_user_url(user), class:"btn btn-outline-danger btn-sm", style: "margin-left: 5px;width: 45%; margin-top: 2px;" %>
                 </td>
               </tr>
             <% end %>

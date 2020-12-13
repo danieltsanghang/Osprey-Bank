@@ -16,6 +16,10 @@
                     <td>Amount</td>
                     <td><%= Money.new(@transaction.amount, findCurrency(@transaction.sender_id,@transaction.receiver_id, 'sent')).format %></td>
                 </tr>
+                <tr>
+                    <td>Date Created</td>
+                    <td><%= @transaction.created_at %></td>
+                </tr>
             </tbody>
         </table>
         <%= link_to "Edit", edit_admin_transaction_url(@transaction), class: "btn btn-lg btn-info", style: "width: 100%; margin: 1% 0%" %>
