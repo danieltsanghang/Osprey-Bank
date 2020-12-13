@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def filter(things)
-
+    # 'things' represents the list of objects to sort
     if(sort_direction == 'asc')
       things = things.sort_by {|el| el[sort_column]} # Sort the ascending order
     else
@@ -50,11 +50,12 @@ module ApplicationHelper
   end
 
   def convert(money,currency)
+    valid_currencies = %w(GBP EUR USD)
     if(currency.nil? && params.has_key?(:account_id))
       currency = Account.find_by(params[:account_id])
     end
 
-    if(currency.nil? && !params.has_key?(:account_id))
+    if((currency.nil? && !params.has_key?(:account_id)) || !valid_currencies.include?(currency))
       currency = 'USD'
     end
 
