@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     resources :transactions, only: [:index, :new, :create]
   end
 
+  # Create route for admins, so they can see pages like the dashboard
+  resource :admins, only: [:show]
+
   # Create namespaces for admin, this will look like: 'admin/users' or 'admin/accounts', etc.
   namespace :admin do
     resources :generator

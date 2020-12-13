@@ -10,7 +10,7 @@ class Admin::TransactionsControllerTest < ActionDispatch::IntegrationTest
     # Get admin and login as admin
     @admin = users(:admin)
 
-    # Login as the sender
+    # Login as the admin
     login_as_user(users(:admin), "password1")
 
     # Get the each user's balance before the transaction

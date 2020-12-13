@@ -1,4 +1,7 @@
 <ul class="nav navbar-nav mr-auto">
+    <li class="nav-item">
+        <%= link_to "Admin Dashboard", admins_path, class: "nav-link" %>
+    </li>
     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#">Users</a>
         <div class="dropdown-menu">
             <%= link_to "View All Users", admin_users_url, class: "nav-link" %>
