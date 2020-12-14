@@ -1,0 +1,9 @@
+<div style="margin: 5% 0%;">
+    <div class="col-md-4 col-xl-6 offset-xl-3">
+    <h1 style="font-size: xx-large;"><i class="fas fa-address-card" style="padding-right: 5px;"></i>New Account</h1>
+        <%= form_for [:admin, @account] do |f| %>
+        <%= render :partial =>'form', :locals => {:f => f}  %>
+        <%= f.submit "Create", class:"btn btn-lg btn-info", style: "width: 100%;" %>
+        <% end %>
+    </div>
+</div>

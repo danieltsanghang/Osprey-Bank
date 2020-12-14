@@ -1,0 +1,42 @@
+<div style="margin: 5% 0%;">
+  <div class="col-md-4 col-xl-6 offset-xl-3">
+    <h1 style="font-size: xx-large;">
+      <i class="fas fa-user" style="padding-right: 10px;"></i>View User</h1>
+    <hr>
+    <table class="table table-striped table-dark">
+      <tbody>
+        <tr>
+          <td>First Name</td>
+          <td><%= @user.fname %></td>
+        </tr>
+        <tr>
+          <td>Last Name</td>
+          <td><%= @user.lname %></td>
+        </tr>
+        <tr>
+          <td>User Name</td>
+          <td><%= @user.username %></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <td>Mobile Number</td>
+          <td><%= @user.phoneNumber %></td>
+        </tr>
+        <tr>
+          <td>Date of birth</td>
+          <td><%= @user.DOB %></td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td><%= @user.address %></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <%=link_to('Edit Profile', edit_user_path(@user), :class => 'btn btn-lg btn-warning', style: "width: 100%; margin-top: 2%")%>
+    <%=link_to("View Accounts", accounts_url, :class => "btn btn-lg btn-dark", style: "width: 100%; margin-top: 2%") %>
+  </div>
+</div>

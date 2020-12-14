@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-dark mb-0">Dashboard</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-primary py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Number of users</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span><%= User.all.size %></span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-users fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-success py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Total transactions</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span><%= Transaction.all.size %></span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-money-check fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-info py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Total Money Transferred</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span><%= Transaction.sum(:amount) %></span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-warning py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Number of Accounts</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span><%= Account.all.size %></span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-file-invoice fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-danger py-2">
+                <%= link_to root_path, style: "text-decoration: none !important; color:inherit;" do %>
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-danger font-weight-bold text-xs mb-1"><span>Fake User Generator</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0"><span>Click here to generate fake users, accounts and transactions!</span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-gears fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">Sent Transactions Overview</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area"><%= line_chart User.find(0).sent_transactions.group_by_day(:created_at).sum(:amount), xtitle: "Sender Account ID", ytitle: "Amount Transferred (Cents)", messages: {empty: "No data"} %></canvas></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">Received Transactions Overview</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area"><%= line_chart Transaction.group(:receiver_id).sum(:amount), xtitle: "Receiver Account ID", ytitle: "Amount Received", messages: {empty: "No data"} %></canvas></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -28,7 +28,8 @@ class Admin::UsersController < ApplicationController
     end
 
     def show
-
+       @user = User.find_by(id: params[:id])
+       redirect_to_404 if @user.blank?
     end
 
     def new

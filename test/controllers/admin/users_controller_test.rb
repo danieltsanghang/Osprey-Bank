@@ -159,5 +159,17 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to admin_users_url
   end
+  
+  test "should show user" do
+    # Show user profile
+    get admin_user_url(@user)
+    assert_response :success
+  end
+
+  test "should redirect 404 if user does not exist" do
+    # finding a user that doesnt exist
+    get admin_user_url(999)
+    assert_response 404
+  end
 
 end

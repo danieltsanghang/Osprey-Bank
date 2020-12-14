@@ -1,0 +1,32 @@
+<div style="margin: 5% 0%;">
+    <div class="col-md-4 col-xl-6 offset-xl-3">
+        <h1 style="font-size: xx-large;"><i class="fas fa-address-card" style="padding-right: 5px;"></i>View Account</h1>
+        <hr>
+        <table class="table table-striped table-light">
+            <tbody>
+                <tr>
+                    <td>User ID</td>
+                    <td><%= @account.user_id %></td>
+                </tr>
+                <tr>
+                    <td>Account Number</td>
+                    <td><%= @account.accountNumber %></td>
+                </tr>
+                <tr>
+                    <td>Sort Code</td>
+                    <td><%= @account.sortCode %></td>
+                </tr>
+                <tr>
+                    <td>Balance</td>
+                    <td><%= Money.new(@account.balance, @account.currency).format %></td>
+                </tr>
+                <tr>
+                    <td>Currency</td>
+                    <td><%= @account.currency %></td>
+                </tr>
+            </tbody>
+        </table>
+        <%= link_to "Edit", edit_admin_account_url(@account), class: "btn btn-lg btn-info", style: "width: 100%; margin: 1% 0%" %>
+        <%= link_to "Delete", delete_admin_account_url(@account), class: "btn btn-lg btn-dark", style: "width: 100%; margin: 1% 0%" %>
+    </div>
+</div>
