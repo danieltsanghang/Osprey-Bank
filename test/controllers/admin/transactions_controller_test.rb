@@ -197,4 +197,28 @@ class Admin::TransactionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  test 'search through all transactions correctly' do
+    # Filter through transactions for a specific key (receiver_id in this case), result should only be a list of length 1
+    get admin_transactions_path, params: { :search_transaction => 234234 }
+    assert assigns(:transactions).size == 1 
+  end
+
+  test 'search through all transactions with a value that does not exists correctly' do
+    # Filter through transactions for a specific value that does not exist, result size should be 0
+    get admin_transactions_path, params: { :search_transaction => "thisdoesnotexist" }
+    assert assigns(:transactions).size == 0
+  end
+
+  test 'search through all transactions with empty string should return all transactions' do
+    # Filter through transactions with empty string, all results should be returned (number of transaction fixtures = 6)
+    get admin_transactions_path, params: { :search_transaction => "" }
+    assert assigns(:transactions).size == 6
+  end
+
+  test 'sort through transactions should sort correctly' do
+    # Sort by amount in a descending order, this means the first result should have the greatest amount from the fixtures, which is 5000000000
+    get admin_transactions_path, params: { :sort => "amount", :direction => "desc" }
+    assert assigns(:transactions)[0].amount == 5000000000
+  end
+
 end

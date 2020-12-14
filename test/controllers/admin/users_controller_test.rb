@@ -165,4 +165,28 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response 404
   end
 
+  test 'search through all users correctly' do
+    # Filter through users for a specific key (phoneNumber in this case), result should only be a list of length 1 based on the test fixtures
+    get admin_users_path, params: { :search_user => 987654321 }
+    assert assigns(:users).size == 1 
+  end
+
+  test 'search through all users with a value that does not exists correctly' do
+    # Filter through users for a specific value that does not exist, result size should be 0
+    get admin_users_path, params: { :search_user => "thisdoesnotexist" }
+    assert assigns(:users).size == 0
+  end
+
+  test 'search through all users with empty string should return all users' do
+    # Filter through users with empty string, all search_user should be returned (number of user fixtures = 6)
+    get admin_users_path, params: { :search_user => "" }
+    assert assigns(:users).size == 3
+  end
+
+  test 'sort through users should sort correctly' do
+    # Sort by DOB in a descending order, this means the first result should have the greatest DOB which is the user with id = 0 based on the test fixtures
+    get admin_users_path, params: { :sort => "DOB", :direction => "desc" }
+    assert assigns(:users)[0].id == 0
+  end
+
 end
