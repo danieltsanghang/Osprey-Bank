@@ -93,17 +93,13 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     # Perform the transaction using a post request with the correct parameters and invalid amount in order to fail the transaction
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: 0} }
 
-    assert_redirected_to new_transaction_url # if the transaction fails, the user should be redirected to the transactions new page (the same page)
-    follow_redirect! # Follow redirect
+    assert_response :success
     assert_template 'transactions/new' # the template displayed is the transactions new page of the user
-    assert session[:user_id] == @sender.user.id # Make sure it's the correct user
   end
 
   test 'should not make transactions for valid users and invalid amount (amount = 0)' do
     # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: 0} }
-
-    follow_redirect! # Follow redirect
 
     # Assert that the sender's and receiver's balance is not changed
     assert User.find(1).accounts[0].balance == @sender_balance_before
@@ -114,8 +110,6 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: -10} }
 
-    follow_redirect! # Follow redirect
-
     # Assert that the sender's and receiver's balance is not changed
     assert User.find(1).accounts[0].balance == @sender_balance_before
     assert User.find(2).accounts[0].balance == @receiver_balance_before
@@ -124,8 +118,6 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
   test 'should not make transactions for valid users and invalid amount (amount > balance)' do
     # Perform the transaction using a post request with the correct parameters
     post transactions_url, params: { transaction: { sender_id: @sender.id, receiver_id: @receiver.id, amount: @sender.balance+1} }
-
-    follow_redirect! # Follow redirect
 
     # Assert that the sender's and receiver's balance is not changed
     assert User.find(1).accounts[0].balance == @sender_balance_before

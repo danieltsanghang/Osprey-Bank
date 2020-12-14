@@ -35,7 +35,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     login_as_user(user, "password1") # login with invalid credentials 
     assert_response :success
     assert_template 'sessions/new' # the template displayed is the login page again
-    assert flash[:error] # an error is displayed
     assert_not is_logged_in? # user is NOT logged in
   end
 
