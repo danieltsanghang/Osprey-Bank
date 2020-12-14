@@ -67,7 +67,7 @@ class Admin::AccountsController < ApplicationController
       # update account
       if (@account.update(account_params))
           @account.balance *= 100
-          #this doesn't work
+
           @account.balance = Monetize.parse(convert(Money.new(@account.balance, old_currency), @account.currency)).fractional
           @account.save
 
