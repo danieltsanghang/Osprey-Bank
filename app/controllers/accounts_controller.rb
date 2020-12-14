@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
 
+  before_action :redirect_to_login_if_not_logged_in
   before_action :redirect_to_404_if_not_authorized
 
   def index
@@ -19,11 +20,6 @@ class AccountsController < ApplicationController
         
         # Admin should not be allowed to act like a regular user, i.e. view personal accounts, transactions, etc.
         redirect_to_login_if_admin
-
-        if (current_user.nil?) #check needed so function can return if user not logged in
-          redirect_to_login_if_not_logged_in
-          return
-        end
 
         unless(params.has_key?(:id)) #if routing via index action then skip unauthorized account access
             return

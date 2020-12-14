@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   private
 
-  # Sanitise inputs
+    # Sanitise inputs
     def user_params
       params.require(:user).permit(:fname, :lname, :username, :email, :phoneNumber, :address, :password, :password_confirmation)
     end
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
         redirect_to_404
         return
       end
+      
     end
 
 end

@@ -4,19 +4,20 @@ class Admin::AccountsController < ApplicationController
 
   helper_method :sort_column
 
-  ACCOUNTS_PER_PAGE = 20 #Number of accounts to be displayed per page
+  ACCOUNTS_PER_PAGE = 20 # Number of accounts to be displayed per page
 
   def index
-      @page = params.fetch(:page, 0).to_i
+      @page = params.fetch(:page, 0).to_i # Current page in the table pagination
 
 
       if (params.has_key?(:user_id))
+          # If admin is trying to view all accounts for a specific user 
           @accounts = get_accounts_by_user
       else
           @accounts = Account.all
       end
 
-      #If search box has been used to query
+      # If search box has been used to query
       if(params.has_key?(:search_account))
           @accounts = search()
       end
@@ -44,12 +45,12 @@ class Admin::AccountsController < ApplicationController
 
   def create
       @account = Account.new(account_params)
-      @account.balance *= 100 #format balance
+      @account.balance *= 100 # format balance
 
       if (@account.valid?)
-          @account.id = Account.last.id + 1 #assign correct primary key
+          @account.id = Account.last.id + 1 # assign correct primary key
           @account.save
-          redirect_to(admin_account_path(@account)) #redirect to account show
+          redirect_to(admin_account_path(@account)) # redirect to account show
 
       else
           render 'new' #render same page and errors
@@ -63,7 +64,7 @@ class Admin::AccountsController < ApplicationController
   def update
       @account = Account.find(params[:id])
       old_currency = @account.currency
-      #update account
+      # update account
       if (@account.update(account_params))
           @account.balance *= 100
           #this doesn't work
