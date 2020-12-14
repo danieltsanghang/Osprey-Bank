@@ -14,62 +14,62 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should be able to create a valid user' do
-    post admin_users_url, params: 
-    { user: 
-      { 
+    post admin_users_url, params:
+    { user:
+      {
         id: 1000,
         fname: "Raymond",
         lname: "Reddington",
-        email: "red@gmail.com", 
-        username: "blacklist123", 
-        password: "randompass123", 
-        password_confirmation: "randompass123", 
-        isAdmin: false, 
+        email: "red@gmail.com",
+        username: "blacklist123",
+        password: "randompass123",
+        password_confirmation: "randompass123",
+        isAdmin: false,
         DOB: "1990-10-10",
         address: "New York",
-        phoneNumber: 123456789    
-      } 
+        phoneNumber: 123456789
+      }
     }
 
     assert_redirected_to admin_user_url(1000)
   end
-  
+
   test 'admin should be able to create an admin' do
-    post admin_users_url, params: 
-    { user: 
-      { 
+    post admin_users_url, params:
+    { user:
+      {
         id: 1005,
         fname: "Raymond",
         lname: "Reddington",
-        email: "red@gmail.com", 
-        username: "blacklist123", 
-        password: "randompass123", 
-        password_confirmation: "randompass123", 
-        isAdmin: true, 
+        email: "red@gmail.com",
+        username: "blacklist123",
+        password: "randompass123",
+        password_confirmation: "randompass123",
+        isAdmin: true,
         DOB: "1990-10-10",
         address: "New York",
-        phoneNumber: 123456789    
-      } 
+        phoneNumber: 123456789
+      }
     }
 
     assert_redirected_to admin_user_url(1005)
   end
 
   test 'admin should not be able to create an invalid user' do
-    post admin_users_url, params: 
-    { user: 
-      { 
+    post admin_users_url, params:
+    { user:
+      {
         id: 1001,
         fname: "Raymond",
         lname: "Reddington",
-        email: "red@gmail.com", 
-        username: "blacklist123", 
-        password: "randompass123", 
-        password_confirmation: "randompass123", 
-        isAdmin: false, 
+        email: "red@gmail.com",
+        username: "blacklist123",
+        password: "randompass123",
+        password_confirmation: "randompass123",
+        isAdmin: false,
         DOB: "1990-10-10",
         address: "New York",
-      } 
+      }
     }
 
     # Render the new action again because it failed
@@ -77,21 +77,21 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should not be able to create a user with a non matching password and password confirmation' do
-    post admin_users_url, params: 
-    { user: 
-      { 
+    post admin_users_url, params:
+    { user:
+      {
         id: 1002,
         fname: "Raymond",
         lname: "Reddington",
-        email: "red@gmail.com", 
-        username: "blacklist123", 
-        password: "randompass123", 
-        password_confirmation: "randompass1234", 
-        isAdmin: false, 
+        email: "red@gmail.com",
+        username: "blacklist123",
+        password: "randompass123",
+        password_confirmation: "randompass1234",
+        isAdmin: false,
         DOB: "1990-10-10",
         address: "New York",
-        phoneNumber: 123456789    
-      } 
+        phoneNumber: 123456789
+      }
     }
 
     # Render the new action again because it failed due to different password and password confirmation
@@ -99,21 +99,21 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should not be able to create a user with an already existing username' do
-    post admin_users_url, params: 
-    { user: 
-      { 
+    post admin_users_url, params:
+    { user:
+      {
         id: 1002,
         fname: "Raymond",
         lname: "Reddington",
-        email: "red@gmail.com", 
-        username: "someuser", 
-        password: "randompass123", 
-        password_confirmation: "randompass123", 
-        isAdmin: false, 
+        email: "red@gmail.com",
+        username: "someuser",
+        password: "randompass123",
+        password_confirmation: "randompass123",
+        isAdmin: false,
         DOB: "1990-10-10",
         address: "New York",
-        phoneNumber: 123456789    
-      } 
+        phoneNumber: 123456789
+      }
     }
 
     # Render the new action again because it failed due to different password and password confirmation
@@ -121,21 +121,21 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin should not be able to create a user with an already existing email' do
-    post admin_users_url, params: 
-    { user: 
-      { 
+    post admin_users_url, params:
+    { user:
+      {
         id: 1002,
         fname: "Raymond",
         lname: "Reddington",
-        email: "testemail@yahoo.com", 
-        username: "blacklist", 
-        password: "randompass123", 
-        password_confirmation: "randompass123", 
-        isAdmin: false, 
+        email: "testemail@yahoo.com",
+        username: "blacklist",
+        password: "randompass123",
+        password_confirmation: "randompass123",
+        isAdmin: false,
         DOB: "1990-10-10",
         address: "New York",
-        phoneNumber: 123456789    
-      } 
+        phoneNumber: 123456789
+      }
     }
 
     # Render the new action again because it failed due to different password and password confirmation
@@ -151,6 +151,13 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     # Login with new credentials and assert user is redirected to their show page
     login_as_user(users(:user), "passwordnew")
     assert_redirected_to user_path(@user)
+  end
+
+  test 'admin should be able to delete user' do
+    assert_difference('User.count', -1) do
+      delete admin_user_url(@user.id), params: {id: @user.id}
+    end
+    assert_redirected_to admin_users_url
   end
 
 end
