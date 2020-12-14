@@ -8,7 +8,7 @@ class Account < ApplicationRecord
 
     validates :currency, inclusion: { in: %w(GBP EUR USD), message: "%{value} is not a supported currency"}
 
-    before_save :default_balance_and_currency
+    before_save :default_attributes
     
     # Model relationships:
     # Each account belongs to one user only, and each account has many sent transactions and many received transactions
@@ -18,8 +18,8 @@ class Account < ApplicationRecord
 
     private
 
-        def default_balance_and_currency
-          #sets default values if not specified in creation of record
+        def default_attributes
+          # sets default values if not specified in creation of record
           default_balance
           default_currency
         end

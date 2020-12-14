@@ -3,31 +3,34 @@ class User < ApplicationRecord
 
     # User validations
     validates :username, presence: true,
-                         length: { minimum: 6, maximum: 20 },
-                         uniqueness: { case_sensitive: false }
+                         length: { minimum: 6, maximum: 20, message: "must be 6-20 characters long" },
+                         uniqueness: { case_sensitive: false, message: "taken!" }
 
     validates :password, presence: true,
-                         length: { minimum: 8, maximum: 30 },
+                         length: { minimum: 8, maximum: 30, message: "must be between 8-30 characters long!" },
                          on: [:create, :password_change] # Context for password change so no errors occur when editing user account without changing password
 
     validates :email, presence: true,
-                      format: { with: URI::MailTo::EMAIL_REGEXP }, # Email regular expression validation
+                      format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be valid" }, # Email regular expression validation
                       uniqueness: { case_sensitive: false }
 
     validates :DOB, presence: true
 
-    validates :fname, presence: true
+    # Min/max first and last name length according to ISO IEC 7813, further reference: https://en.wikipedia.org/wiki/ISO/IEC_7813
+    validates :fname, presence: true,
+                      length: { minimum: 2, maximum: 26, message: "must be 2-26 characters long"}
 
-    validates :lname, presence: true
+    validates :lname, presence: true,
+                      length: { minimum: 2, maximum: 26, message: "must be 2-26 characters long"}
 
     validates :address, presence: true
 
     validates :phoneNumber, presence: true,
-                            numericality: true,
-                            length: { minimum: 9, maximum: 15 }
+                            numericality: { greater_than: 0, message: "cannot be a negative number"},
+                            length: { minimum: 9, maximum: 15, message: "must be 9-15 digits long" }
 
-    before_save :downcase_username # Downcase username
-    before_save :default_values # Set default admin value to false if it does not exist
+    before_save :downcase_username
+    before_save :default_values
 
     # Model relationships:
     # Each user has many accounts, which has many transactions
