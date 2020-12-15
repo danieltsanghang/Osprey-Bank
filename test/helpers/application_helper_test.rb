@@ -7,7 +7,7 @@ test "transaction currency should be determined by sender" do
   user = users(:user)
   login_as_user(user, "password1")
   assert_response :redirect # User redirected after authenticated
-  transaction_one = Transaction.find_by(:sender_id => 1)
+  transaction_one = Transaction.find_by(:sender_id => 12345678)
   assert_equal "GBP", findCurrency(transaction_one.sender_id,transaction_one.receiver_id,"sent")
 end
 

@@ -1,6 +1,11 @@
 class Account < ApplicationRecord
 
     # Account validations
+    validates :id, presence: true,
+                   uniqueness: true,
+                   numericality: { only_number: true, greater_than: 0,  message: "cannot be a negative number" },
+                   length: { minimum: 7, maximum: 9, message: "must be between 7-9 digits long!" }
+
     validates :user_id, presence:true
 
     validates :sortCode, length: {is: 6, message: "should only be 6 digits"}, numericality: {only_number: true},

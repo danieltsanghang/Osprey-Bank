@@ -46,9 +46,8 @@ class Admin::AccountsController < ApplicationController
   def create
       @account = Account.new(account_params)
       @account.balance *= 100 # format balance
-
+      @account.id = params[:account][:id].present? ? params[:account][:id] : Account.last.id + 1 # assign correct primary key
       if (@account.valid?)
-          @account.id = Account.last.id + 1 # assign correct primary key
           @account.save
           redirect_to(admin_account_path(@account)) # redirect to account show
 

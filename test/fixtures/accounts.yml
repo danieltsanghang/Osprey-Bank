@@ -1,21 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 account_1:
-  id: 1
+  id: 12345678
   user_id: 1
   sortCode: 123456
   balance: 2500
   currency: GBP
 
 account_2:
-  id: 2
+  id: 123456789
   user_id: 2
   sortCode: 654321
   balance: 10000
   currency: USD
 
 account_3:
-  id: 3
+  id: 1234567
   user_id: 2
   sortCode: 123455
   balance: 2500
