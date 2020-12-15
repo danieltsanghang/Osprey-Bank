@@ -59,7 +59,7 @@ end
         password_confirmation: "Password12345",
         isAdmin: false,
         phoneNumber: Faker::Number.number(digits: 9),
-        DOB: Faker::Date.in_date_period,
+        DOB: Faker::Date.birthday(min_age: 18, max_age: 90),
         address: Faker::Address.full_address
     )
 end
