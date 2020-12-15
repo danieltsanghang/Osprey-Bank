@@ -31,7 +31,13 @@ rails server
 ## References
 <ol>
     <li>
-        Bootstrap Studio: This was used extensively throughout the development of the UI. Usage included using default themes/templates provided by the application.
+        Bootstrap Studio: This was used extensively throughout the development of the UI. Usage included using default themes/templates/stock images provided by the application.
+    </li>
+    <li>
+        Bootstrap: Bootstrap was used significantly throughout the UI
+    </li>
+    <li>
+        Font Awesome: This was ued throughout the website for icons, such as in the creating a transaction page in the user section (/transactions/new), or in the error pages.
     </li>
     <li>
         Rails Cast Episode 228 was used for implementing sortable rows.  http://railscasts.com/episodes/228-sortable-table-columns
