@@ -40,6 +40,7 @@
     <%= link_to('Edit Profile', edit_admin_user_path(@user), :class => 'btn btn-lg btn-primary', style: "width: 100%; margin-top: 2%")%>
     <%= link_to('Edit Password', edit_password_admin_user_path(@user), :class => 'btn btn-lg btn-secondary', style: "width: 100%; margin-top: 2%")%>
     <%= link_to  "View User Accounts", admin_user_accounts_url(@user),  class: "btn btn-lg btn-dark", style: "width: 100%; margin-top: 2%" %>
+    <%= link_to "Click here to generate fake transactions", new_admin_generator_url(:userid =>  @user.id), :class => 'btn btn-lg btn-warning', style: "width: 100%; margin-top: 2%"%>
     <%= link_to "Delete User", delete_admin_user_url(@user), class:"btn btn-outline-danger btn-lg", style: "width: 100%; margin-top: 2%" %>
   </div>
 </div>

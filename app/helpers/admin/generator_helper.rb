@@ -1,0 +1,2 @@
+module Admin::GeneratorHelper
+end
