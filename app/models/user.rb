@@ -25,7 +25,7 @@ class User < ApplicationRecord
                       length: { minimum: 2, maximum: 26, message: "must be 2-26 characters long"}
 
     validates :address, presence: true,
-                        length: { minimum: 5, maximum: 60, message: "must be 5-60 characters long"}
+                        length: { minimum: 5, maximum: 150, message: "must be 5-150 characters long"}
 
     validates :phoneNumber, presence: true,
                             numericality: { greater_than: 0, message: "cannot be a negative number"},

@@ -93,7 +93,7 @@ module ApplicationHelper
             isAdmin: false,
             phoneNumber: Faker::Number.number(digits: 9),
             DOB: Faker::Date.birthday(min_age: 18, max_age: 90),
-            address: Faker::Address.full_address
+            address: Faker::Address.full_address[0..150]
         )
     end
   end
