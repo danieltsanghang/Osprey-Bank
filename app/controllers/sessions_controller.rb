@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       login(user)
       if(user.isAdmin)
         # Redirect to admin panel
-        redirect_to admin_users_url
+        redirect_to admins_url
       else
         # Redirect to user area
         redirect_to user
