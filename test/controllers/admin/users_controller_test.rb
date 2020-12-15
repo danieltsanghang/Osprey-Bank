@@ -165,4 +165,14 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response 404
   end
 
+  test "admin should see all users" do
+    get admin_users_url
+    assert_response :success
+  end
+  test "normal user should not see all users" do
+    login_as_user(@user, "password1")
+    get admin_users_url
+    assert_redirected_to login_url
+  end
+
 end
