@@ -153,6 +153,13 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path(@user)
   end
 
+  test 'admin should be able to delete user' do
+    assert_difference('User.count', -1) do
+      delete admin_user_url(@user.id), params: {id: @user.id}
+    end
+    assert_redirected_to admin_users_url
+  end
+  
   test "should show user" do
     # Show user profile
     get admin_user_url(@user)

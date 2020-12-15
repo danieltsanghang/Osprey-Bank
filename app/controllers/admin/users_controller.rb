@@ -55,7 +55,12 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-
+        @user = User.find_by(id: params[:id])
+        if @user.update(users_params)
+          redirect_to admin_user_url(@user.id)
+        else
+          render :edit
+        end
     end
 
     def edit_password
@@ -77,7 +82,9 @@ class Admin::UsersController < ApplicationController
     end
 
     def destroy
-
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect_to admin_users_url
     end
 
     private
