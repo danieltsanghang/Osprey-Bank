@@ -142,7 +142,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'address cannot be more than 60 characters' do
-    @user_valid.address = "a" * 61
+    @user_valid.address = "a" * 151
     assert_not @user_valid.valid?
   end
 

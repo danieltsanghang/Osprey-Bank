@@ -42,7 +42,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     user = users(:admin)# Get the admin needed to login
     login_as_user(user, "password1") # login with valid credentials 
     
-    assert_redirected_to admin_users_url # Should be redirected to admin/users
+    assert_redirected_to admins_url # Should be redirected to admin/users
   end
 
 
