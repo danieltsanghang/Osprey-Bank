@@ -119,12 +119,33 @@ class UserTest < ActiveSupport::TestCase
     assert @user_valid.valid?
   end
 
+  test 'user can be 18 years old exactly' do
+    @user_valid[:DOB] = 18.years.ago.to_datetime
+    assert @user_valid.valid?
+  end
+
+  test 'user cannot be younger than 18 years old' do
+    @user_valid[:DOB] = 18.years.ago.to_datetime + 1.day
+    assert_not @user_valid.valid?
+  end
+
   # Address tests
 
   test 'address cannot be empty' do
     @user_valid.address = ""
     assert_not @user_valid.valid?
   end
+
+  test 'address cannot be less than 5 characters' do
+    @user_valid.address = "nono"
+    assert_not @user_valid.valid?
+  end
+
+  test 'address cannot be more than 60 characters' do
+    @user_valid.address = "a" * 61
+    assert_not @user_valid.valid?
+  end
+
 
   # Admin tests
 
