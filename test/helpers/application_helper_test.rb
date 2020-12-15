@@ -12,9 +12,9 @@ test "transaction currency should be determined by sender" do
 end
 
 test "fake transaction currency should be USD" do
-transaction = Transaction.find_by(:sender_id => 2123)
-assert_equal "USD", findCurrency(transaction.sender_id,transaction.receiver_id,"sent")
-assert_equal "USD", findCurrency(transaction.sender_id,transaction.receiver_id,"recieve")
+  transaction = Transaction.find_by(:sender_id => 2123)
+  assert_equal "USD", findCurrency(transaction.sender_id,transaction.receiver_id,"sent")
+  assert_equal "USD", findCurrency(transaction.sender_id,transaction.receiver_id,"recieve")
 end
 
 

@@ -153,6 +153,55 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path(@user)
   end
 
+  test 'admin should be able to edit a users fname to a valid fname' do
+    patch admin_user_url(@user.id), params: {  user: { fname: "Alan" } }
+    @user.reload
+
+    assert @user.fname == "Alan"
+  end
+
+  test 'admin should not be able to edit a users fname to an invalid fname' do
+    patch admin_user_url(@user.id), params: {  user: { fname: "B" } }
+    @user.reload
+
+    assert_not @user.fname == "B"
+  end
+
+  test 'admin should be able to edit a users email to a valid email' do
+    patch admin_user_url(@user.id), params: {  user: { email: "alanturing@gmail.com" } }
+    @user.reload
+
+    assert @user.email == "alanturing@gmail.com"
+  end
+
+  test 'admin should not be able to edit a users email to an invalid email' do
+    patch admin_user_url(@user.id), params: {  user: { email: "notarealemail.com" } }
+    @user.reload
+
+    assert_not @user.email == "notarealemail.com"
+  end
+
+  test 'admin should be able to edit a users username to a valid username' do
+    patch admin_user_url(@user.id), params: {  user: { username: "alanturing" } }
+    @user.reload
+
+    assert @user.username == "alanturing"
+  end
+
+  test 'admin should not be able to edit a users username to an invalid username' do
+    patch admin_user_url(@user.id), params: {  user: { username: "alan" } }
+    @user.reload
+
+    assert_not @user.username == "alan"
+  end
+
+  test 'admin should be able to make a user an admin' do
+    patch admin_user_url(@user.id), params: {  user: { isAdmin: true } }
+    @user.reload
+
+    assert @user.isAdmin == true
+  end
+
   test 'admin should be able to delete user' do
     assert_difference('User.count', -1) do
       delete admin_user_url(@user.id), params: {id: @user.id}
@@ -170,6 +219,17 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     # finding a user that doesnt exist
     get admin_user_url(999)
     assert_response 404
+  end
+
+  test "admin should see all users" do
+    get admin_users_url
+    assert_response :success
+  end
+  
+  test "normal user should not see all users" do
+    login_as_user(@user, "password1")
+    get admin_users_url
+    assert_redirected_to login_url
   end
 
   test 'search through all users correctly' do
@@ -194,17 +254,6 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     # Sort by DOB in a descending order, this means the first result should have the greatest DOB which is the user with id = 0 based on the test fixtures
     get admin_users_path, params: { :sort => "DOB", :direction => "desc" }
     assert assigns(:users)[0].id == 0
-  end
-
-  test "admin should see all users" do
-    get admin_users_url
-    assert_response :success
-  end
-  
-  test "normal user should not see all users" do
-    login_as_user(@user, "password1")
-    get admin_users_url
-    assert_redirected_to login_url
   end
 
 end
