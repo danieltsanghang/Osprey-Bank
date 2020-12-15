@@ -16,7 +16,7 @@
 >OspreyBank.com
 
 ## Languages/Technologies Used
->Ruby on Rails, PostgreSQL, HTML, SCSS, JavaScript and deployed on Heroku
+>Ruby on Rails 2.7.1, PostgreSQL, HTML, SCSS, JavaScript and deployed on Heroku
 
 ## Local Usage
 
@@ -30,7 +30,7 @@ rails server
 
 ## References
 <ol>
-    <li> 
+    <li>
         Bootstrap Studio: This was used extensively throughout the development of the UI. Usage included using default themes/templates provided by the application.
     </li>
     <li>
@@ -44,7 +44,7 @@ rails server
     <li>
         There are nested resources that provide for a much better user experience. A full list of them can be found using <strong>rails routes</strong> or by viewing the <strong>routes.rb</strong> file. For example, a user can view all transactions from all accounts using the route: <strong> /users/:id/transactions </strong> Similarly, an admin can view all transactions or accounts using the route <strong>/admin/users/:id/transactions</strong> or <strong>/admin/users/:id/accounts</strong>. These nested resources are very useful and convenient.
     </li>
-    <li> 
+    <li>
         An admin can create fake data for a user through the following route: <strong>insert route here later</strong>
     </li>
 </ul>

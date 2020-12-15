@@ -1,66 +1,66 @@
 <div style="padding-right: 0;padding-left: 0;padding-top: 5%;">
-    <div class="container">
-        <div class="row d-md-flex justify-content-md-center">
-            <%= render partial: "application/error_messages", locals: {:object => @user} %>
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="mb-0">Update Your Personal Details</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Here you can fill out a form to update your personal details if they happen to change.</p>
-                        <div class="card"></div>
-                        <div style="padding-top: 5px;padding-bottom: 5px;">
+  <div class="container">
+    <div class="row d-md-flex justify-content-md-center">
+      <%= render partial: "application/error_messages", locals: {:object => @user} %>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="mb-0">Update Your Personal Details</h3>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Here you can fill out a form to update your personal details if they happen to change.</p>
+            <div class="card"></div>
+            <div style="padding-top: 5px;padding-bottom: 5px;">
 
-                            <!-- The display for the form -->
+              <!-- The display for the form -->
 
-                            <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
-                                <h5 class="mb-0">Personal Details</h5>
-                            </a>
-                                <%= form_for(@user) do |f| %>
-                            
-                            <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
-                                <div class="table-responsive" style="height: auto;">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>First Name</td>
-                                                <td><%= f.text_field(:fname) %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Last Name</td>
-                                                <td><%= f.text_field(:lname) %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>User Name</td>
-                                                <td><%= f.text_field(:username) %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email</td>
-                                                <td><%= f.text_field(:email) %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mobile Number</td>
-                                                <td><%= f.text_field(:phoneNumber) %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Address</td>
-                                                <td><%= f.text_field(:address) %></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+              <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+                <h5 class="mb-0">Personal Details</h5>
+              </a>
+              <%= form_for(@user) do |f| %>
 
-                                    <div class="form-buttons">
-                                        <%= f.submit "Update Details", class: "btn btn-lg btn-primary", style: "width: 100%" %>
-                                    </div>
+              <div class="collapse show" id="collapse-1" style="padding-top: 10px;">
+                <div class="table-responsive" style="height: auto;">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>First Name</td>
+                        <td class="input-group"><%= f.text_field :fname, style:"width:100%; padding-left:10px" %></td>
+                      </tr>
+                      <tr>
+                        <td>Last Name</td>
+                        <td><%= f.text_field :lname, style:"width:100%; padding-left:10px" %></td>
+                      </tr>
+                      <tr>
+                        <td>User Name</td>
+                        <td><%= f.text_field :username , style:"width:100%; padding-left:10px"%></td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><%= f.email_field:email, style:"width:100%; padding-left:10px" %></td>
+                      </tr>
+                      <tr>
+                        <td>Mobile Number</td>
+                        <td><%= f.text_field(:phoneNumber, style:"width:100%; padding-left:10px") %></td>
+                      </tr>
+                      <tr>
+                        <td>Address</td>
+                        <td ><%= f.text_field(:address,style:"width:100%; padding-left:10px") %></td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                                    <% end %>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                  <div class="form-buttons">
+                    <%= f.submit "Update Details", class: "btn btn-lg btn-primary", style: "width: 100%" %>
+                  </div>
+
+                <% end %>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</div>
 </div>
