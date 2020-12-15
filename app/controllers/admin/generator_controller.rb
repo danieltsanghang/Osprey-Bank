@@ -22,8 +22,7 @@ class Admin::GeneratorController < ApplicationController
 
             #generate fake users, accounts and transactions
             generateUsers(params[:generator][:users].to_i)
-            generateAccounts(params[:generator][:accounts].to_i, params[:generator][:users].to_i)
-            generateTransactions(params[:generator][:transactions].to_i, params[:generator][:accounts].to_i)
+            generateAccounts(params[:generator][:accounts].to_i, params[:generator][:users].to_i,params[:generator][:transactions].to_i)
 
             redirect_to(admin_users_url)
         end

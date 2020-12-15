@@ -98,7 +98,7 @@ module ApplicationHelper
     end
   end
 
-  def generateAccounts(amount, newUsers)
+  def generateAccounts(amount, newUsers, transactionAmount)
     @limit = 0
     if !Account.first.nil?
         @limit = Account.last.id.to_i + 1
@@ -107,20 +107,22 @@ module ApplicationHelper
     if !User.first.nil?
         @userLimit = User.last.id.to_i + 1
     end
-
+    account_ids = Array.new()
     (@limit .. (@limit + amount-1)).each do |id|
+          accountid = Faker::Number.number(digits: 8)
+          account_ids << accountid.to_i
         Account.create!(
-            # id: id,
+            id: accountid,
             user_id: User.find(rand((@userLimit - newUsers) .. (@userLimit -1))).id,
             sortCode: Faker::Number.number(digits: 6),
-            id: Faker::Number.number(digits: 8),
             balance: Faker::Number.number(digits: 7),
             currency: %w[USD GBP EUR].sample
         )
     end
+    generateTransactions(transactionAmount,account_ids)
   end
 
-  def generateTransactions(amount, id_range)
+  def generateTransactions(amount, account_ids)
     @limit = 0
     if !Transaction.first.nil?
         @limit = Transaction.last.id.to_i + 1
@@ -132,7 +134,7 @@ module ApplicationHelper
     (@limit .. @limit + amount-1).each do |id|
         Transaction.create!(
           id: id,
-          sender_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
+          sender_id: account_ids.sample,
           # money to random account that doesnt exist
           receiver_id: Faker::Number.number(digits: 8),
           amount: Faker::Number.between(from: 10, to: 99999),
@@ -147,7 +149,7 @@ module ApplicationHelper
           id: id,
           # money from random account that doesnt exist
           sender_id: Faker::Number.number(digits: 8),
-          receiver_id: Account.find(rand((@accountLimit - id_range ) .. (@accountLimit -1))).id,
+          receiver_id: account_ids.sample,
           amount: Faker::Number.between(from: 10, to: 99999),
           created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
 
