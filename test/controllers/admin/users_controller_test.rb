@@ -153,6 +153,13 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path(@user)
   end
 
+  test 'admin should be able to delete user' do
+    assert_difference('User.count', -1) do
+      delete admin_user_url(@user.id), params: {id: @user.id}
+    end
+    assert_redirected_to admin_users_url
+  end
+  
   test "should show user" do
     # Show user profile
     get admin_user_url(@user)
@@ -187,6 +194,17 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     # Sort by DOB in a descending order, this means the first result should have the greatest DOB which is the user with id = 0 based on the test fixtures
     get admin_users_path, params: { :sort => "DOB", :direction => "desc" }
     assert assigns(:users)[0].id == 0
+  end
+
+  test "admin should see all users" do
+    get admin_users_url
+    assert_response :success
+  end
+  
+  test "normal user should not see all users" do
+    login_as_user(@user, "password1")
+    get admin_users_url
+    assert_redirected_to login_url
   end
 
 end
