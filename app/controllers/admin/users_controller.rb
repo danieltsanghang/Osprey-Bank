@@ -55,16 +55,12 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-<<<<<<< HEAD
         @user = User.find_by(id: params[:id])
         if @user.update(users_params)
           redirect_to admin_user_url(@user.id)
         else
           render :edit
         end
-=======
-
->>>>>>> main
     end
 
     def edit_password
