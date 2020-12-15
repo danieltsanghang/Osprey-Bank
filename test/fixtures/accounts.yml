@@ -4,7 +4,6 @@ account_1:
   id: 1
   user_id: 1
   sortCode: 123456
-  accountNumber: 100000000
   balance: 2500
   currency: GBP
 
@@ -12,7 +11,6 @@ account_2:
   id: 2
   user_id: 2
   sortCode: 654321
-  accountNumber: 200000000
   balance: 10000
   currency: USD
 
@@ -20,6 +18,5 @@ account_3:
   id: 3
   user_id: 2
   sortCode: 123455
-  accountNumber: 300000000
   balance: 2500
   currency: USD

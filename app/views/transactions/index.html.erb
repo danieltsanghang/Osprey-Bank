@@ -3,7 +3,7 @@
 <div class="container" >
     <div class="row d-md-flex justify-content-md-center">
       <h1 class="display-3" style="text-align: center;">Welcome to your transaction history
-        <span style="color:#56c6c6">  <%=current_user.fname%></span></h1>
+        <span class ="text-capitalize" style="color:#56c6c6">  <%=current_user.fname%></span></h1>
             <p class="lead">Below you can find all the transactions from your bank account!</p>
     <div class="col-md-10 col-md-offset-1 ">
         <% if(@transactions_all.nil? || @transactions_all.empty?) %>
@@ -50,11 +50,11 @@
                                 <% end %>
                             </td>
                             <td>
-                                <% render_receiver = Account.find_by(id: transaction.sender_id) %>
+                                <% render_receiver = Account.find_by(id: transaction.receiver_id) %>
                                 <% if(render_receiver.nil?) %>
                                 <%= transaction.receiver_id %>
                                 <% else %>
-                                <%= transaction.receiver_id %>
+                                <%=transaction.receiver_id %>
                                 <% end %>
                             </td>
 
@@ -65,8 +65,6 @@
                             <td>Received</td>
                             <% direction = "recieve" %>
                             <% end %>
-                            <!--<td><%# convert(Money.new(transaction.amount, 'USD'), findCurrency(transaction.sender_id,transaction.receiver_id,direction)) %></td>-->
-                            <!--<td><%# Money.new(transaction.amount, transaction.sender.currency).format %></td>-->
                             <td><%= Money.new(transaction.amount, findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
                             <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
                         </tr>

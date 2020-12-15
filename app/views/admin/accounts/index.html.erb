@@ -21,9 +21,8 @@
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col"><%= sortable "created_at", "Date Created" %></th>
-                          <th scope="col"><%= sortable "id", "Account ID" %></th>
+                          <th scope="col"><%= sortable "id", "Account Number (ID)" %></th>
                           <th scope="col"><%= sortable "user_id", "User ID" %></th>
-                          <th scope="col"><%= sortable "accountNumber", "Account Number" %></th>
                           <th scope="col"><%= sortable "sortCode", "Sort Code" %></th>
                           <th scope="col"><%= sortable "balance", "Balance" %></th>
                           <th scope="col"><%= sortable "currency", "Currency"%></th>
@@ -37,7 +36,6 @@
                         <td><%= account.created_at %></td>
                         <td><%= account.id %></td>
                         <td><%= account.user_id %></td>
-                        <td><%= account.accountNumber %></td>
                         <td><%= account.sortCode %></td>
                         <td><%= Money.new(account.balance, account.currency).format %></td>
                         <td><%= account.currency %></td>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  # Home routes
   root 'home#index'
   get 'home/index'
   get 'home/maintenance'
@@ -9,15 +10,16 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # allow user data to be pulled for user/show
+  # Users should only be able to view their user account and edit it (which also includes update)
   resources :users, only: [:show, :edit, :update]
 
-  # Create resourceful routes for transactions
-  resources :transactions
+  # Create resourceful routes for transactions, except destory/delete as they should not be able to delete transactions
+  resources :transactions, except: [:destroy]
 
-  # Create resourceful routes for accounts only to show accounts, as user should not be able to do anything else
-  resources :accounts
+  # Create resourceful routes for accounts only to show and index (show all) accounts, as user should not be able to do anything else
+  resources :accounts, only: [:index, :show]
+
+  # Create nested routes for accounts/transactions in order to view and create transactions for specific accounts
   resources :accounts, only: [:show] do
     resources :transactions, only: [:index, :new, :create]
   end
@@ -33,7 +35,6 @@ Rails.application.routes.draw do
         get :delete
         get '/edit_password', action: :edit_password, controller: 'users'
         patch '/edit_password', action: :update_password, controller: 'users'
-        #patch '/update_password', action: :update_password, controller: 'users'
       end
     end
     resources :accounts do
@@ -53,7 +54,7 @@ Rails.application.routes.draw do
     end
 
     resources :accounts, only: [:show] do
-      resources :transactions, only:  [:index, :new, :create]
+      resources :transactions, only: [:index, :new, :create]
     end
 
     resources :users, only: [:show] do

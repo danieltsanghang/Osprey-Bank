@@ -1,6 +1,6 @@
 <h1>
     Transaction at
-    <%= @transaction.timeStamp %>
+    <%= @transaction.created_at %>
 </h1>
 
 <div class="container">
@@ -14,11 +14,21 @@
               <tbody>
                 <tr>
                   <td style="width:200px; ">From</td>
-                  <td><%= @transaction.sender_id %></td>
+                  <% if(@transaction.sender.nil?) %>
+                    <% sender_details = "Unknown" %>
+                  <% else %>
+                    <% sender_details = "#{@transaction.sender.user.lname}, #{@transaction.sender.user.fname} - #{@transaction.sender.user.username}" %>
+                  <% end %>
+                  <td><%= "#{@transaction.sender_id} - #{sender_details}" %></td>
                 </tr>
                 <tr>
                   <td>To</td>
-                  <td><%= @transaction.receiver_id %></td>
+                  <% if(@transaction.receiver.nil?) %>
+                    <% receiver_details = "Unknown" %>
+                  <% else %>
+                    <% receiver_details = "#{@transaction.receiver.user.lname}, #{@transaction.receiver.user.fname} - #{@transaction.receiver.user.username}" %>
+                  <% end %>
+                  <td><%= "#{@transaction.receiver_id} - #{receiver_details}" %></td>
                 </tr>
                 <tr>
                   <td>Amount</td>

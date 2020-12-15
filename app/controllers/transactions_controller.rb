@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
 
     def index
 
-        @page = params.fetch(:page, 0).to_i
+        @page = params.fetch(:page, 0).to_i # Current page in the pagination
 
         # Check wehther the user is accessing the transactions for a specific account or for all accounts a user has
         if(params.has_key?(:account_id))
@@ -18,13 +18,14 @@ class TransactionsController < ApplicationController
             transactions = get_transactions_from_user
         end
 
+        # Search and filters for the results
         if(params.has_key?(:search_transaction)) 
             transactions = search(transactions)
         end
 
         @transactions_all = filter(transactions)
 
-        # Route for CSV file, no need to create a controller for it
+        # Route for CSV file
         respond_to do |format|
             format.html
             format.csv { send_data Transaction.export_csv(@transactions_all, current_user) } # Send the data to the Transaction model along with the current_user
@@ -45,17 +46,19 @@ class TransactionsController < ApplicationController
 
     def create
         @transaction = Transaction.new(transaction_params)
-        @transaction.amount *= 100
+        @transaction.amount *= 100 # Money objects use cents, so multiply by 100
 
         if(@transaction.valid?)
+            @transaction.id = Transaction.last.id + 1 # assign correct primary key in case of ID collisions with fake data
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
 
             if(account.balance - @transaction.amount >= 0) # Check if the transaction is even possible based on balance in account
-                account.balance = account.balance - @transaction.amount
+                account.balance -= @transaction.amount
 
                 if(!receiver_account.nil?) # Update the receiver's balance if they exist
-                    receiver_account.balance = receiver_account.balance + Monetize.parse(convert(Money.new(@transaction.amount, account.currency), receiver_account.currency)).fractional.round(-1)
+                    # Currency conversion must take place
+                    receiver_account.balance += Monetize.parse(convert(Money.new(@transaction.amount, account.currency), receiver_account.currency)).fractional.round(-1)
                     receiver_account.save
                 end
                 @transaction.save
@@ -64,16 +67,19 @@ class TransactionsController < ApplicationController
 
             else
                 flash[:error] = "Not enough money"
-                redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+                render 'new'
             end
         else
-            redirect_to new_transaction_url # Redirect back to create a new transaction page and render error
+            render 'new'
         end
     end
 
     private
         # Function redirects user to 404 if they are not logged in or authorized to view that account
         def redirect_to_404_if_not_authorized
+
+            # Admin should not be allowed to act like a regular user, i.e. view personal accounts, transactions, etc.
+            redirect_to_login_if_admin
 
             # If the user calls the index for their account, it's a GET request identifying the user by the session, hence not no need for further authentication
             unless(params.has_key?(:account_id))
@@ -130,7 +136,10 @@ class TransactionsController < ApplicationController
 
         # Function used to search for a sender, receiver, amount or date
         def search(transactions)
-            return transactions.select{|el| el.sender_id.to_s.starts_with?(params[:search_transaction]) || el.receiver_id.to_s.starts_with?(params[:search_transaction]) || el.amount.to_s.starts_with?(params[:search_transaction]) || el.created_at.to_s.starts_with?(params[:search_transaction])}
+            return transactions.select{|el| el.sender_id.to_s.starts_with?(params[:search_transaction]) || 
+                el.receiver_id.to_s.starts_with?(params[:search_transaction]) || 
+                el.amount.to_s.starts_with?(params[:search_transaction]) || 
+                el.created_at.to_s.starts_with?(params[:search_transaction])}
         end
 
 end

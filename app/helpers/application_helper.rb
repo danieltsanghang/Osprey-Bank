@@ -23,8 +23,9 @@ module ApplicationHelper
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
+  # Filter through a list of objects
   def filter(things)
-
+    # 'things' represents the list of objects to sort
     if(sort_direction == 'asc')
       things = things.sort_by {|el| el[sort_column]} # Sort the ascending order
     else
@@ -36,8 +37,7 @@ module ApplicationHelper
 
   end
 
-
-
+  # Determine currency from sender, receiver and direction
   def findCurrency(sender,reciever,direction)
 
     if(Account.find_by(:id => sender).nil?)
@@ -48,18 +48,21 @@ module ApplicationHelper
 
   end
 
+  # Convert a money object to another currency based on the params and return the money object
   def convert(money,currency)
+    valid_currencies = %w(GBP EUR USD)
     if(currency.nil? && params.has_key?(:account_id))
       currency = Account.find_by(params[:account_id])
     end
 
-    if(currency.nil? && !params.has_key?(:account_id))
+    if((currency.nil? && !params.has_key?(:account_id)) || !valid_currencies.include?(currency))
       currency = 'USD'
     end
 
     return money.exchange_to(currency).format
   end
 
+  # Convert a money object to another currency based on the params and return the amount represented in cents
   def convert_return_amount(money,currency)
     if(currency.nil? && params.has_key?(:account_id))
       currency = Account.find_by(params[:account_id])

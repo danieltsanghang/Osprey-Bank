@@ -1,13 +1,10 @@
-<%= render partial: "application/error_messages", locals: {:object => @transaction} %>
-<div class="row">
-    <div class="col">
         <h1>Transaction Page</h1>
-    </div>
-</div>
 <div class="col-12 col-md-4 offset-md-4"  style="padding-right: 0;padding-left: 0;padding-top: 1%; margin: auto">
+    <%= render partial: "application/error_messages", locals: {:object => @transaction} %>
     <div class="card credit-card-box">
-        <div class="card-header">
-            <h3><span class="panel-title-text">Make a Transaction</span><%= image_tag "accepted_cards.png", class: "img-fluid panel-title-image" %></h3>
+        <div class="card-header d-flex justify-content-center">
+            <h3 ><span class="panel-title-text">Make a Transaction</span></h3>
+<%= image_tag "accepted_cards.png", class: "img-fluid panel-title-image", style:"margin-left:20px"%>
         </div>
         <div class="card-body">
             <%= form_for @transaction, local: true do |f| %>
@@ -56,7 +53,7 @@
 
             <div class="form-row">
                 <div class="input-group">
-                    <div class="col-12"><%= f.submit "Make Transaction", class: "btn btn-success btn-lg btn-block" %></div>
+                    <div class="col-12"><%= f.submit "Make Transaction", class: "btn btn-block btn-warning btn-lg " %></div>
                 </div>
             </div>
             <% end %>

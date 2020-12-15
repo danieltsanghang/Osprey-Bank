@@ -5,7 +5,7 @@
       <%if(@page - 1 >= 0)%>
         <li class="page-item"><%= link_to "Previous", request.params.merge(:page => @page - 1) , class:"page-link"%></li>
       <%else%>
-        <li class="disabled page-item " ">
+        <li class="disabled page-item">
           <a class="page-link">Previous</a>
         </li>
       <% end %>

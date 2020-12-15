@@ -1,3 +1,7 @@
+<%# 
+  # Partial for search bar above table containing list of objects (i.e. transactions, users and accounts) that enables the user to search/filter for specific
+  # row(s) and to export results to a CSV file
+ %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%;">
     <%= form_for(input_path, {method: :get, html: {class: "form-inline my-2 my-lg-0"}}) do |f|%>
     <%= text_field_tag search, params[search], placeholder: "Search for something..." , class: "form-control mr-sm-2"%>
