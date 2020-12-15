@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://kit.fontawesome.com/22790cbe10.js" crossorigin="anonymous"></script>
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
@@ -23,7 +24,7 @@
     border-right-color: #999;
     border-left-color: #999;
     border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
+    border-top:#2E2F30 solid 4px;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
     background-color: white;
@@ -32,8 +33,8 @@
   }
 
   .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
+    font-size: 200%;
+    color: #2E2F30;
     line-height: 1.5em;
   }
 
@@ -55,12 +56,15 @@
 </head>
 
 <body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+  <div class="container text-center" style="margin-top: 15%;">
+    <i class="fas fa-exclamation-triangle" style="font-size: 150px;align-items: center;color: rgb(102,215,215);"></i>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+      <h1 class="text-center">500 - Internal Server Error</h1>
+      <p class="text-center">We're so sorry, but something went wrong. Please try again later, and if that doesn't work please contact us!</p>
+      <br>
+      <p><strong>- Osprey Bank</strong></p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
+</body>
 </body>
 </html>

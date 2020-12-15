@@ -42,7 +42,7 @@ rails server
 
 <ul>
     <li>
-        There are nested resources that provide for a much better user experience. A full list of them can be found using <strong>rails routes</strong> or by viewing the <strong>routes.rb</strong> file. For example, a user can view all transactions from all accounts using the route: <strong> /users/:id/transactions </strong> Similarly, an admin can view all transactions or accounts using the route <strong>/admin/users/:id/transactions</strong> or <strong>/admin/users/:id/accounts</strong>. These nested resources are very useful and convenient.
+        There are nested resources that provide for a much better user experience. A full list of them can be found using <strong>rails routes</strong> or by viewing the <strong>routes.rb</strong> file. For example, a user can view all transactions from all accounts using the route: <strong> /users/:id/transactions </strong> Similarly, an admin can view all transactions or accounts for a specific user using the route <strong>/admin/users/:id/transactions</strong> or <strong>/admin/users/:id/accounts</strong>. These nested resources are very useful and convenient.
     </li>
     <li> 
         An admin can create fake data for a user through the following route: <strong>insert route here later</strong>
