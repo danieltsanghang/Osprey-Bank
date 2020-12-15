@@ -107,10 +107,10 @@ module ApplicationHelper
 
     (@limit .. (@limit + amount-1)).each do |id|
         Account.create!(
-            id: id,
+            # id: id,
             user_id: User.find(rand((@userLimit - newUsers) .. (@userLimit -1))).id,
             sortCode: Faker::Number.number(digits: 6),
-            accountNumber: Faker::Number.number(digits: 8),
+            id: Faker::Number.number(digits: 8),
             balance: Faker::Number.number(digits: 7),
             currency: %w[USD GBP EUR].sample
         )
@@ -164,7 +164,7 @@ module ApplicationHelper
             sender_id: account.id.to_i,
             receiver_id: Faker::Number.number(digits: 8),
             amount: Faker::Number.between(from: 10, to: 99999),
-            created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
+            created_at: Faker::Time.between(from: DateTime.now - 700, to: DateTime.now, format: :default)
           )
         end
 
@@ -175,7 +175,7 @@ module ApplicationHelper
             sender_id: Faker::Number.number(digits: 8),
             receiver_id: account.id.to_i,
             amount: Faker::Number.between(from: 10, to: 99999),
-            created_at: Faker::Time.between(from: DateTime.now - 365, to: DateTime.now, format: :default)
+            created_at: Faker::Time.between(from: DateTime.now - 700, to: DateTime.now, format: :default)
           )
         end
 
