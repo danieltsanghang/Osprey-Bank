@@ -81,7 +81,7 @@
                     <h6 class="text-primary font-weight-bold m-0">Sent Transactions Overview</h6>
                 </div>
                 <div class="card-body">
-                    <div class="chart-area"><%= line_chart User.find(0).sent_transactions.group_by_day(:created_at).sum(:amount), xtitle: "Sender Account ID", ytitle: "Amount Transferred (Cents)", messages: {empty: "No data"} %></canvas></div>
+                    <div class="chart-area"><%= line_chart Transaction.group(:sender_id).sum(:amount), xtitle: "Sender Account ID", ytitle: "Amount Sent (Cents)", messages: {empty: "No data"} %></canvas></div>
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@
                     <h6 class="text-primary font-weight-bold m-0">Received Transactions Overview</h6>
                 </div>
                 <div class="card-body">
-                    <div class="chart-area"><%= line_chart Transaction.group(:receiver_id).sum(:amount), xtitle: "Receiver Account ID", ytitle: "Amount Received", messages: {empty: "No data"} %></canvas></div>
+                    <div class="chart-area"><%= line_chart Transaction.group(:receiver_id).sum(:amount), xtitle: "Receiver Account ID", ytitle: "Amount Received (Cents)", messages: {empty: "No data"} %></canvas></div>
                 </div>
             </div>
         </div>

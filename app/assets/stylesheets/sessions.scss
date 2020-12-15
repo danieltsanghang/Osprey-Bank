@@ -4,9 +4,9 @@
 
 /* CSS generated using bootstrap studio */
 .login-clean {
-    background: #f1f7fc;
+    background: #eef4f7;
     padding: 80px 0;
-}  
+}
 
 .login-clean form {
     max-width: 320px;
@@ -21,9 +21,16 @@
 
 .login-clean .illustration {
     text-align: center;
-    padding: 0 0 20px;
-    font-size: 100px;
-    color: rgb(244,71,107);
+    padding: 40px 0 20px;
+    font-size: 60px;
+    color: #66d7d7;
+}
+
+.login-clean .brand {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
 }
 
 .login-clean form .form-control {
@@ -52,7 +59,7 @@
 }
 
 .login-clean form .btn-primary {
-    background: #f4476b;
+    background: #313437;
     border: none;
     border-radius: 4px;
     padding: 11px;
@@ -63,7 +70,7 @@
 }
 
 .login-clean form .btn-primary:hover, .login-clean form .btn-primary:active {
-    background: #eb3b60;
+    background: #66d7d7;
 }
 
 .login-clean form .btn-primary:active {
@@ -83,7 +90,3 @@
     opacity: 1;
     text-decoration: none;
 }
-
-            
-  
-    

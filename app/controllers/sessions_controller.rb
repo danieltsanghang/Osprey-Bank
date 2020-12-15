@@ -11,19 +11,14 @@ class SessionsController < ApplicationController
       login(user)
       if(user.isAdmin)
         # Redirect to admin panel
-        # redirect_to ...
         redirect_to admin_users_url
-        puts("User authenticated and is a admin")
       else
         # Redirect to user area
-        # redirect_to ...
         redirect_to user
-        puts("User authenticated and is a user")
       end
     else 
       # Login failed
       flash[:error] = "Login failed! Invalid username and password combination!"
-      puts("User authentication failed")
       render 'new'
     end
   end

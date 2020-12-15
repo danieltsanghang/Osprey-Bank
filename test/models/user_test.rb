@@ -107,11 +107,128 @@ class UserTest < ActiveSupport::TestCase
     assert @user_valid.valid?
   end
 
+  # Date of birth tests
+
+  test 'date of birth should be valid' do
+    @user_valid[:DOB] = "111/222/333"
+    assert_not @user_valid.valid?
+  end
+
+  test 'date of birth should be parsed from a string' do
+    @user_valid[:DOB] = "10/10/2001"
+    assert @user_valid.valid?
+  end
+
+  # Address tests
+
+  test 'address cannot be empty' do
+    @user_valid.address = ""
+    assert_not @user_valid.valid?
+  end
+
+  # Admin tests
+
+  test 'user can be an admin' do
+    @user_valid.isAdmin = true
+    assert @user_valid.valid?
+  end
+
+  test 'user is by default not an admin' do
+    user = User.new(:fname => "Alice", 
+      :lname => "Williams", 
+      :email => "alice.williams@gmail.com", 
+      :username => "Alice101", 
+      :password => "AlicePassword123", 
+      :password_confirmation => "AlicePassword123",
+      :DOB => Date.new(1990-10-10),
+      :phoneNumber => 123456789,
+      :address => "London")
+
+      assert user.valid?
+      assert_not user.isAdmin
+  end
+
+  # Phone number tests
+
+  test 'phoneNumber cannot be less than 9 digits' do
+    @user_valid.phoneNumber = "12345678"
+    assert_not @user_valid.valid?
+  end
+
+  test 'phoneNumber cannot be more than 15 digits' do
+    @user_valid.phoneNumber = "1234567891234567"
+    assert_not @user_valid.valid?
+  end
+
+  test 'number cannot be a negative number' do
+    @user_valid.phoneNumber = "-12345678910"
+    assert_not @user_valid.valid?
+  end
+
+  test 'phoneNumber can be 9 digits' do
+    @user_valid.phoneNumber = "123456789"
+    assert @user_valid.valid?
+  end
+
+  test 'phoneNumber can be 15 digits' do
+    @user_valid.phoneNumber = "123456789123456"
+    assert @user_valid.valid?
+  end
+
+  # First name tests
+
+  test 'fname can be 2 characters long' do
+    @user_valid.fname = "Al"
+    assert @user_valid.valid?
+  end
+
+  test 'fname can be 26 characters long' do
+    @user_valid.fname = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    assert @user_valid.valid?
+  end
+
+  test 'fname cannot be less than 2 characters long' do
+    @user_valid.fname = "A"
+    assert_not @user_valid.valid?
+  end
+
+  test 'fname cannot be more than 26 characters long' do
+    @user_valid.fname = "ABCDEFGHIJKLMNOPQRSTUVWXYZa"
+    assert_not @user_valid.valid?
+  end
+
+  # Last name tests
+
+  test 'lname can be 2 characters long' do
+    @user_valid.lname = "Al"
+    assert @user_valid.valid?
+  end
+
+  test 'lname can be 26 characters long' do
+    @user_valid.lname = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    assert @user_valid.valid?
+  end
+
+  test 'lname cannot be less than 2 characters long' do
+    @user_valid.lname = "A"
+    assert_not @user_valid.valid?
+  end
+
+  test 'lname cannot be more than 26 characters long' do
+    @user_valid.lname = "ABCDEFGHIJKLMNOPQRSTUVWXYZa"
+    assert_not @user_valid.valid?
+  end
+
   # Email tests
 
   test 'email should be valid' do
     @user_valid.email = 'blah'
     assert_not @user_valid.valid?
+  end
+
+  test 'email regular expression matching should be valid' do
+    @user_valid.email = 'something@something.com'
+    assert @user_valid.valid?
   end
 
   test 'emails should be unique' do

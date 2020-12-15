@@ -8,8 +8,7 @@
           </div>
           <div class="card-body">
             <p class="card-text">Here you can view your account details.</p>
-
-            <div class="card"></div>
+            <br>
             <div style="padding-top: 5px;padding-bottom: 5px;">
               <a class="btn card" style="background-color: rgba(0,0,0,.03);" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-2">
                 <h5 class="mb-0">Account Info</h5>
@@ -18,16 +17,17 @@
                 <ul class="list-group">
                   <li class="list-group-item">
                     <span>
-                      Account Number:
-                      <%= @account.accountNumber %>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <span>
                       Sort Code:
                       <%= @account.sortCode %>
                     </span>
                   </li>
+                  <li class="list-group-item">
+                    <span>
+                      Account Number:
+                      <%= @account.id %>
+                    </span>
+                  </li>
+
                   <li class="list-group-item">
                     <span>
                       Currency:
@@ -42,17 +42,18 @@
                   </li>
                   <div style="text-align: center;">
                     <span>
-                      <td><%= link_to"EUR", account_path(:currency =>"EUR"), class: "btn btn-lg btn-primary", style: "margin: 2%;" %></td>
-                      <td><%= link_to"GBP", account_path(:currency =>"GBP"), class: "btn btn-lg btn-primary", style: "margin: 2%;" %></td>
-                      <td><%= link_to"USD", account_path(:currency =>"USD"), class: "btn btn-lg btn-primary", style: "margin: 2%;" %></td>
+                      <td><%= link_to"EUR", account_path(:currency =>"EUR"), class: "btn btn-lg btn-secondary", style: "margin: 2%;" %></td>
+                      <td><%= link_to"GBP", account_path(:currency =>"GBP"), class: "btn btn-lg btn-secondary", style: "margin: 2%;" %></td>
+                      <td><%= link_to"USD", account_path(:currency =>"USD"), class: "btn btn-lg btn-secondary", style: "margin: 2%;" %></td>
                     </span>
                   </div>
                 </ul>
               </div>
             </div>
           </div>
-          <%= link_to  "View Account Transactions", account_transactions_url(params[:id]),  class: "btn btn-lg btn-primary", style: "margin: 2%;" %>
-          <%= link_to  "Make a Transaction", new_account_transaction_url(params[:id]),  class: "btn btn-lg btn-info", style: "margin: 2%; margin-top: 0%" %>
+            <%= link_to  "Make a Transaction", new_account_transaction_url(params[:id]),  class: "btn btn-lg btn-warning", style: "margin: 2%; " %>
+          <%= link_to  "View Account Transactions", account_transactions_url(params[:id]),  class: "btn btn-lg btn-info", style: "margin: 2%; margin-top: 0" %>
+
         </div>
       </div>
     </div>

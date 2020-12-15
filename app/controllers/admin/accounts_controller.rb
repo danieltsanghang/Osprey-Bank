@@ -4,19 +4,20 @@ class Admin::AccountsController < ApplicationController
 
   helper_method :sort_column
 
-  ACCOUNTS_PER_PAGE = 20 #Number of accounts to be displayed per page
+  ACCOUNTS_PER_PAGE = 20 # Number of accounts to be displayed per page
 
   def index
-      @page = params.fetch(:page, 0).to_i
+      @page = params.fetch(:page, 0).to_i # Current page in the table pagination
 
 
       if (params.has_key?(:user_id))
+          # If admin is trying to view all accounts for a specific user 
           @accounts = get_accounts_by_user
       else
           @accounts = Account.all
       end
 
-      #If search box has been used to query
+      # If search box has been used to query
       if(params.has_key?(:search_account))
           @accounts = search()
       end
@@ -44,12 +45,15 @@ class Admin::AccountsController < ApplicationController
 
   def create
       @account = Account.new(account_params)
-      @account.balance *= 100 #format balance
+      @account.balance *= 100 # format balance
 
+      # The admin should be allowed to assign the primary key, in case of an ID collision, they will be alerted
+      # If no id is passed as a param, auto incrementing will be used. In the case that there are no accounts and no id is given,
+      # 1000000 will be used as the default id. This is a secondary check, this already exists in a databse migration.
+      @account.id = params[:account][:id].present? ? params[:account][:id] : (Account.all.empty? ? 1000000 : Account.last.id + 1)
       if (@account.valid?)
-          @account.id = Account.last.id + 1 #assign correct primary key
           @account.save
-          redirect_to(admin_account_path(@account)) #redirect to account show
+          redirect_to(admin_account_path(@account)) # redirect to account show
 
       else
           render 'new' #render same page and errors
@@ -63,10 +67,10 @@ class Admin::AccountsController < ApplicationController
   def update
       @account = Account.find(params[:id])
       old_currency = @account.currency
-      #update account
+      # update account
       if (@account.update(account_params))
           @account.balance *= 100
-          #this doesn't work
+
           @account.balance = Monetize.parse(convert(Money.new(@account.balance, old_currency), @account.currency)).fractional
           @account.save
 
@@ -91,7 +95,7 @@ class Admin::AccountsController < ApplicationController
   private
 
       def account_params
-          params.require(:account).permit(:id, :user_id, :accountNumber, :sortCode, :balance, :currency)
+          params.require(:account).permit(:id, :user_id, :sortCode, :balance, :currency)
       end
 
       def sort_column
@@ -101,7 +105,7 @@ class Admin::AccountsController < ApplicationController
       # Function to search for certain accounts
       def search
           return @accounts.select{|el| el.created_at.to_s.starts_with?(params[:search_account]) || el.id.to_s.starts_with?(params[:search_account]) ||
-            el.user_id.to_s.starts_with?(params[:search_account]) || el.accountNumber.to_s.starts_with?(params[:search_account]) ||
+            el.user_id.to_s.starts_with?(params[:search_account])  ||
             el.sortCode.to_s.starts_with?(params[:search_account]) || el.balance.to_s.starts_with?(params[:search_account]) ||
             el.currency.to_s.starts_with?(params[:search_account])}
       end

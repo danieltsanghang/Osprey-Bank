@@ -6,4 +6,10 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get maintenance page" do
+    get home_maintenance_url
+    assert_response :success
+  end
+
+
 end

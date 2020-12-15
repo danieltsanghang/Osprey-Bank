@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
     USERS_PER_PAGE = 20 # This will be used for pagination, max number of users in each page is 20
 
     def index
-        @page = params.fetch(:page, 0).to_i
+        @page = params.fetch(:page, 0).to_i # Current page in the table pagination
         @users = User.all
 
         if(params.has_key?(:search_user)) 
@@ -38,14 +38,11 @@ class Admin::UsersController < ApplicationController
 
     def create
         @user = User.new(users_params)
-        if(@user.save)
-            puts "SUCCESS"
+        if(@user.valid?)
+            @user.id = User.last.id + 1 # assign correct primary key in case of ID collisions with fake data
+            @user.save
             redirect_to admin_user_url(@user)
         else
-            puts "FAILED"
-            @user.errors.full_messages.each do |msg|
-                puts msg
-            end
             render 'new'
         end
     end
@@ -69,7 +66,7 @@ class Admin::UsersController < ApplicationController
 
     def update_password
         @user = User.find_by(id: params[:id])
-        @user.update_attributes(users_params)
+        @user.update(users_params)
         if(@user.save(context: :password_change)) # Add the context password_change to perform password change user model validations
             redirect_to admin_user_url(@user.id)
         else
@@ -101,7 +98,16 @@ class Admin::UsersController < ApplicationController
 
         # Function used to search for a sender, receiver, amount or date
         def search
-            return @users.select{|el|  el.created_at.to_s.starts_with?(params[:search_user]) || el.id.to_s.starts_with?(params[:search_user]) || el.fname.to_s.starts_with?(params[:search_user]) || el.lname.to_s.starts_with?(params[:search_user]) || el.email.to_s.starts_with?(params[:search_user]) || el.username.to_s.starts_with?(params[:search_user]) || el.isAdmin.to_s.starts_with?(params[:search_user]) || el[:DOB].to_s.starts_with?(params[:search_user]) || el.phoneNumber.to_s.starts_with?(params[:search_user]) || el.address.to_s.starts_with?(params[:search_user])}
+            return @users.select{|el|  el.created_at.to_s.starts_with?(params[:search_user]) || 
+                el.id.to_s.starts_with?(params[:search_user]) || 
+                el.fname.to_s.starts_with?(params[:search_user]) || 
+                el.lname.to_s.starts_with?(params[:search_user]) || 
+                el.email.to_s.starts_with?(params[:search_user]) || 
+                el.username.to_s.starts_with?(params[:search_user]) || 
+                el.isAdmin.to_s.starts_with?(params[:search_user]) || 
+                el[:DOB].to_s.starts_with?(params[:search_user]) || 
+                el.phoneNumber.to_s.starts_with?(params[:search_user]) || 
+                el.address.to_s.starts_with?(params[:search_user])}
         end
 
         # Function that paginates the transactions into different pages

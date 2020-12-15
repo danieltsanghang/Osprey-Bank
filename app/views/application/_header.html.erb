@@ -1,6 +1,7 @@
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color: #292c2f;color: #fff;">
     <div class="container"><%= link_to "Osprey Bank", home_index_path, class: "navbar-brand" %><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Header</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
+        <%# Select the correct header partial to render based on the user type %>
             <% if(is_admin?) %>
                 <%= render partial: "application/headers/header_admin" %>
             <% elsif(logged_in?) %>
