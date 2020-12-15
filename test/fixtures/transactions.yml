@@ -2,38 +2,38 @@
 
 # Transaction from account 1 to account 2
 transaction_one:
-  sender_id: 1
-  receiver_id: 2
+  sender_id: 12345678
+  receiver_id: 123456789
   amount: 2500
 
 # Transaction from account 2 to account 1
 transaction_two:
-  sender_id: 2
-  receiver_id: 1
+  sender_id: 123456789
+  receiver_id: 12345678
   amount: 50000
 
 # Transaction from account 1 to a fake account
 transaction_three:
-  sender_id: 1
+  sender_id: 12345678
   receiver_id: 323
   amount: 995
 
 # Transaction from a fake account to account 1 
 transaction_four:
   sender_id: 2123
-  receiver_id: 1
+  receiver_id: 12345678
   amount: 1000
 
 # Transaction from account 2 to a fake account
 transaction_three:
-  sender_id: 2
+  sender_id: 123456789
   receiver_id: 323
   amount: 5000000000
 
 # Transaction from a fake account to account 2
 transaction_four:
   sender_id: 2123
-  receiver_id: 2
+  receiver_id: 123456789
   amount: 10
 
 # Transaction from fake account to another fake account
@@ -44,6 +44,6 @@ transaction_five:
 
 # Transaction from account 2 to account 3
 transaction_six:
-  sender_id: 2
-  receiver_id: 3
+  sender_id: 123456789
+  receiver_id: 1234567
   amount: 2500

@@ -47,8 +47,11 @@ class Admin::AccountsController < ApplicationController
       @account = Account.new(account_params)
       @account.balance *= 100 # format balance
 
+      # The admin should be allowed to assign the primary key, in case of an ID collision, they will be alerted
+      # If no id is passed as a param, auto incrementing will be used. In the case that there are no accounts and no id is given,
+      # 1000000 will be used as the default id. This is a secondary check, this already exists in a databse migration.
+      @account.id = params[:account][:id].present? ? params[:account][:id] : (Account.all.empty? ? 1000000 : Account.last.id + 1)
       if (@account.valid?)
-          @account.id = Account.last.id + 1 # assign correct primary key
           @account.save
           redirect_to(admin_account_path(@account)) # redirect to account show
 
