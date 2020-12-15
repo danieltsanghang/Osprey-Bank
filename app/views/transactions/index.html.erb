@@ -3,7 +3,7 @@
 <div class="container" >
     <div class="row d-md-flex justify-content-md-center">
       <h1 class="display-3" style="text-align: center;">Welcome to your transaction history
-        <span style="color:#56c6c6">  <%=current_user.fname%></span></h1>
+        <span class ="text-capitalize" style="color:#56c6c6">  <%=current_user.fname%></span></h1>
             <p class="lead">Below you can find all the transactions from your bank account!</p>
     <div class="col-md-10 col-md-offset-1 ">
         <% if(@transactions_all.nil? || @transactions_all.empty?) %>
