@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-    
+
     before_action :redirect_to_login_if_not_admin
 
     helper_method :sort_column
@@ -10,7 +10,7 @@ class Admin::UsersController < ApplicationController
         @page = params.fetch(:page, 0).to_i # Current page in the table pagination
         @users = User.all
 
-        if(params.has_key?(:search_user)) 
+        if(params.has_key?(:search_user))
             @users = search()
         end
 
@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
 
         paginate # Paginate the page
         @users = @users[@page * USERS_PER_PAGE, USERS_PER_PAGE] # Set the variable to contain all transactions in the current page
-        
+
     end
 
     def show

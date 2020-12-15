@@ -37,10 +37,10 @@ User.create!(
 )
 (0..4).each do |id|
     Account.create!(
-        id: id,
+        id: Faker::Number.between(from: 10000000, to: 90000000),
         user_id: 0,
         sortCode: Faker::Number.number(digits: 6),
-        accountNumber: Faker::Number.number(digits: 8),
+        # accountNumber: Faker::Number.number(digits: 8),
         balance: Faker::Number.number(digits: 7),
         currency: %w[USD GBP EUR].sample
     )
@@ -59,27 +59,27 @@ end
         password_confirmation: "Password12345",
         isAdmin: false,
         phoneNumber: Faker::Number.number(digits: 9),
-        DOB: Faker::Date.in_date_period,
+        DOB: Faker::Date.birthday(min_age: 18, max_age: 90),
         address: Faker::Address.full_address
     )
 end
 
-(5..20).each do |id|
+(5..50).each do |id|
     Account.create!(
-        id: id,
+        id: Faker::Number.between(from: 10000000, to: 90000000),
         user_id: rand(1..20),
         sortCode: Faker::Number.number(digits: 6),
-        accountNumber: Faker::Number.number(digits: 8),
         balance: Faker::Number.number(digits: 7),
         currency: %w[USD GBP EUR].sample
     )
 end
 
-(1..100).each do |id|
+(0..100).each do |id|
     Transaction.create!(
-      sender_id: Account.find(rand(0..9)).id,
-      receiver_id: Account.find(rand(10..20)).id,
+      id: id,
+      sender_id: Account.last(25).first.id,
+      receiver_id: Account.first(25).first.id,
       amount: Faker::Number.number(digits: 4),
-      timeStamp: Faker::Date.backward(days: 100)
+      created_at: Faker::Date.backward(days: 100)
     )
   end
