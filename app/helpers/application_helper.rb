@@ -157,7 +157,7 @@ module ApplicationHelper
   def userGenerateTransaction(userID, amount)
 
     User.find(userID).accounts.each do |account|
-      @limit = Transaction.last.id.to_i
+      @limit = Transaction.last.id.to_i + 1
         (@limit .. @limit + amount-1).each do |id|
           Transaction.create!(
             id: id,
@@ -168,7 +168,7 @@ module ApplicationHelper
           )
         end
 
-        @limit = Transaction.all.last.id.to_i
+        @limit = Transaction.last.id.to_i + 1
         (@limit .. @limit + amount-1).each do |id|
           Transaction.create!(
             id: id,

@@ -1,11 +1,16 @@
 <div style="margin: 5% 0%;">
+  <% flash.each do |type, msg| %>
+  <div class="alert alert-info" style="text-align:center; width:50%; margin: auto">
+    <%= msg %>
+  </div>
+<% end %>
   <div class="col-md-4 col-xl-6 offset-xl-3">
     <%= form_for :generator, :url => {:action => "create"} do |f| %>
     <%= error_messages_for(f.object) %>
     <div>
       <% if(params[:userid].present?) %>
       <%= f.hidden_field :userid, value: params[:userid] %>
-        <th>Number of transanaction for each account of this user</th>
+        <th>Number of transactions for each account of this user</th>
         <td><%= f.number_field(:transactions, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake transcations", required: true })%></td>
 
       <%else%>
