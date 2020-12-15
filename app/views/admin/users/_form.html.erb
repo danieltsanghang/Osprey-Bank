@@ -12,7 +12,7 @@
     <th>Username</th>
     <td><%= f.text_field(:username, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Username", required: true })%></td>
     <th>DOB</th>
-    <td><%= f.date_field(:DOB, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Date of Birth", required: true, min: Date.new(1900, 01, 01), max: Date.new(2003, 01, 01) })%></td>
+    <td><%= f.date_field(:DOB, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Date of Birth", required: true, min: 110.years.ago.to_datetime, max: 18.years.ago.to_datetime })%></td>
     <th>Phone number</th>
     <td><%= f.number_field(:phoneNumber, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Phone number", required: true })%></td>
     <th>Address</th>
