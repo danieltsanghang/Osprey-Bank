@@ -37,7 +37,7 @@ User.create!(
 )
 (0..4).each do |id|
     Account.create!(
-        id: Faker::Number.number(digits: 8),
+        id: Faker::Number.between(from: 10000000, to: 90000000),
         user_id: 0,
         sortCode: Faker::Number.number(digits: 6),
         # accountNumber: Faker::Number.number(digits: 8),
@@ -66,7 +66,7 @@ end
 
 (5..50).each do |id|
     Account.create!(
-        id: Faker::Number.number(digits: 8),
+        id: Faker::Number.between(from: 10000000, to: 90000000),
         user_id: rand(1..20),
         sortCode: Faker::Number.number(digits: 6),
         balance: Faker::Number.number(digits: 7),

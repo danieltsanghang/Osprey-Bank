@@ -109,7 +109,7 @@ module ApplicationHelper
     end
     account_ids = Array.new()
     (@limit .. (@limit + amount-1)).each do |id|
-          accountid = Faker::Number.number(digits: 8)
+          accountid = Faker::Number.between(from: 10000000, to: 90000000)
           account_ids << accountid.to_i
         Account.create!(
             id: accountid,
