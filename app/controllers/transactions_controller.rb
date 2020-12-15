@@ -11,11 +11,19 @@ class TransactionsController < ApplicationController
 
         # Check wehther the user is accessing the transactions for a specific account or for all accounts a user has
         if(params.has_key?(:account_id))
-            # Get transactions for a specific account
+            # Get transactions and balance for a specific account
             transactions = get_transactions_from_account
+            account = Account.find(params[:account_id])
+            @balance = Money.new(account.balance, account.currency)
         else
-            # Get transactions for all accounts the user has
+            # Get transactions and balance for all accounts the user has
             transactions = get_transactions_from_user
+            
+            @balance = 0
+            current_user.accounts.each do |el|
+                @balance += Money.new(el.balance, el.currency).exchange_to('USD').fractional
+            end
+            @balance = Money.new(@balance, "USD")
         end
 
         # Search and filters for the results
