@@ -31,7 +31,7 @@ rake db:seed
 rails server
 ```
 ## Pre-populated Users
-### There are two types of users on the application, a regular user and an admin. 1 Admin and 1 User is provided. With a single admin, you can create as many other admins or users as you want. Essentially, given 1 admin account you can do anything on the website. To login, click the "Login" button at the top right corner of the home page, or visit the URL <strong>/login</strong>. The admin and user details for login:
+### There are two types of users on the application, a regular user and an admin. 1 Admin and 1 User is provided. With a single admin, you can create/edit/delete as many other admins or users as you want, including accounts and transactions. Essentially, given 1 admin account you can do anything on the website. To login, click the "Login" button at the top right corner of the home page, or visit the path <strong>/login</strong>, or more specifically, the URL <strong>https://ospreybank.herokuapp.com/login</strong>. The admin and user details for login:
 
 ### Admin:
 <strong>username:</strong> admin0 <br>
@@ -43,9 +43,12 @@ rails server
 
 <br>
 
-### Note: There is a fake data generator an admin can access from the admin dashboard by clicking the button "Fake User Generator" or by visiting the route "/admin/generator/new". All users generated using this will have a default password of <strong>Password12345</strong>. The admin can change this password later by clicking the "Edit Password" button on the User index page or User show page, or by visiting the route <strong>/admin/users/:id/edit_password</strong>
+### Note: There is a fake data generator an admin can access from the admin dashboard by clicking the button "Fake User Generator" or by visiting the route "/admin/generator/new". All users generated using this will have a default password of <strong>Password12345</strong>. The admin can change this password later by clicking the "Edit Password" button on the User index page or on the User show page, or by visiting the route <strong>/admin/users/:id/edit_password</strong>
 
 <br>
+
+## Administrative Area
+To gain access to the administrative area, simply login as the admin (username: admin0, password: Password12345), and it will automatically redirect you to the administrative area. To login, at the home page there is a login button at the top right that says "Login", or use the path "/login", or more specifically "https://ospreybank.herokuapp.com/login". Simply enter the admin credentials, click the "Login" button and the path "/admins" will be opened, which is the admin dashboard page/view. To re-iterate, a regular user and admin login in the same place, depending on the type of user/access level, they will be redirected to differnt paths/places.
 
 ## Notable Features/Routes
 
@@ -54,7 +57,7 @@ rails server
         There are nested resources that provide for a much better user experience. A full list of them can be found using <strong>rails routes</strong> or by viewing the <strong>routes.rb</strong> file. For example, a user can view all transactions from all accounts using the route: <strong> /transactions </strong> or for a specific account using <strong>/accounts/:id/transactions</strong>. Similarly, an admin can view all transactions or accounts for a specific user using the route <strong>/admin/users/:id/transactions</strong> or <strong>/admin/users/:id/accounts</strong>. These nested resources are very useful and convenient.
     </li>
     <li>
-        An admin can create fake data on the website using following route: <strong>admin/generator/new</strong>, and can create fake transactions for specific users through the following route: <strong>admin/generator/new?userid=:id</strong>. <strong>Note:</strong> to create transactions for a specifc user, that user must have an account. Also, when generating transactions, if the admin selects 100 transactions to create, the generator will create 100 sent transactions and 100 received transactions for each account a user has, so 200 in total for each account.
+        An admin can create fake data on the website using following route: <strong>admin/generator/new</strong>, and can create fake transactions for specific users through the following route: <strong>admin/generator/new?userid=:id</strong>. <strong>Note:</strong> to create transactions for a specific user, that user must have an account. Also, when generating transactions, if the admin selects 100 transactions to create, the generator will create 100 sent transactions and 100 received transactions for each account a user has, so 200 in total for each account.
     </li>
 </ul>
 
