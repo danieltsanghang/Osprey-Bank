@@ -16,7 +16,7 @@ Team Osprey
 </ol>
 
 ## Deployed Application URL
->OspreyBank.com
+>http://ospreybank.herokuapp.com/
 
 ## Languages/Technologies Used
 >Ruby on Rails 2.7.1, PostgreSQL, HTML, SCSS, JavaScript and deployed on Heroku
