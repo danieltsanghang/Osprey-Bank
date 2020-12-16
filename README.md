@@ -34,7 +34,7 @@ rails server
 ### There are two types of users on the application, a regular user and an admin. 1 Admin and 1 User is provided. With a single admin, you can create as many other admins or users as you want. Essentially, given 1 admin account you can do anything on the website. To login, click the "Login" button at the top right corner of the home page, or visit the URL <strong>/login</strong>. The admin and user details for login:
 
 ### Admin:
-<strong>username:</strong> admin <br>
+<strong>username:</strong> admin0 <br>
 <strong>password:</strong> Password12345 <br>
 
 ### User:
