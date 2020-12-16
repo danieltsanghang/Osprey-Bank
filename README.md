@@ -42,6 +42,21 @@ rails server
     <li>
         Rails Cast Episode 228 was used for implementing sortable rows.  http://railscasts.com/episodes/228-sortable-table-columns
     </li>
+    </li>
+        Images:
+        <li>
+        https://siftware.com/wp-content/uploads/2020/09/happy-customer-alt.png
+        </li>
+        <li>
+        https://www.okgv.com/wp-content/uploads/2019/08/OlsonKulkoskiGallowayVesely-1035146258.jpg
+        </li>
+        <li>
+        https://img.freepik.com/free-photo/happy-senior-woman_256588-835.jpg?size=626&ext=jpg&ga=GA1.2.548558842.1600041600
+        </li>
+        <li>
+        https://cdn.ps.emap.com/wp-content/uploads/sites/3/2019/12/stock-image-of-young-girl-woman-student-440x330.jpg
+        </li>
+    <li>
 </ol>
 
 ## Notable Features/Routes
