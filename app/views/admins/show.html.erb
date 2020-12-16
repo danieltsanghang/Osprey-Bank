@@ -75,6 +75,23 @@
                 <% end %>
             </div>
         </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-danger py-2">
+                <%= link_to seed_admin_generators_url, style: "text-decoration: none !important; color:inherit;" do %>
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-danger font-weight-bold text-xs mb-1"><span>Restart database</span></div>
+                            <div class="text-dark font-weight-bold h5 mb-0">
+                                <%= link_to "Click here to purge all data from the database except the seed users.", seed_admin_generators_url%>
+                            </div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-ban fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
     </div>
 
     <div class="row">

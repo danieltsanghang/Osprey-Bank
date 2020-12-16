@@ -3,6 +3,16 @@ class Admin::GeneratorsController < ApplicationController
       def new
       end
 
+      def seed
+        tables = ActiveRecord::Base.connection.tables - ['schema_migrations']
+        tables.each do |table|
+          ActiveRecord::Base.connection.execute "DELETE FROM #{table}"
+        end
+        Rails.application.load_seed
+      redirect_to(admins_url)
+      end
+
+
       def create
         if(params[:generator][:userid].present?)
             if params[:generator][:transactions].empty?
