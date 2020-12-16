@@ -1,4 +1,7 @@
-<div style="margin: 10% 0%;">
+<% content_for :title, "Generate Fake Data" %>
+<div style="margin: 5% 0%;">
+<h1>Generate Fake Data</h1>
+
   <% flash.each do |type, msg| %>
   <div class="alert alert-info" style="text-align:center; width:50%; margin: auto">
     <%= msg %>
@@ -25,7 +28,7 @@
       </div>
 
     <% end %>
-      <%= f.submit "create", class:"btn btn-lg btn-info", style: "width: 100%;" %>
+      <%= f.submit "Create", class:"btn btn-lg btn-info", style: "width: 100%;" %>
   <%end%>
 </div>
 </div>

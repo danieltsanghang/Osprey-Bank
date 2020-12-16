@@ -1,3 +1,4 @@
+<% content_for :title, "Login" %>
 <div class="login-clean" style="width: 100%; height: 100vh;">
     <%=form_with(url: login_path, scope: :session, local: true) do |f| %>
         <h2 class="sr-only">Login Form</h2>
