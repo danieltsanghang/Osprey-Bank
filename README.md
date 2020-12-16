@@ -48,7 +48,7 @@ rails server
 <br>
 
 ## Administrative Area
-To gain access to the administrative area, simply login as the admin (username: admin0, password: Password12345), and it will automatically redirect you to the administrative area. To login, at the home page there is a login button at the top right that says "Login", or use the path "/login", or more specifically "https://ospreybank.herokuapp.com/login". Simply enter the admin credentials, click the "Login" button and the path "/admins" will be opened, which is the admin dashboard page/view. To re-iterate, a regular user and admin login in the same place, depending on the type of user/access level, they will be redirected to differnt paths/places.
+To gain access to the administrative area, simply login as the admin (username: admin0, password: Password12345), and it will automatically redirect you to the administrative area. To login, at the home page there is a login button at the top right that says "Login", or use the path "/login", or more specifically "https://ospreybank.herokuapp.com/login". Simply enter the admin credentials, click the "Login" button and the path "/admins" will be opened, which is the admin dashboard page/view (Admin interface URL: https://ospreybank.herokuapp.com/admins). To re-iterate, a regular user and admin login in the same place, depending on the type of user/access level, they will be redirected to differnt paths/places.
 
 ## Notable Features/Routes
 
