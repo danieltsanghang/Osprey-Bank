@@ -116,24 +116,6 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
       assert_not(@account.sortCode == 1)
   end
 
-  test 'admin can edit account number with valid account number' do
-      patch admin_account_url(@account), params: {:account => {:accountNumber => 11111111}}
-
-      #reload account
-      @account.reload
-
-      #new account number should be 11111111
-      assert @account.accountNumber == 11111111
-  end
-
-  test 'admin cannot edit account number with invalid account number' do
-      patch admin_account_url(@account), params: {:account => {:accountNumber => 1}}
-
-      #reload account object
-      @account.reload
-
-      assert_not(@account.accountNumber == 1)
-  end
 
   test 'admin can edit account user id with user id that exists' do
       patch admin_account_url(@account), params: {:account => {:user_id => 2}}
@@ -172,7 +154,7 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
   #---------------------------
 
   test 'admin can create account with all valid details' do
-      post admin_accounts_url, params: {:account => {:user_id=> 1, :accountNumber => 12458498, :sortCode => 222222,
+      post admin_accounts_url, params: {:account => {:user_id=> 1, :sortCode => 222222,
         :balance => 216500.0, :currency=> "GBP"}}
 
       #user should be created
@@ -180,23 +162,16 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin cannot create account with user id that does not exist' do
-    post admin_accounts_url, params: {:account => {:user_id=> 100, :accountNumber => 12458498, :sortCode => 222222,
+    post admin_accounts_url, params: {:account => {:user_id=> 100, :sortCode => 222222,
       :balance => 216500.0, :currency=> "GBP"}}
 
     #user should not be created
     assert_not Account.where(user_id: 100).exists?
   end
 
-  test 'admin cannot create account with invalid account number' do
-    post admin_accounts_url, params: {:account => {:user_id=> 1, :accountNumber => 1, :sortCode => 222222,
-      :balance => 216500.0, :currency=> "GBP"}}
-
-    #user should not be created
-    assert_not Account.where(user_id: 1, accountNumber: 1).exists?
-  end
 
   test 'admin cannot create account with invalid sort code' do
-    post admin_accounts_url, params: {:account => {:user_id=> 1, :accountNumber => 12458498, :sortCode => 2,
+    post admin_accounts_url, params: {:account => {:user_id=> 1, :sortCode => 2,
       :balance => 216500.0, :currency=> "GBP"}}
 
     #user should not be created
@@ -204,11 +179,55 @@ class Admin::AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'admin cannot create account with invalid currency' do
-    post admin_accounts_url, params: {:account => {:user_id=> 1, :accountNumber => 12458498, :sortCode => 222222,
+    post admin_accounts_url, params: {:account => {:user_id=> 1, :sortCode => 222222,
       :balance => 216500.0, :currency=> "YEN"}}
 
     #user should not be created
     assert_not Account.where(user_id: 1, currency: "YEN").exists?
+  end
+
+  #-------------------------------
+  #Tests for account id
+  #-------------------------------
+
+  test 'admin can manually set a valid account id' do
+    post admin_accounts_url, params: {:account => {:id => 10000000, :user_id=> 1, :sortCode => 222222,
+      :balance => 216500.0, :currency=> "GBP"}}
+
+    #user should be created
+    assert Account.exists?(10000000)
+  end
+
+  test 'admin can manually set a valid account id of length 7' do
+    post admin_accounts_url, params: {:account => {:id => 1000000, :user_id=> 1, :sortCode => 222222,
+      :balance => 216500.0, :currency=> "GBP"}}
+
+    #user should be created
+    assert Account.exists?(1000000)
+  end
+
+  test 'admin can manually set a valid account id of length 9' do
+    post admin_accounts_url, params: {:account => {:id => 100000000, :user_id=> 1, :sortCode => 222222,
+      :balance => 216500.0, :currency=> "GBP"}}
+
+    #user should be created
+    assert Account.exists?(100000000)
+  end
+
+  test 'admin cannot manually set an invalid account with an id of length < 7' do
+    post admin_accounts_url, params: {:account => {:id => 111111, :user_id=> 1, :sortCode => 222222,
+      :balance => 216500.0, :currency=> "GBP"}}
+
+    #user should be created
+    assert_not Account.exists?(111111)
+  end
+
+  test 'admin cannot manually set an invalid account with an id of length > 9' do
+    post admin_accounts_url, params: {:account => {:id => 2222222222, :user_id=> 1, :sortCode => 222222,
+      :balance => 216500.0, :currency=> "GBP"}}
+
+    #user should be created
+    assert_not Account.exists?(2222222222)
   end
   
   #----------------------------------------------

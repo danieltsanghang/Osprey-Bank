@@ -9,6 +9,16 @@ module ApplicationHelper
     render(:partial => 'application/error_messages', :locals => {:object => object})
   end
 
+  # Generates title for each page dynamically
+  def full_title(current_page_title = '')
+    application_title = "Osprey Bank"
+    if current_page_title.empty?
+      application_title
+    else
+      "#{application_title} | #{current_page_title}"
+    end
+  end
+
   # Function used to pass the params to the URL for sorting, i.e. ?sort="date"&direction="asc"
   # Source used: Rails casts episode 228, link: http://railscasts.com/episodes/228-sortable-table-columns
   def sortable(col, title=nil)
@@ -82,18 +92,23 @@ module ApplicationHelper
     end
 
     (@limit .. (@limit + amount -1)).each do |id|
+      companypostfix = ["LLC", "Group", "&Co", "Inc", "Corp", "Pte"].sample
+      normal = [Faker::Name.unique.first_name, Faker::Name.unique.last_name, Faker::Internet.username(specifier: 6)]
+      company = [Faker::Name.unique.last_name, companypostfix, (Faker::Name.unique.last_name + companypostfix)]
+      detailUsed = [normal,company].sample
+      account_ids = Array.new()
         User.create!(
             id: id,
-            fname: Faker::Name.unique.first_name,
-            lname: Faker::Name.unique.last_name ,
+            fname: detailUsed[0],
+            lname: detailUsed[1],
             email: Faker::Internet.email,
-            username: Faker::Internet.username(specifier: 6),
+            username: detailUsed[2],
             password: "Password12345", # issue each user the same password
             password_confirmation: "Password12345",
             isAdmin: false,
             phoneNumber: Faker::Number.number(digits: 9),
             DOB: Faker::Date.birthday(min_age: 18, max_age: 90),
-            address: Faker::Address.full_address
+            address: Faker::Address.full_address[0..150]
         )
     end
   end

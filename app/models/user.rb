@@ -15,6 +15,7 @@ class User < ApplicationRecord
                       uniqueness: { case_sensitive: false }
 
     validates :DOB, presence: true
+    validate :validate_age
 
     # Min/max first and last name length according to ISO IEC 7813, further reference: https://en.wikipedia.org/wiki/ISO/IEC_7813
     validates :fname, presence: true,
@@ -23,7 +24,8 @@ class User < ApplicationRecord
     validates :lname, presence: true,
                       length: { minimum: 2, maximum: 26, message: "must be 2-26 characters long"}
 
-    validates :address, presence: true
+    validates :address, presence: true,
+                        length: { minimum: 5, maximum: 150, message: "must be 5-150 characters long"}
 
     validates :phoneNumber, presence: true,
                             numericality: { greater_than: 0, message: "cannot be a negative number"},
@@ -67,6 +69,12 @@ class User < ApplicationRecord
         # Method that sets the default admin attribute to false
         def default_values
             self.isAdmin ||= false
+        end
+
+        def validate_age
+            if(self[:DOB].nil? || self[:DOB] > 18.years.ago)
+                errors.add(:DOB, "you must be atleast 18 years old!")
+            end
         end
 
 end
