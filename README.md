@@ -16,7 +16,7 @@ Team Osprey
 </ol>
 
 ## Deployed Application URL
->http://ospreybank.herokuapp.com/
+>https://ospreybank.herokuapp.com/
 
 ## Languages/Technologies Used
 >Ruby on Rails 2.7.1, PostgreSQL, HTML, SCSS, JavaScript and deployed on Heroku
@@ -86,6 +86,9 @@ rails server
             </li>
             <li>
             https://cdn.ps.emap.com/wp-content/uploads/sites/3/2019/12/stock-image-of-young-girl-woman-student-440x330.jpg
+            </li>
+            <li>
+            Favicon Used: https://icons-for-free.com/finance+money+money+in+wallet+wallet+icon-1320086013421017813/
             </li>
         </ol>
     </li>
