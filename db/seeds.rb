@@ -7,7 +7,7 @@ User.create!(
   fname: "Alice",
   lname: "Williams",
   email: "alice.williams@gmail.com",
-  username:"admin",
+  username:"admin0",
   password: "Password12345",
   password_confirmation: "Password12345",
   isAdmin: true,
