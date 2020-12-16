@@ -1,4 +1,4 @@
-class Admin::GeneratorController < ApplicationController
+class Admin::GeneratorsController < ApplicationController
 
       def new
       end
@@ -8,8 +8,14 @@ class Admin::GeneratorController < ApplicationController
             if params[:generator][:transactions].empty?
                 flash.now.alert = "Please enter a valid amount of transactions"
             end
-            userGenerateTransaction(params[:generator][:userid].to_i, params[:generator][:transactions].to_i)
-            redirect_to(admin_transactions_url)
+            if(User.find(params[:generator][:userid].to_i).accounts.size > 0)
+                userGenerateTransaction(params[:generator][:userid].to_i, params[:generator][:transactions].to_i)
+                redirect_to(admin_transactions_url)
+            else
+                flash.now.alert = "Cannot generate transactions for a user without any accounts"
+                render 'new'
+                return
+            end
         else
             #simple form error checks
             if params[:generator][:users].empty?
