@@ -1,17 +1,7 @@
 class Admin::GeneratorsController < ApplicationController
-
+  before_action :redirect_to_login_if_not_admin
       def new
       end
-
-      def seed
-        tables = ActiveRecord::Base.connection.tables - ['schema_migrations']
-        tables.each do |table|
-          ActiveRecord::Base.connection.execute "DELETE FROM #{table}"
-        end
-        Rails.application.load_seed
-      redirect_to(admins_url)
-      end
-
 
       def create
         if(params[:generator][:userid].present?)
@@ -45,6 +35,11 @@ class Admin::GeneratorsController < ApplicationController
 
             redirect_to(admin_users_url)
         end
+      end
+
+      def seed
+        Rails.application.load_seed
+        redirect_to(admins_url)
       end
 
 end

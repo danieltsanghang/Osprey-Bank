@@ -33,4 +33,13 @@ class Admin::GeneratorsControllerTest < ActionDispatch::IntegrationTest
       assert_generates "admin/generator/new", controller: "admin/generators", action: "new"
     end
 
+    test 're seeding the application should leave only 2 users left' do
+      get seed_admin_generator_url
+      assert_equal(User.all.size.to_i,2)
+    end
+    test 'users cannot seed the database' do
+      login_as_user(users(:user), "password1")
+      get seed_admin_generator_url
+      assert_redirected_to login_url
+    end
 end
