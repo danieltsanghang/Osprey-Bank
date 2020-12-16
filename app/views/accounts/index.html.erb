@@ -1,38 +1,39 @@
-  <div style="padding-right: 0;padding-left: 0;padding-top: 5%;">
-      <div class="container">
-          <div class="row d-md-flex justify-content-md-center">
-              <div class="col-md-8">
-                  <div class="card" >
-                      <div class="card-header">
-                          <h3 class="mb-0" style="text-align: center;">Accounts</h3>
-                      </div>
-                      <% if(@accounts.nil? || @accounts.empty?) %>
-                      <div class="card-body">
-                          <p class="card-text">You have no accounts set up.</p>
-                      </div>
-                      <% else %>
-                      <div class="card-body">
-                          <p class="text-center card-text">Here you can view all your accounts.</p>
+<% content_for :title, "Your Accounts" %>
+<div style="padding-right: 0;padding-left: 0;padding-top: 5%;">
+    <div class="container">
+        <div class="row d-md-flex justify-content-md-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0" style="text-align: center;">Accounts</h3>
+                    </div>
+                    <% if(@accounts.nil? || @accounts.empty?) %>
+                    <div class="card-body">
+                        <p class="card-text">You have no accounts set up.</p>
+                    </div>
+                    <% else %>
+                    <div class="card-body">
+                        <p class="text-center card-text">Here you can view all your accounts.</p>
 
-                          <div class="card"></div>
-                          <div style="padding-top: 5px;padding-bottom: 5px;">
-                              <div class="collapse show"  style="padding-top: 10px;">
-                                  <ul class="list-group">
-                                      <% @accounts.each_with_index do |account, index| %>
-                                      <%details =  account.sortCode.to_s + " / " + account.id.to_s%>
-                                      <li class="list-group-item">
-                                          <span class="text-center ">
+                        <div class="card"></div>
+                        <div style="padding-top: 5px;padding-bottom: 5px;">
+                            <div class="collapse show" style="padding-top: 10px;">
+                                <ul class="list-group">
+                                    <% @accounts.each_with_index do |account, index| %>
+                                    <%details =  account.sortCode.to_s + " / " + account.id.to_s%>
+                                    <li class="list-group-item">
+                                        <span class="text-center ">
                                             <%= link_to details, account_path(account.id, :currency => account.currency) ,class:"btn btn-block btn-light"%>
-                                          </span>
-                                      </li>
-                                      <% end %>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <% end %>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                                        </span>
+                                    </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

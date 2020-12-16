@@ -37,26 +37,28 @@ rails server
         Bootstrap: Bootstrap was used significantly throughout the UI
     </li>
     <li>
-        Font Awesome: This was ued throughout the website for icons, such as in the creating a transaction page in the user section (/transactions/new), or in the error pages.
+        Font Awesome: This was ued throughout the website for icons, such as in the admin dashboard page, or in the error pages.
     </li>
     <li>
         Rails Cast Episode 228 was used for implementing sortable rows.  http://railscasts.com/episodes/228-sortable-table-columns
     </li>
-    </li>
-        Images:
-        <li>
-        https://siftware.com/wp-content/uploads/2020/09/happy-customer-alt.png
-        </li>
-        <li>
-        https://www.okgv.com/wp-content/uploads/2019/08/OlsonKulkoskiGallowayVesely-1035146258.jpg
-        </li>
-        <li>
-        https://img.freepik.com/free-photo/happy-senior-woman_256588-835.jpg?size=626&ext=jpg&ga=GA1.2.548558842.1600041600
-        </li>
-        <li>
-        https://cdn.ps.emap.com/wp-content/uploads/sites/3/2019/12/stock-image-of-young-girl-woman-student-440x330.jpg
-        </li>
     <li>
+        Images:
+        <ol>
+            <li>
+            https://siftware.com/wp-content/uploads/2020/09/happy-customer-alt.png
+            </li>
+            <li>
+            https://www.okgv.com/wp-content/uploads/2019/08/OlsonKulkoskiGallowayVesely-1035146258.jpg
+            </li>
+            <li>
+            https://img.freepik.com/free-photo/happy-senior-woman_256588-835.jpg?size=626&ext=jpg&ga=GA1.2.548558842.1600041600
+            </li>
+            <li>
+            https://cdn.ps.emap.com/wp-content/uploads/sites/3/2019/12/stock-image-of-young-girl-woman-student-440x330.jpg
+            </li>
+        </ol>
+    </li>
 </ol>
 
 ## Notable Features/Routes
@@ -66,6 +68,6 @@ rails server
         There are nested resources that provide for a much better user experience. A full list of them can be found using <strong>rails routes</strong> or by viewing the <strong>routes.rb</strong> file. For example, a user can view all transactions from all accounts using the route: <strong> /users/:id/transactions </strong> Similarly, an admin can view all transactions or accounts for a specific user using the route <strong>/admin/users/:id/transactions</strong> or <strong>/admin/users/:id/accounts</strong>. These nested resources are very useful and convenient.
     </li>
     <li>
-        An admin can create fake data for a user through the following route: <strong>insert route here later</strong>
+        An admin can create fake data on the website following route: <strong>admin/generator/new</strong>, and can create fake transactions for specific users through the following route: <strong>admin/generator/new?userid=:id</strong>. <strong>Note:</strong> to create transactions for a specifc user, that user must have an account. Also, when generating transactions, if the admin selects 100 transactions to create, the generator will create 100 sent transactions and 100 received transactions for each account a user has, so 200 in total for each account.
     </li>
 </ul>

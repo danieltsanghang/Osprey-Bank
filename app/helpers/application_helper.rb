@@ -9,6 +9,16 @@ module ApplicationHelper
     render(:partial => 'application/error_messages', :locals => {:object => object})
   end
 
+  # Generates title for each page dynamically
+  def full_title(current_page_title = '')
+    application_title = "Osprey Bank"
+    if current_page_title.empty?
+      application_title
+    else
+      "#{application_title} | #{current_page_title}"
+    end
+  end
+
   # Function used to pass the params to the URL for sorting, i.e. ?sort="date"&direction="asc"
   # Source used: Rails casts episode 228, link: http://railscasts.com/episodes/228-sortable-table-columns
   def sortable(col, title=nil)
