@@ -82,12 +82,17 @@ module ApplicationHelper
     end
 
     (@limit .. (@limit + amount -1)).each do |id|
+      companypostfix = ["LLC", "Group", "&Co", "Inc", "Corp", "Pte"].sample
+      normal = [Faker::Name.unique.first_name, Faker::Name.unique.last_name, Faker::Internet.username(specifier: 6)]
+      company = [Faker::Name.unique.last_name, companypostfix, (Faker::Name.unique.last_name + companypostfix)]
+      detailUsed = [normal,company].sample
+      account_ids = Array.new()
         User.create!(
             id: id,
-            fname: Faker::Name.unique.first_name,
-            lname: Faker::Name.unique.last_name ,
+            fname: detailUsed[0],
+            lname: detailUsed[1],
             email: Faker::Internet.email,
-            username: Faker::Internet.username(specifier: 6),
+            username: detailUsed[2],
             password: "Password12345", # issue each user the same password
             password_confirmation: "Password12345",
             isAdmin: false,
