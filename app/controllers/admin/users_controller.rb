@@ -39,7 +39,7 @@ class Admin::UsersController < ApplicationController
     def create
         @user = User.new(users_params)
         if(@user.valid?)
-            @user.id = User.last.id + 1 # assign correct primary key in case of ID collisions with fake data
+            @user.id = User.all.empty? ? 0 : User.last.id + 1 # assign correct primary key in case of ID collisions with fake data
             @user.save
             redirect_to admin_user_url(@user)
         else

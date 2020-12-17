@@ -46,7 +46,7 @@ class Admin::TransactionsController < ApplicationController
         @transaction.amount *= 100 # Currency is stored in cents, so multiply by 100
 
         if(@transaction.valid?)
-            @transaction.id = Transaction.last.id + 1 # assign correct primary key in case of ID collisions with fake data
+            @transaction.id = Transaction.all.empty? ? 0 : Transaction.last.id + 1 # assign correct primary key in case of ID collisions with fake data
             # If transaction invalid, meaning trying to send more money than a user has, then render ned with an error
             if(!(@transaction.sender.nil?) && (@transaction.sender.balance - @transaction.amount < 0))
                 flash[:error] = "Not enough money"
