@@ -96,4 +96,45 @@ To gain access to the administrative area, simply login as the admin (username: 
             </li>
         </ol>
     </li>
+    <li>
+        Gems Used (Full list can be found in the Gemfile, these are the most notable gems used specific to our application):
+        <ol>
+            <li>
+            bcrypt
+            </li>
+            <li>
+            faker
+            </li>
+            <li>
+            money-rails
+            </li>
+            <li>
+            monetize
+            </li>
+            <li>
+            chartkick
+            </li>
+            <li>
+            groupdate
+            </li>
+            <li>
+            minitest-reporters
+            </li>
+            <li>
+            bootstrap
+            </li>
+            <li>
+            bootstrap_form
+            </li>
+            <li>
+            sass-rails
+            </li>
+            <li>
+            jquery-rails
+            </li>
+            <li>
+            rails-controller-testing
+            </li>
+        </ol>
+    </li>
 </ol>
