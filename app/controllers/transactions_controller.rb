@@ -57,7 +57,7 @@ class TransactionsController < ApplicationController
         @transaction.amount *= 100 # Money objects use cents, so multiply by 100
 
         if(@transaction.valid?)
-            @transaction.id = Transaction.last.id + 1 # assign correct primary key in case of ID collisions with fake data
+            @transaction.id = Transaction.all.empty? ? 0 : Transaction.last.id + 1 # assign correct primary key in case of ID collisions with fake data
             account = Account.find(params[:transaction][:sender_id]) # Find the sender account associated with transaction
             receiver_account = Account.find_by(id: params[:transaction][:receiver_id]) # Find the receiver account associated with transaction, if it exists
 
