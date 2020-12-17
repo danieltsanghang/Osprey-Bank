@@ -26,6 +26,7 @@ Team Osprey
 ```ruby
 bundle install
 yarn install
+rake db:create
 rake db:migrate
 rake db:seed
 rails server
