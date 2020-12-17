@@ -29,7 +29,11 @@ Rails.application.routes.draw do
 
   # Create namespaces for admin, this will look like: 'admin/users' or 'admin/accounts', etc.
   namespace :admin do
-    resource :generator
+    resource :generator do
+        collection do
+         get :seed
+       end
+      end
     resources :users do
       member do
         get :delete

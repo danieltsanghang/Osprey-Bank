@@ -30,161 +30,178 @@
       <ul class="nav navbar-nav ml-auto">
         <li>
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Banking</a>
-          <div style="padding-top:20px;padding-left:27%; padding-right:20%;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
-            <div class="row" style="width: fit-content;margin: 0;">
-              <div class="col-sm-auto col-lg-auto border-right" style="padding-left:30px;">
-                <h6>Current accounts</h6>
-                <%= link_to "Platinum account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Teal account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Student account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Children's account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Switch to Osprey", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all current account", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Savings account</h6>
-                <%= link_to "Regular savings account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Instant savings accounts", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Osprey Teal Savings Account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Children's Savings Account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "ISAs", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all savings account", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto">
-                <h6>Already banking with us?</h6>
-                <%= link_to "Existing customers", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Manage your account", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Online Banking", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Mobile banking", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Overdrafts", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Speak to our customer service", home_maintenance_path, class:"dropdown-item" %>
+          <div style="padding-top:20px;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
+            <div class="container">
+              <div class="row bg-white rounded-0 m-0 shadow-sm">
+                <div class="col-lg col-xl">
+                  <div class="p-4">
+                    <div class="row">
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Current accounts</h6>
+                        <%= link_to "Platinum account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Teal account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Student account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Children's account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Switch to Osprey", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all current account", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Savings account</h6>
+                        <%= link_to "Regular savings account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Instant savings accounts", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Osprey Teal Savings Account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Children's Savings Account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "ISAs", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all savings account", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4">
+                        <h6 class="font-weight-bold text-uppercase">Already banking with us?</h6>
+                        <%= link_to "Existing customers", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Manage your account", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Online Banking", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Mobile banking", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Overdrafts", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Speak to our customer service", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </li>
         <li>
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Borrowing</a>
-          <div style="padding-top:20px;padding-left:20%; padding-right:15%;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
-            <div class="row">
-              <div class="col-sm-auto col-lg-auto border-right" style="padding-left:30px;">
-                <h6>
-                  Credit cards</h6>
-                <%= link_to "Balance transfer cards", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Purchase cards", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Everyday spending cards", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Credit building cards", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Platinum cards", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all credit cards", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Loans</h6>
-                <%= link_to "Personal Loan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Platinum Loan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Car Loan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Debt Consolidation Loan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Home Improvement Loan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Top up your loan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all loans", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Mortgages</h6>
-                <%= link_to "Remortgage to Osprey", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "First-time buyers", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "How to apply", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Mortgage rates", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Calculators", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all mortgages", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto">
-                <h6>Already borrowing with us?</h6>
-                <%= link_to "Manage your existing mortgage", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Switch your Osprey mortgage", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Manage your credit card", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Base rate information", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Mortgage payment holidays", home_maintenance_path, class:"dropdown-item" %>
+          <div style="padding-top:20px;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
+            <div class="container">
+              <div class="row bg-white rounded-0 m-0 shadow-sm">
+                <div class="col-lg col-xl">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">
+                          Credit cards</h6>
+                        <%= link_to "Balance transfer cards", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Purchase cards", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Everyday spending cards", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Credit building cards", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Platinum cards", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all credit cards", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Loans</h6>
+                        <%= link_to "Personal Loan", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Platinum Loan", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Car Loan", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Debt Consolidation Loan", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Home Improvement Loan", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Top up your loan", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all loans", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Mortgages</h6>
+                        <%= link_to "Remortgage to Osprey", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "First-time buyers", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "How to apply", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Mortgage rates", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Calculators", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all mortgages", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4">
+                        <h6 class="font-weight-bold text-uppercase">Already borrowing with us?</h6>
+                        <%= link_to "Manage your existing mortgage", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Switch your Osprey mortgage", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Manage your credit card", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Base rate information", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Mortgage payment holidays", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </li>
         <li>
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Investing</a>
-          <div style="padding-top:20px;padding-left:18%; padding-right:15%;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
-            <div class="row">
-              <div class="col-sm-auto col-lg-auto border-right" style="padding-left:30px;">
-                <h6>
-                  Cash ISAs</h6>
-                <%= link_to "Guide to ISAs", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Instant Cash ISA", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Flexible Cash ISA – 2 Year", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Platinum Flexible Cash ISA – 2 Year", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Managing your Help to Buy: ISA", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all ISA accounts", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Bonds</h6>
-                <%= link_to "Fixed-rate Bond", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Flexible Bond – 2 Year", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Platinum Flexible Bond – 2 Year", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all Bond Accounts", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Investments</h6>
-                <%= link_to "Smart Investor", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Plan & Invest", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "How to apply", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Investment ISA", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Investments Packages", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all Investment options", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto">
-                <h6>Already investing with us?</h6>
-                <%= link_to "Existing customers", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "How to buy and sell funds", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "How to buy and sell shares", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Onshore Investment Bond", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Child Trust Fund", home_maintenance_path, class:"dropdown-item" %>
+          <div style="padding-top:20px;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
+            <div class="container">
+              <div class="row bg-white rounded-0 m-0 shadow-sm">
+                <div class="col-lg col-xl">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">
+                          Cash ISAs</h6>
+                        <%= link_to "Guide to ISAs", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Instant Cash ISA", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Flexible Cash ISA – 2 Year", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Platinum Cash ISA – 2 Year", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Managing ISAs", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all ISA accounts", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Investments</h6>
+                        <%= link_to "Smart Investor", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Plan & Invest", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "How to apply", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Investment ISA", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Investments Packages", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all Investment options", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4">
+                        <h6 class="font-weight-bold text-uppercase">Already investing with us?</h6>
+                        <%= link_to "Existing customers", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "How to buy and sell funds", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "How to buy and sell shares", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Onshore Investment Bond", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Child Trust Fund", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </li>
         <li>
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insurance</a>
-          <div style="padding-top:20px;padding-left:15%; padding-right:12%;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
-            <div class="row">
-              <div class="col-sm-auto col-lg-auto border-right" style="padding-left:30px;">
-                <h6>
-                  General Insurance</h6>
-                <%= link_to "Osprey Home Insurance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Osprey Landlord Insurance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Osprey Simple Life Insurance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Life insurance for mortgage protection", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all life insurance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all home insurance", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Travel insurance</h6>
-                <%= link_to "Travel with breakdown cover", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Travel with breakdown cover and airport lounges", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Travel services", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Coronavirus travel guidance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Brexit travel guidance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all travel insurance", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Tech insurance</h6>
-                <%= link_to "Osprey total tech pack", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Student tech pack", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Global tech insurance", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "How to apply", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all tech insurance", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto">
-                <h6>Already insured with us?</h6>
-                <%= link_to "Home Insurance claims", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Travel Insurance claims", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Life Insurance claims", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Aspects Insurance claims", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Car Insurance claims", home_maintenance_path, class:"dropdown-item" %>
+          <div style="padding-top:20px;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
+            <div class="container">
+              <div class="row bg-white rounded-0 m-0 shadow-sm">
+                <div class="col-lg col-xl">
+                  <div class="p-1">
+                    <div class="row">
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">
+                          General Insurance</h6>
+                        <%= link_to "Osprey Home Insurance", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Osprey Landlord Insurance", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Osprey Simple Life Insurance", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Life insurance for mortgage protection", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all life insurance", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all home insurance", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Travel insurance</h6>
+                        <%= link_to "Travel with breakdown cover", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Travel with breakdown cover and airport lounges", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Travel services", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Coronavirus travel guidance", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Brexit travel guidance", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all travel insurance", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4">
+                        <h6 class="font-weight-bold text-uppercase">Already insured with us?</h6>
+                        <%= link_to "Home Insurance claims", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Travel Insurance claims", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Life Insurance claims", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Aspects Insurance claims", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Car Insurance claims", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -192,41 +209,42 @@
 
         <li>
           <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our community</a>
-          <div style="padding-top:20px;padding-left:18%; padding-right:15%;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
-            <div class="row">
-              <div class="col-sm-auto col-lg-auto border-right" style="padding-left:30px;">
-                <h6>
-                  Life events</h6>
-                <%= link_to "Buying a car", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Buying your first home", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Improving your home", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Getting married", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Going to university", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "See all life moments", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Difficult times</h6>
-                <%= link_to "Coronavirus support", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Money worries", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Losing your job", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Illness and debt", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Mental health support", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Gambling support", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto border-right">
-                <h6>Money management</h6>
-                <%= link_to "Saving money", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Create a budget plan", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Spending within your means", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Explore money management hub", home_maintenance_path, class:"dropdown-item" %>
-              </div>
-              <div class="col-sm-auto col-lg-auto">
-                <h6>Everyday banking</h6>
-                <%= link_to "Improving your digital skills", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Teaching children about money", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "How to bank with us", home_maintenance_path, class:"dropdown-item" %>
-                <%= link_to "Accessibility and disability support", home_maintenance_path, class:"dropdown-item" %>
-              <%= link_to "Managing someone else’s finances", home_maintenance_path, class:"dropdown-item" %>
+          <div style="padding-top:20px;width:100%" class="dropdown-menu megamenu sm-menu border-top" aria-labelledby="dropdown01">
+            <div class="container">
+              <div class="row bg-white rounded-0 m-0 shadow-sm">
+                <div class="col-lg col-xl">
+                  <div class="p-3">
+                    <div class="row">
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">
+                          Life events</h6>
+                        <%= link_to "Buying a car", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Buying your first home", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Improving your home", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Getting married", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Going to university", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "See all life moments", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4 border-right">
+                        <h6 class="font-weight-bold text-uppercase">Difficult times</h6>
+                        <%= link_to "Coronavirus support", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Money worries", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Losing your job", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Illness and debt", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Mental health support", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Gambling support", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                      <div class="col-lg mb-4">
+                        <h6 class="font-weight-bold text-uppercase">Everyday banking</h6>
+                        <%= link_to "Improving your digital skills", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Teaching children about money", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "How to bank with us", home_maintenance_path, class:"dropdown-item" %>
+                        <%= link_to "Accessibility and disability support", home_maintenance_path, class:"dropdown-item" %>
+                      <%= link_to "Managing someone else’s finances", home_maintenance_path, class:"dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -443,8 +461,7 @@
 <%= link_to home_maintenance_path do%>
 <p style="padding-left: 13px;padding-top: 3px;padding-bottom: 5px;background: #e8e8e8;color: rgb(79,83,85);">Osprey Platinum member</p>
 <%end%>
-</div></div> </div></div>
-<div class="newsletter-subscribe" style="margin-bottom: 100px;"> <div class="container"><div class="intro">
+</div></div> </div></div><div class="newsletter-subscribe" style="margin-bottom: 100px;"> <div class="container"><div class="intro">
 <h2 class="text-center">Subscribe for our Newsletter</h2>
 <p class="text-center">We have many great products and services coming very soon! Subscribe to stay tuned.</p></div><form class="form-inline">
 <div class="form-group">

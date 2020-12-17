@@ -93,8 +93,19 @@ module ApplicationHelper
 
     (@limit .. (@limit + amount -1)).each do |id|
       companypostfix = ["LLC", "Group", "&Co", "Inc", "Corp", "Pte"].sample
-      normal = [Faker::Name.unique.first_name, Faker::Name.unique.last_name, Faker::Internet.username(specifier: 6)]
-      company = [Faker::Name.unique.last_name, companypostfix, (Faker::Name.unique.last_name + companypostfix)]
+      lastname = Faker::Name.last_name
+
+      companyUserName = (lastname.dup << companypostfix)
+      normalUserName = Faker::Internet.unique.username(specifier: 6)
+
+      if(companyUserName.length < 6 || User.where("username ~* ?", companyUserName)) then
+        companyUserName = companyUserName.dup << Faker::Number.number(digits: 2).to_s end
+
+      if(companyUserName.length > 20 ) then
+        companyUserName = normalUserName end
+
+      normal = [Faker::Name.first_name, lastname, normalUserName]
+      company = [lastname, companypostfix, companyUserName]
       detailUsed = [normal,company].sample
       account_ids = Array.new()
         User.create!(

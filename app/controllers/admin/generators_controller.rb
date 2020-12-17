@@ -1,9 +1,14 @@
 class Admin::GeneratorsController < ApplicationController
-
+  before_action :redirect_to_login_if_not_admin
       def new
       end
 
       def create
+          if(params[:generator][:users].to_i + User.all.size > 300)
+           flash.now.alert = "You have more than 300 generated users"
+           render 'new'
+           return
+          end
         if(params[:generator][:userid].present?)
             if params[:generator][:transactions].empty?
                 flash.now.alert = "Please enter a valid amount of transactions"
@@ -35,6 +40,11 @@ class Admin::GeneratorsController < ApplicationController
 
             redirect_to(admin_users_url)
         end
+      end
+
+      def seed
+        Rails.application.load_seed
+        redirect_to(admins_url)
       end
 
 end
