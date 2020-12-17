@@ -6,7 +6,7 @@ tables = ActiveRecord::Base.connection.tables - ['schema_migrations']
 tables.each do |table|
   ActiveRecord::Base.connection.execute "DELETE FROM #{table}"
 end
-
+Faker::UniqueGenerator.clear
 # Create an admin
 User.create!(
   id: 0,

@@ -4,6 +4,11 @@ class Admin::GeneratorsController < ApplicationController
       end
 
       def create
+          if(params[:generator][:users].to_i + User.all.size < 300)
+           flash.now.alert = "You have more than 300 generated users"
+           render 'new'
+           return
+          end
         if(params[:generator][:userid].present?)
             if params[:generator][:transactions].empty?
                 flash.now.alert = "Please enter a valid amount of transactions"

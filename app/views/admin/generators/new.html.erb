@@ -13,11 +13,14 @@
     <%= error_messages_for(f.object) %>
     <div>
       <% if(params[:userid].present?) %>
+      <p class="text-center"> Please be reasonable with data generating, over 1000 transactions can take a while. </p>
       <%= f.hidden_field :userid, value: params[:userid] %>
         <th>Number of transactions for each account of this user</th>
         <td><%= f.number_field(:transactions, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake transcations", required: true })%></td>
 
       <%else%>
+      <p class="text-center"> Please be reasonable with data generating, creating more then 300 users via the generator can crash the system. </p>
+      <p class="text-center"> When total users reach 300, please create data manually instead. </p>
         <th>Number of fake users</th>
         <td><%= f.number_field(:users, { class: "border rounded-0 form-control", style: "margin-bottom: 15px;", placeholder: "Number of fake users" })%></td>
         <th>Number of fake accounts distrubuted to users above</th>
