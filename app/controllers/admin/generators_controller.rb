@@ -1,5 +1,5 @@
 class Admin::GeneratorsController < ApplicationController
-
+  before_action :redirect_to_login_if_not_admin
       def new
       end
 
@@ -35,6 +35,11 @@ class Admin::GeneratorsController < ApplicationController
 
             redirect_to(admin_users_url)
         end
+      end
+
+      def seed
+        Rails.application.load_seed
+        redirect_to(admins_url)
       end
 
 end
