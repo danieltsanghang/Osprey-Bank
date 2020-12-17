@@ -108,9 +108,6 @@ module ApplicationHelper
       company = [lastname, companypostfix, companyUserName]
       detailUsed = [normal,company].sample
       account_ids = Array.new()
-      puts ("!@!@!@!@!@!@!@!@!@!@!@!@!@!@@!!@")
-      puts (companyUserName)
-      puts (normalUserName)
         User.create!(
             id: id,
             fname: detailUsed[0],
