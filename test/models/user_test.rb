@@ -176,8 +176,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user_valid.valid?
   end
 
-  test 'phoneNumber cannot be more than 15 digits' do
-    @user_valid.phoneNumber = "1234567891234567"
+  test 'phoneNumber cannot be more than 10 digits' do
+    @user_valid.phoneNumber = "12345678912"
     assert_not @user_valid.valid?
   end
 
@@ -191,8 +191,8 @@ class UserTest < ActiveSupport::TestCase
     assert @user_valid.valid?
   end
 
-  test 'phoneNumber can be 15 digits' do
-    @user_valid.phoneNumber = "123456789123456"
+  test 'phoneNumber can be 10 digits' do
+    @user_valid.phoneNumber = "1234567891"
     assert @user_valid.valid?
   end
 
