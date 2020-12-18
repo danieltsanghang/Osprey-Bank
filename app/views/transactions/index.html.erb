@@ -67,8 +67,14 @@
                             <td>Received</td>
                             <% direction = "recieve" %>
                             <% end %>
-                            <td><%= Money.new(transaction.amount, findCurrency(transaction.sender_id,transaction.receiver_id,direction)).format %></td>
-                            <td><%= link_to("Show", transaction_path(transaction, :currency => findCurrency(transaction.sender_id,transaction.receiver_id,direction))) %></td>
+                            <% transaction_currency = 'USD'%>
+                            <%if(!transaction.sender.nil?)%>
+                                <%transaction_currency = transaction.sender.currency%>
+                            <% elsif(!transaction.receiver.nil?)%>
+                                <%transaction_currency = transaction.receiver.currency%>
+                            <%end%>
+                            <td><%= Money.new(transaction.amount, transaction_currency).format %></td>
+                            <td><%= link_to("Show", transaction_path(transaction, :currency => transaction_currency)) %></td>
                         </tr>
                         <% end %>
                     </tbody>

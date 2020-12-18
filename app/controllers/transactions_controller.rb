@@ -49,7 +49,13 @@ class TransactionsController < ApplicationController
 
     def show
       @transaction = Transaction.find(params[:id])
-      @amount = convert(Money.new(@transaction.amount, (@transaction.sender.currency || @transaction.receiver.currency || 'USD')), params[:currency])
+      transaction_currency = 'USD'
+      if(!@transaction.sender.nil?)
+        transaction_currency = @transaction.sender.currency
+      elsif(!@transaction.receiver.nil?)
+        transaction_currency = @transaction.receiver.currency
+      end
+      @amount = convert(Money.new(@transaction.amount, transaction_currency), params[:currency])
     end
 
     def create

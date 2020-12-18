@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
     validates :phoneNumber, presence: true,
                             numericality: { greater_than: 0, message: "cannot be a negative number"},
-                            length: { minimum: 9, maximum: 15, message: "must be 9-15 digits long" }
+                            length: { minimum: 9, maximum: 10, message: "must be 9-10 digits long" }
 
     before_save :downcase_username
     before_save :default_values
